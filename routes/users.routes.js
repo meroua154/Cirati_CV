@@ -22,7 +22,16 @@ router.get("/", function(req, res) {
 		}
 	})
 });
-
+router.get("/recruiter", function(req, res) {
+    User.find({ role: 'recruiter' }, function(err, recruiters) {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'Erreur lors de la récupération des recruteurs' });
+        } else {
+            res.json(recruiters);
+        }
+    });
+});
 // Getting one user
 router.get("/:id", function(req, res) {
     User.findById(req.params.id).then(user => 
