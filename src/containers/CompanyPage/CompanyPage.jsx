@@ -27,10 +27,9 @@ const CompanyPage = () => {
 
     const fetchDernieresOffres = async () => {
       try {
-        const response = await fetch(`URL_pour_obtenir_les_offres_de_l'entreprise_${company.id}`);
-        const data = await response.json();
-        const deuxDernieres = data.offres.slice(0, 2); 
-        setDeuxDernieresOffres(deuxDernieres);
+        const response = await Axios.get(`http://localhost:4000/job/latest_jobs/${idcomp}`);
+        const data = response.data;
+        setDeuxDernieresOffres(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des dernières offres d\'emploi:', error);
       }
@@ -75,9 +74,9 @@ const CompanyPage = () => {
                 <tbody>
                   {/* Afficher les deux dernières offres d'emploi */}
                   {deuxDernieresOffres.map((offre) => (
-                    <tr key={offre.id}>
+                    <tr key={offre._id}>
                       <td className="p-4 border-b">
-                        <a className="bg-white p-8 w-full block rounded-lg" href={`/offre/${offre.id}`}>
+                        <a className="bg-white p-8 w-full block rounded-lg" href={`/offre/${offre._id}`}>
                           <h2 className="text-xl font-semibold">{offre.title}</h2>
                           <p className="text-gray-600">{offre.description}</p>
                         </a>
