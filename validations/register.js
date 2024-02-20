@@ -49,8 +49,8 @@ module.exports = function validateRegisterInput(data) {
     }
 
     // Location checks
-    if (Validator.isEmpty(data.location)) {
-        errors.location = "Location field is required";
+    if (Validator.isEmpty(data.localisation)) {
+        errors.location = "localisation field is required";
     }
 
     // Phone number checks

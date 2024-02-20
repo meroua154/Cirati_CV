@@ -24,7 +24,7 @@ const userSchema = new Schema({
         enum: ['applicant', 'recruiter'],
         default: 'applicant'
     },
-    location: {
+    localisation: {
         type: String
     },
     phone_number: {

@@ -22,6 +22,21 @@ router.get("/", function(req, res) {
 		}
 	})
 });
+router.get("/recruiter/:id", function(req, res) {
+    User.findById(req.params.id, function(err, recruiter) {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'Erreur lors de la récupération du recruteur' });
+        } else {
+            if (!recruiter) {
+                res.status(404).json({ error: 'Recruteur non trouvé' });
+            } else {
+                res.json(recruiter);
+            }
+        }
+    });
+});
+
 router.get("/recruiter", function(req, res) {
     User.find({ role: 'recruiter' }, function(err, recruiters) {
         if (err) {

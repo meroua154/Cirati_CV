@@ -23,7 +23,19 @@ router.get("/:id", function(req, res) {
     )
     .catch(err => console.log(err));
 });
-
+router.get("/latest_jobs/:recruiterId", function(req, res) {
+    Job.find({ recruiter: req.params.recruiterId }) 
+        .sort({ dateOfPost: -1 }) 
+        .limit(10) 
+        .exec(function(err, jobs) {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Erreur lors de la récupération des emplois.");
+            } else {
+                res.json(jobs);
+            }
+        });
+});
 // POST request 
 // Add a job to db
 router.post("/add_job", (req, res) => {
