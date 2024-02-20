@@ -10,6 +10,9 @@ module.exports = function validateRegisterInput(data) {
     data.role = !isEmpty(data.role) ? data.role : "";
     data.password = !isEmpty(data.password) ? data.password : "";
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";
+    data.location = !isEmpty(data.location) ? data.location : "";
+    data.phone_number = !isEmpty(data.phone_number) ? data.phone_number : "";
+    data.bio = !isEmpty(data.bio) ? data.bio : "";
 
     // Name checks
     if (Validator.isEmpty(data.name)) {
@@ -43,6 +46,21 @@ module.exports = function validateRegisterInput(data) {
 
     if (!Validator.equals(data.password, data.password2)) {
         errors.password2 = "Passwords must match";
+    }
+
+    // Location checks
+    if (Validator.isEmpty(data.location)) {
+        errors.location = "Location field is required";
+    }
+
+    // Phone number checks
+    if (Validator.isEmpty(data.phone_number)) {
+        errors.phone_number = "Phone number field is required";
+    }
+
+    // Bio checks
+    if (Validator.isEmpty(data.bio)) {
+        errors.bio = "Bio field is required";
     }
 
     return {

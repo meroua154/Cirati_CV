@@ -27,10 +27,18 @@ const userSchema = new Schema({
     location: {
         type: String
     },
+    phone_number: {
+        type: String
+    },
+    bio: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now
     }
 });
+
 userSchema.index({ name: 1 });
+
 module.exports = User = mongoose.model("User", userSchema);
