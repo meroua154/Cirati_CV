@@ -67,11 +67,8 @@ const FormPage = () => {
           <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500" />
         </div>
         <div className=" flex mb-4">
-        
-      
-        <TESelect data={data} multiple label="Example label"  className='border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500'/>
-      
-</div>
+           <TESelect data={data} multiple label="Example label"  className='border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500'/>
+        </div>
 
 
 

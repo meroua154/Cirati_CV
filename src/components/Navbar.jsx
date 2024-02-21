@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="md:px-10 py-4 px-7 md:flex items-center bg-white dark:bg-gray-900">
           <div className="flex text-xl cursor-pointer items-center">
             <a href="/">
-              <h1 className="font-medium dark:text-white mr-48">
+              <h1 className="font-medium dark:text-white mr-42">
                 <strong className="text-[#2a68ff] font-extrabold mr-0.5">
                   Cirati
                 </strong>
@@ -30,7 +30,7 @@ const Navbar = () => {
             {isOpen ? <XMarkIcon className="dark:invert" /> : <Bars3BottomRightIcon className="dark:invert" />}
           </div>
          
-          <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white dark:bg-gray-900 md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 ${isOpen ? 'top-12' : 'top-[-490px]'}`}>
+          <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white dark:bg-gray-900 md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-4 ml-32 ${isOpen ? 'top-12' : 'top-[-490px]'}`}>
             {navLinks.map((li) => (
               <li
                 className="text-sm  my-7 md:my-0 md:ml-8"
@@ -39,8 +39,12 @@ const Navbar = () => {
                 <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-[#2a68ff] duration-500" href={li.href}>{li.label}</a>
               </li>
             ))}
-            <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-32 rounded-2xl md:static">Se connecter</button>
+            <a href="/login">
+            <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static">Se connecter</button>
+            </a>
+            <a href="/rec">
             <button className="text-blue-600 hover:text-[#6f6f6f] ml-4 text-sm whitespace-nowrap md:static">espace recruteur</button>
+            </a>
           </ul>
           
         </div>

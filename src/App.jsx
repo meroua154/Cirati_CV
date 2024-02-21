@@ -9,6 +9,10 @@ import FormPage from './containers/CV/FormPage';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Password from './containers/LoginPage/Password';
+import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
+import RecLogin from './containers/RecruiterPage/RecLogin';
+import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
+import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
 
 
 export default function App() {
@@ -25,6 +29,10 @@ export default function App() {
               <Route path="/login" exact element={<LoginPage />} />
               <Route path="/register" exact element={<RegisterPage />} />
               <Route path="/password" exact element={<Password />} />
+              <Route path="/rec" exact element={<RecuiterPage />} />
+              <Route path="/reclog" exact element={<RecLogin />} />
+              <Route path="/ess" exact element={<EssGratuitement />} />
+              <Route path="/validation" exact element={<ValidationEmail />} />
             </Routes>
           </div>
         </Layout>

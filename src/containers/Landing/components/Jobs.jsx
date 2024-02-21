@@ -1,8 +1,6 @@
 import React from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { JobsData } from "../../../Constants";
-import { Pagination } from 'flowbite-react';
-import { useState } from 'react';
 
 
 const Jobs = () => {
