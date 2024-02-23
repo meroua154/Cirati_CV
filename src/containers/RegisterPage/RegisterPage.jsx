@@ -1,22 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
-
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../actions/authActions";
 
 const RegisterPage = () => {
-  const responseGoogle = (response) => {
-    console.log(response);
-    // Ici, vous pouvez gérer la réponse de Google, comme l'authentification du côté serveur, etc.
+  const [notification, setNotification] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
+    role: '',
+    localisation: '',
+    phone_number: '',
+    bio: '',
+    skills: ''
+  });
+  const navigate = useNavigate();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Gérer la soumission du formulaire ici
-    const formData = new FormData(event.target);
-    const email = formData.get('email');
-    const password = formData.get('password');
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const responseGoogle = (response) => {
+    console.log(response);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const userData = {
+        ...formData,
+        skills: formData.skills ? formData.skills.split(',').map(skill => skill.trim()) : []
+      };
+      
+      const res = await registerUser(userData);
+      
+      if (res.type === "GET_ERRORS" && res.payload && res.payload.email) {
+        setNotification({
+          type: "error",
+          message: res.payload.email,
+        });
+      } else {
+        setNotification({
+          type: "success",
+          message: "User registered successfully! You can log in now."
+        });
+        setTimeout(() => {
+          navigate("/Login");
+        }, 1000);
+      }
+    } catch (err) {
+      console.error("Error during registration:", err);
+      setNotification({
+        type: "error",
+        message: "An error occurred during registration. Please try again later.",
+      });
+    }
+  };
+  
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white rounded-md shadow-md my-24">
@@ -34,22 +81,140 @@ const RegisterPage = () => {
           className="w-full flex justify-center mb-4 rounded-md"
         />
         <p className='text-center font-medium'>Ou</p>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={(event) => handleSubmit(event)} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nom</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              required
+              value={formData.name}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" name="email" id="email" autoComplete="email" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autoComplete="email"
+              required
+              value={formData.email}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
-            <input type="password" name="password" id="password" autoComplete="current-password" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              autoComplete="current-password"
+              required
+              value={formData.password}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
           </div>
           <div>
-            <button type="submit" className=" w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Creer mon compte
+            <label htmlFor="password2" className="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
+            <input
+              type="password"
+              name="password2"
+              id="password2"
+              autoComplete="current-password"
+              required
+              value={formData.password2}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">Rôle</label>
+            <select
+              name="role"
+              id="role"
+              required
+              value={formData.role}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            >
+              <option value="">Sélectionnez le rôle</option>
+              <option value="applicant">Demandeur d'emploi</option>
+              <option value="recruiter">Recruteur</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="localisation" className="block text-sm font-medium text-gray-700">Localisation</label>
+            <input
+              type="text"
+              name="localisation"
+              id="localisation"
+              autoComplete="localisation"
+              required
+              value={formData.localisation}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
+            <input
+              type="text"
+              name="phone_number"
+              id="phone_number"
+              autoComplete="phone_number"
+              required
+              value={formData.phone_number}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="bio" className="block text-sm font-medium text-gray-700">Bio</label>
+            <textarea
+              name="bio"
+              id="bio"
+              autoComplete="bio"
+              required
+              value={formData.bio}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            ></textarea>
+          </div>
+          <div>
+            <label htmlFor="skills" className="block text-sm font-medium text-gray-700">Compétences</label>
+            <input
+              type="text"
+              name="skills"
+              id="skills"
+              autoComplete="skills"
+              required
+              value={formData.skills}
+              onChange={handleInputChange}
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className=" w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Créer mon compte
             </button>
           </div>
         </form>
       </div>
+      {notification && (
+        <div className={notification.type === "error" ? "text-red-500" : "text-green-500"}>
+          {notification.message}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,5 @@
-import './index.css'
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./hocs/Layout";
 import Landing from "../src/containers/Landing/Landing";
 import CompanyPage from "../src/containers/CompanyPage/CompanyPage";
@@ -13,30 +12,56 @@ import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
+import * as jwt_decode from 'jwt-decode';
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import PrivateRoute from "./components/private-route/PrivateRoute";
+import { Provider } from "react-redux";
+import store from "./store";
 
+// Vérifie si un token JWT est présent dans le localStorage
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  const decoded = jwt_decode(token);
 
-export default function App() {
+  // Définir l'utilisateur actuel
+  store.dispatch(setCurrentUser(decoded));
+
+  const currentTime = Date.now() / 1000; 
+  // Vérifie si le token a expiré
+  if (decoded.exp < currentTime) {
+    // Déconnecter l'utilisateur et le rediriger vers la page de connexion
+    store.dispatch(logoutUser());
+    window.location.href = "/login";
+  }
+}
+
+function App() {
   return (
-    
+    <Provider store={store}>
       <Router>
         <Layout>
           <div className="container">
-            <Routes>
-              <Route path="/" exact element={<Landing />} />
-              <Route path="/company" exact element={<CompanyPage />} />
-              <Route path="/emploi" exact element={<OffresEmploi />} />
-              <Route path="/form" exact element={<FormPage />} />
-              <Route path="/login" exact element={<LoginPage />} />
-              <Route path="/register" exact element={<RegisterPage />} />
-              <Route path="/password" exact element={<Password />} />
-              <Route path="/rec" exact element={<RecuiterPage />} />
-              <Route path="/reclog" exact element={<RecLogin />} />
-              <Route path="/ess" exact element={<EssGratuitement />} />
-              <Route path="/validation" exact element={<ValidationEmail />} />
-            </Routes>
+          <Routes>
+  <Route path="/" element={<Landing />} />
+  <Route path="/login" element={<LoginPage />} />
+  <Route path="/register" element={<RegisterPage />} />
+  <Route path="/password/:resetToken" element={<Password />} />
+  <Route path="/company" element={<PrivateRoute component={CompanyPage} />} />
+  <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
+  <Route path="/form" element={<PrivateRoute component={FormPage} />} />
+  <Route path="/rec" element={<PrivateRoute component={RecuiterPage} />} />
+  <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
+  <Route path="/ess" element={<PrivateRoute component={EssGratuitement} />} />
+  <Route path="/validation" element={<PrivateRoute component={ValidationEmail} />} />
+  <Route path="*" element={<Navigate to="/login" />} />
+</Routes>
           </div>
         </Layout>
       </Router>
-    
+    </Provider>
   );
 }
+
+export default App;
