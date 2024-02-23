@@ -18,7 +18,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
-
+import PassRecLog from './containers/RecruiterPage/PassRecLog';
+import RecForm from './containers/RecruiterPage/RecForm';
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -51,7 +52,9 @@ function App() {
   <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
   <Route path="/ess" element={<PrivateRoute component={EssGratuitement} />} />
   <Route path="/validation" element={<PrivateRoute component={ValidationEmail} />} />
-  <Route path="/recform" exact element={<RecForm />} />
+  <Route path="/passrec" element={<PrivateRoute component={PassRecLog} />} />
+  <Route path="/recform" element={<PrivateRoute component={RecForm} />} />
+  {/* <Route path="/recform" exact element={<RecForm />} /> */}
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
           </div>

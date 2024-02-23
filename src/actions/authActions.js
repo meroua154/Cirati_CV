@@ -25,29 +25,22 @@ export const registerUser = async (userData, history) => {
 
 
 
-// Login - get user token
-export const loginUser = userData => dispatch => {
-    axios
-    .post("http://localhost:4000/user/login", userData)
-    .then(res => {
-        // Save to localStorage
-        // Set token to localStorage
-        const { token } = res.data;
-        localStorage.setItem("jwtToken", token);
-        // Set token to Auth header
-        setAuthToken(token);
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
-        // Set current user
-        dispatch(setCurrentUser(decoded));
-    })
-    .catch(err =>
-            dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
-    );
-};
+export const loginUser = userData => async dispatch => {
+    try {
+      const res = await axios.post("http://localhost:4000/user/login", userData);
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+    } catch (err) {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    }
+  };
+  
 
 // Set logged in user
 export const setCurrentUser = decoded => {
