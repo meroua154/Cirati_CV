@@ -12,7 +12,7 @@ const Head = ({ coverPhoto, profilePhoto, companyName }) => {
           className="w-full h-60 object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-40"></div>
-        <div className="absolute bottom-0 left-0 ml-96 mb-8">
+        <div className="absolute bottom-0 left-0 ml-80 mb-8">
           <p className="text-white font-bold text-2xl">{companyName}</p>
         </div>
         

@@ -17,7 +17,6 @@ export default function ValidationEmail() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (code.length === 6) {
-            // Ici, vous pouvez ajouter la logique pour valider le code d'email
             console.log('Code de validation soumis :', code);
         } else {
             setErrorMessage('Le code doit comporter exactement 6 chiffres.');
@@ -25,28 +24,36 @@ export default function ValidationEmail() {
     };
   return (
     <div className="flex justify-center items-center h-screen">
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit} className="bg-slate-50 shadow-md rounded px-12 pt-8 pb-8 mb-4">
+                <div className='mb-8'>
+                   <h1 className='font-bold text-2xl tracking-widest'>Validez votre adresse email</h1> 
+                </div>
+                
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="code">
-                        Code de validation d'email
+                    <label className="block text-gray-700 text-sm" htmlFor="code">
+                       Saisissez le code de validation
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-2"
                         id="code"
                         type="text"
                         placeholder="Entrez le code ici"
                         value={code}
                         onChange={handleChange}
+                        required
                     />
                     {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="">
+                  <a href="/recform">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className=" w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         type="submit"
                     >
                         Valider
                     </button>
+                  </a>
+                    <p className='text-xs mt-2'>Rien recu ? <a href="" className='text-blue-600'>Renvoyer le code de validation</a></p>
                 </div>
             </form>
         </div>

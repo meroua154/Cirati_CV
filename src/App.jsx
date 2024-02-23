@@ -13,6 +13,8 @@ import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
+import PassRecLog from './containers/RecruiterPage/PassRecLog';
+import RecForm from './containers/RecruiterPage/RecForm';
 
 
 export default function App() {
@@ -31,8 +33,10 @@ export default function App() {
               <Route path="/password" exact element={<Password />} />
               <Route path="/rec" exact element={<RecuiterPage />} />
               <Route path="/reclog" exact element={<RecLogin />} />
+              <Route path="/passrec" exact element={<PassRecLog />} />
               <Route path="/ess" exact element={<EssGratuitement />} />
               <Route path="/validation" exact element={<ValidationEmail />} />
+              <Route path="/recform" exact element={<RecForm />} />
             </Routes>
           </div>
         </Layout>

@@ -47,17 +47,19 @@ const Value = () => {
           );
         })}
      </div>
-      <div className="valuecard flex flex-wrap gap-10 justify-between items-center rounded-xl  md:mt-4 md:mb-16 sm:p-16 sm:col-span-3 bg-cover w-full background-image">
-          <div className="left">
-            <p className="text-blueColor font-extrabold text-2xl mb-3">
-              Ready to switch a carrer?{" "}
+      <div className="valuecard flex flex-wrap gap-10 justify-between items-center rounded-xl  md:mt-4 md:mb-16 sm:p-16 sm:col-span-3 bg-cover w-full background-image mb-8">
+          <div className="left ml-2">
+            <p className="text-blueColor font-extrabold text-2xl mb-3 mt-8 md:mt-0">
+              Prêt à changer de carrière ?{" "}
             </p>
-            <p className="font-extrabold text-2xl ">Let's Get Started ! </p>
+            <p className="font-extrabold text-2xl ">Créez votre CV dès maintenant ! </p>
           </div>
-          <div className="right">
+          <div className="right ml-2 mb-4">
+          <a href="/form">
             <button className="border-2 border-blueColor rounded-lg text-lg font-semibold px-8 py-5 text-blueColor hover:bg-white hover:text-black ">
-              Get Started
+              Commençons !
             </button>
+          </a>
           </div>
         </div>
     </section>

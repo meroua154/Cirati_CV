@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Password = () => {
+const PassRecLog = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Gérer la soumission du formulaire ici
@@ -11,7 +11,7 @@ const Password = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 rounded-md shadow-md my-24 bg-slate-50">
+    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Mot de passe oublié</h2>
@@ -27,7 +27,7 @@ const Password = () => {
               Envoyer moi un email
             </button>
           </div>
-          <div  className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
+          <div  className='text-blue-500 text-center text-xs mt-16'><a href="/reclog">Retour a la page de connexion</a></div>
           
         </form>
       </div>
@@ -35,4 +35,4 @@ const Password = () => {
   );
 };
 
-export default Password;
+export default PassRecLog;
