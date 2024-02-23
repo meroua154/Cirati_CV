@@ -3,6 +3,7 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 // Load input validation
 const validateRegisterInput = require("../validations/register");
@@ -13,6 +14,117 @@ const User = require("../models/users.model");
 
 // GET request 
 // Getting all the users
+async function sendEmails(toEmail, subject, content) {
+    return new Promise((resolve, reject) => {
+        var defaultClient = SibApiV3Sdk.ApiClient.instance;
+        var apiKey = defaultClient.authentications['api-key'];
+        apiKey.apiKey = process.env.EMAIL_API_KEY;
+        var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+        var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+        sendSmtpEmail.subject = subject;
+        sendSmtpEmail.htmlContent = content;
+        sendSmtpEmail.sender = { name: 'Noreply', email: 'noreply@example.com' };
+        sendSmtpEmail.to = [{ email: toEmail }];
+        apiInstance.sendTransacEmail(sendSmtpEmail).then(
+            function (data) {
+                console.log('API appelée avec succès. Données retournées : ' + data);
+                resolve(data); 
+            },
+            function (error) {
+                console.error('Erreur lors de l\'envoi de l\'email : ', error);
+                reject(error); 
+            }
+        );
+    });
+}
+
+async function verifyEmail(req, res) {
+    try {
+        const { token } = req.query;
+        if (!token) {
+            return res.status(400).json({ message: 'accès interdit' });
+        }
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
+            if (err) {
+                console.error('erreur lors de la verification: ', err);
+                return res.status(400).json({ message: `erreur lors de la verification:  ${err.message}` });
+            }
+            const { email } = decoded;
+            const user = await User.findOne({ email });
+            if (user) {
+                user.verified = true;
+                await user.save();
+                return res.status(200).json({ message: 'Votre email a été vérifié!' });
+            }
+            res.status(404).json({ message: 'un utilisateur avec cet email nexsite pas ' });
+        });
+    } catch (error) {
+        console.error('erreur lors de la verification: ', error);
+        return res.status(500).json({ message: `erreur lors de la verification:  ${error.message}` });
+    }
+}
+async function resetpassword(req, res) {
+    try {
+      const { email } = req.body.email;
+      const client = await User.findOne({ where: { email } });
+      if (!client) {
+        return res.status(404).json({ message: 'utilisateur introuvable' });
+      }
+      const currentTime = Date.now();
+      const expirationTime = Math.floor(currentTime / 1000) + (10 * 60);
+  
+      const resetToken = jwt.sign({ id: client.id, exp: expirationTime }, process.env.RESET_PASSWORD_SECRET);
+      const resetLink = `http://localhost:5173/password/${resetToken}`;
+  
+      const emailSubject = 'réinitialisation du mot de passe';
+      const emailContent = `
+        <p>clickez sur le link afin de réinitialiser votre mot de passe</p>
+        <a href="${resetLink}">${resetLink}</a>
+      `;
+      sendEmails(email, emailSubject, emailContent);
+  
+      res.json({ message: 'un email de confirmation à été envoyé ' });
+    } catch (error) {
+      console.error( error);
+      res.status(500).json({ message: 'erreur lors de la réintialisation' });
+    }
+  }
+  async function resetPassword2(req, res) {
+    try {
+      const { resetToken } = req.params;
+      const { newPassword } = req.body;
+      jwt.verify(resetToken, process.env.RESET_PASSWORD_SECRET, async (err, decoded) => {
+        if (err) {
+          console.error(err);
+          return res.status(400).json({ message: 'le token est invalid' });
+        }
+        const { id, exp } = decoded;
+        const currentTime = Math.floor(Date.now() / 1000);
+        if (currentTime > exp) {
+          return res.status(400).json({ message: 'le token est expiré' });
+        }
+        try {
+          const client = await User.findByPk(id);
+          if (!client) {
+            return res.status(404).json({ message: 'utilisateur introuvable' });
+          }
+          const hashedPassword = await bcrypt.hash(newPassword, 10);
+          client.Password = hashedPassword;
+          await client.save();
+          return res.status(200).json({ message: 'réinitialisation réussite' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: 'erreur lors de la réintialisation' });
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'erreur lors de la réintialisation' });
+    }
+  }
+router.post("/Resetpassword",  resetpassword);
+router.post("/Resetpassword2/:resetToken", resetPassword2);
+router.get("/verifyemail", verifyEmail);
 router.get("/", function(req, res) {
     User.find(function(err, users) {
 		if (err) {
@@ -64,31 +176,45 @@ router.post("/register", (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
+    const verificationToken = jwt.sign({ email: req.body.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const verificationLink = `${req.protocol}://${req.get('host')}/user/verifyemail?token=${verificationToken}`;
+    const emailSubject = 'confirmer le compte:';
+    const emailContent = `
+    <p>Afin de confirmer votre compte veuillez clicker sur le button suivant :</p>
+    <a href="${verificationLink}">  Click here!!</a>
+    `;
+ 
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
-        return res.status(400).json({ email: "Email already exists" });
+            return res.status(400).json({ email: "Email already exists" });
         } else {
-        const newUser = new User(req.body
-        );
-        
-        // Hash password before saving in database
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-                .save()
-                .then(user => {
-                    res.status(200).json(user);
-                })
-                .catch(err => {
-                    res.status(400).send(err);
+            // Envoi de l'email
+            sendEmails(req.body.email, emailSubject, emailContent)
+            .then(() => {
+                // Enregistrement de l'utilisateur dans la base de données après l'envoi réussi de l'email
+                const newUser = new User(req.body);
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if (err) throw err;
+                        newUser.password = hash;
+                        newUser
+                            .save()
+                            .then(user => {
+                                res.status(200).json(user); // Renvoyer l'utilisateur une fois enregistré
+                            })
+                            .catch(err => {
+                                res.status(400).send(err);
+                            });
+                    });
                 });
+            })
+            .catch((emailError) => {
+                res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email: ' + emailError.message });
             });
-        });
         }
     });
 });
+
 
 // PUT Request
 // Edit User Details
@@ -120,11 +246,20 @@ router.post("/login", (req, res) => {
     const password = req.body.password;
     // Find user by email
     User.findOne({ email }).then(user => {
-        // Check if user exists
         if (!user) {
             return res.status(404).json({ emailnotfound: "Email not found" });
         }
-        // Check password
+        if (!user.verified) {
+            const verificationToken = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '4h' });
+            const verificationLink = `${req.protocol}://${req.get('host')}/user/verifyemail/verifyEmail?token=${verificationToken}`;
+            const emailSubject = 'vérification de lemail';
+            const emailContent = `
+              <p>Clickez sur ce lien afin de valider votre email:</p>
+              <a href="${verificationLink}">  Clickez ici!!</a>
+              `;
+            sendEmails(email, emailSubject, emailContent);
+            return res.status(500).json({ message: `veuillez valider dabord envoyé sur ${utilisateur.Email}` });
+        }
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
                 // User matched

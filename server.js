@@ -3,7 +3,7 @@ const listEndpoints = require('express-list-endpoints');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 const passport = require("passport");
 
 const app = express();

@@ -36,7 +36,11 @@ const userSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
 });
 
 userSchema.index({ name: 1 });
