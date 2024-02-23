@@ -60,9 +60,9 @@ const CompanyPage = () => {
         <Head />
       </div>
        
-      <div className="bg-gray-100 min-h-screen flex flex-row mt-24 mx-8">
+      <div className="bg-gray-100 min-h-screen flex flex-col md:flex-row mt-24 mx-8">
         {/* Boîte 1 */}
-        <div className="bg-white p-8 basis-2/3 rounded-lg shadow mb-4 mr-8" style={{ height: 'fit-content' }}>
+        <div className="bg-white p-8 md:basis-2/3 rounded-lg shadow mb-4 sm:mr-4" style={{ height: 'fit-content' }}>
           <div className="flex items-start">
             <div className="ml-4 border-black">
               <table>
@@ -85,7 +85,7 @@ const CompanyPage = () => {
                   ))}
                 </tbody>
               </table>
-              <button className="mt-4 text-blueColor text-lg font-semibold px-4 py-2">
+              <button className="mt-4 text-blueColor text-sm  px-4 py-2">
                 Voir toutes les offres d'emploi
               </button>
             </div>
@@ -93,7 +93,7 @@ const CompanyPage = () => {
         </div>
 
         {/* Boîte 2 */}
-        <div className="p-8 basis-1/3 rounded-lg shadow mb-4 mr-8" style={{ height: '400px', position: 'relative' }}>
+        <div className="p-8 md:basis-1/3 rounded-lg shadow mb-4 sm:mr-4" style={{ height: '400px', position: 'relative' }}>
           {companyLocation && (
             <CompanyMap
               latitude={companyLocation.latitude}

@@ -19,19 +19,15 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./store";
 
-// Vérifie si un token JWT est présent dans le localStorage
+
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
   const decoded = jwt_decode(token);
-
-  // Définir l'utilisateur actuel
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000; 
-  // Vérifie si le token a expiré
   if (decoded.exp < currentTime) {
-    // Déconnecter l'utilisateur et le rediriger vers la page de connexion
     store.dispatch(logoutUser());
     window.location.href = "/login";
   }
@@ -55,6 +51,7 @@ function App() {
   <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
   <Route path="/ess" element={<PrivateRoute component={EssGratuitement} />} />
   <Route path="/validation" element={<PrivateRoute component={ValidationEmail} />} />
+  <Route path="/recform" exact element={<RecForm />} />
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
           </div>

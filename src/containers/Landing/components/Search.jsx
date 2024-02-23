@@ -56,9 +56,9 @@ const Search = () => {
   return (
     <section className="Search px-20">
       <div>
-        <h1 className="text-center text-4xl font-bold tracking-wider mt-24 leading-relaxed p-[1rem] md:p-[3rem]">Trouvez le job de vos reves <br /> en quelques clics..</h1>
+        <h1 className="text-center text-3xl md:text-4xl font-bold  mt-32  md:mt-20 leading-relaxed mx-0 md:p-[3rem]">Trouvez le <spam className="text-blue-600">job</spam> de vous reves en quelques clics</h1>
       </div>
-    <div className="grid gap-9  rounded-[10px] p-[1rem] md:p-[3rem]  ">
+    <div className="grid gap-9  rounded-[10px] p-[1rem] md:p-[3rem] px-0 ">
       <form onSubmit={handleSearch}>
         <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-5 shadow-lg shadow-grey-700 dark:bg-slate-600">
           <div className="flex flex-grow items-center ">
@@ -111,7 +111,7 @@ const Search = () => {
         </ul>
       )}
       {searched && !(titleQuery || companyQuery || locationQuery) && (
-        <p>No search criteria entered.</p>
+        <p className="md:ml-2 ml-2">No search criteria entered.</p>
       )}
       {!searched && (
         <p>Enter search criteria to begin.</p>

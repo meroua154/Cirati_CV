@@ -10,8 +10,8 @@ const Jobs = () => {
   return (
     <section id="jobs" className="full-width-div">
         <div className=" container mx-auto px-16 pb-24">
-        <h2 className="text-center text-3xl font-bold md:pt-20 md:pb-12 dark:text-white lettre-espace" >Dernieres offres</h2> 
-        <div className=" flex gap-10 justify-center flex-wrap items-center px-8 sm:py-10">
+        <h2 className="text-center text-3xl font-bold pt-12 pb-8 md:pt-20 md:pb-8 dark:text-white lettre-espace" >Dernieres offres</h2> 
+        <div className=" flex gap-10 justify-center flex-wrap items-center sm:px-4 sm:py-10">
           {JobsData.slice(0, 6).map((job) => {
              return (
                 <div key={job.id}
