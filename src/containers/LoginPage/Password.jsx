@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Password = () => {
-  const handleSubmit = (event) => {
+  const [resetMessage, setResetMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
+
+  const resetPassword = async (email) => {
+    try {
+      const response = await axios.post('http://localhost:4000/user/Resetpassword', { email });
+      setResetMessage(response.data.message);
+      setMessageType('success');
+    } catch (error) {
+      setResetMessage(error.response.data.message);
+      setMessageType('error');
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Gérer la soumission du formulaire ici
     const formData = new FormData(event.target);
     const email = formData.get('email');
-    console.log('Email:', email);
-    // Ajoutez ici la logique pour envoyer un e-mail de réinitialisation du mot de passe
+    await resetPassword(email);
   };
 
   return (
@@ -27,8 +40,10 @@ const Password = () => {
               Envoyer moi un email
             </button>
           </div>
-          <div  className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
-          
+          <div className={`text-center mt-4 ${messageType === 'error' ? 'text-red-500' : 'text-green-500'}`}>
+            {resetMessage}
+          </div>
+          <div className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
         </form>
       </div>
     </div>
