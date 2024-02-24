@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react"
 import { BiTimeFive } from "react-icons/bi";
-import { JobsData } from "../../../Constants";
+// import { JobsData } from "../../../Constants";
+import axios from 'axios';
 
-
-const Jobs = () => {
-
+const Jobs = ({JobsData}) => {
   
 
   return (
@@ -23,27 +22,29 @@ const Jobs = () => {
                         {job.title}
                       </p>
                       <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
-                        {job.location}
+                        {job.address}
                       </p>
                     </div>
                     <span className="mt-[-20px] text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-300">
                       <BiTimeFive className="inline mb-0.5 mr-1" />
-                      {job.time}
+                      {job.duration}
                     </span>
                   </div>
                   <div className="lowerpart border-t-2 mt-4 group-hover:text-white ">
                     <p className="mt-4 text-sm text-[#adaaaa] group-hover:text-white dark:text-slate-200">
-                      {job.desc}
+                      {job.description}
+                      
                     </p>
                     <div className="company flex justify-start items-center mt-4 mb-3">
                       <img
                         className="p-0"
                         src={job.logo}
                         width={25}
-                        alt={job.title}
+                        height={25}
+                        // alt={job.title}
                       />
                       <p className="text-sm font-medium ml-1 dark:text-slate-300">
-                        {job.company}
+                        {job.recruiterName}
                       </p>
                     </div>
                   </div>

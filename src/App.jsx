@@ -45,17 +45,18 @@ function App() {
   <Route path="/" element={<Landing />} />
   <Route path="/login" element={<LoginPage />} />
   <Route path="/register" element={<RegisterPage />} />
-  <Route path="/password/:resetToken" element={<Password />} />
-  <Route path="/company" element={<PrivateRoute component={CompanyPage} />} />
-  <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
-  <Route path="/form" element={<PrivateRoute component={FormPage} />} />
-  <Route path="/rec" element={<PrivateRoute component={RecuiterPage} />} />
-  <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
-  <Route path="/ess" element={<PrivateRoute component={EssGratuitement} />} />
-  <Route path="/validation" element={<PrivateRoute component={ValidationEmail} />} />
-  <Route path="/passrec" element={<PrivateRoute component={PassRecLog} />} />
-  <Route path="/recform" element={<PrivateRoute component={RecForm} />} />
-  {/* <Route path="/recform" exact element={<RecForm />} /> */}
+  <Route path="/password" element={<Password />} />
+  <Route path="/validation" element={<ValidationEmail/>}  />
+  {/* <Route path="/passrec" element={<PrivateRoute element={<PassRecLog/>} />} />  ya deja password !!?*/}
+      {/* <Route path="/reclog" element={<PrivateRoute element={<RecLogin/>} />} />
+            <Route path="/ess" element={<PrivateRoute element={<EssGratuitement/>} />} />  ???why hado than*/}
+              {/* <Route path="/recform" element={<RecForm />} />  no need  */}
+            <Route path="/company" element={<PrivateRoute element={<CompanyPage/>} />} />
+            <Route path="/emploi" element={<PrivateRoute element={<OffresEmploi/>} />} />
+            <Route path="/form" element={<PrivateRoute element={<FormPage/>} />} />
+            <Route path="/rec" element={<PrivateRoute element={<RecuiterPage/>} />} />
+        
+
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
           </div>

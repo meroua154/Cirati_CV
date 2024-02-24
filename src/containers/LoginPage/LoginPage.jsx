@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { loginUser } from "../../actions/authActions";
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const dispatch = useDispatch(); 
   const errors = useSelector(state => state.errors);
+  const auth = useSelector(state => state.auth);
+  console.log(auth)
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/"); 
+    }
+  }, [auth.isAuthenticated, navigate]);
   const [notification, setNotification] = useState(null);
   const responseGoogle = (response) => {
     console.log(response);
