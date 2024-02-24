@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const { generateImageURL } = require('../commun/communfun')
 const userSchema = new Schema({
     name: {
         type: String,
@@ -40,6 +40,9 @@ const userSchema = new Schema({
     verified: {
         type: Boolean,
         default: false
+    },
+    skills: {
+        type: [String] 
     },
 });
 

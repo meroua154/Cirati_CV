@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const jobSchema = new Schema({
     recruiter: {
@@ -17,11 +17,17 @@ const jobSchema = new Schema({
         type: String,
         //required: true
     },
+    logo: {
+        type: String,
+        //required: true
+    },
     description: {
         type: String,
     },
     type: {
         type: String,
+        enum: ['Remote', 'Contract', 'Fulltime', 'Parttime'],
+        default: 'Remote'
         //required: true
     },
     duration: {
@@ -66,10 +72,18 @@ const jobSchema = new Schema({
         type: Date,
         default: new Date()
     },
-    deadline:{
-		type: Date,
-		//required: true
-	}
+    deadline: {
+        type: Date,
+        //required: true
+    },
+    level: {
+        type: String,
+        enum: ['Beginner', 'Experienced', 'Intermediate', 'Professional'],
+        default: 'Beginner'
+        //required: true
+    }
 });
+
 jobSchema.index({ recruiter: 1 });
-module.exports = Job =  mongoose.model('Job', jobSchema)
+
+module.exports = Job = mongoose.model('Job', jobSchema);

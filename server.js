@@ -22,7 +22,8 @@ app.use(cors());
 // Body-Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+//====================Assets==============================================
+app.use('/ciraticv/Images', express.static('Images'));
 // Connect to MongoDB
 // To localhost
 mongoose.connect('mongodb://127.0.0.1:27017/JobsPlanet', { useNewUrlParser: true, useUnifiedTopology: true });

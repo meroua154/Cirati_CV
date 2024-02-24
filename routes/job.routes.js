@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
+const { upload,generateImageURL } = require('../commun/communfun');
 // Load User model
 const Job = require("../models/job.model");
 
@@ -38,12 +38,17 @@ router.get("/latest_jobs/:recruiterId", function(req, res) {
 });
 // POST request 
 // Add a job to db
-router.post("/add_job", (req, res) => {
+router.post("/add_job", upload.single("Image"), (req, res) => {
+    if (req.file) {
+        const photoFile = req.file;
+        photoUrl = generateImageURL(req, photoFile.filename);
+    }
     const newJob = new Job({
         recruiter: req.body.recruiter,
         recruiterName: req.body.recruiterName,
         recruiterEmail: req.body.recruiterEmail,
         title: req.body.title,
+        logo:photoUrl,
         description: req.body.description,
         type: req.body.type,
         duration: req.body.duration,
@@ -71,18 +76,25 @@ router.post("/add_job", (req, res) => {
 
 // PUT Request
 // Edit Job Details
-router.put('/edit_job/:id', (req, res) => {
-    Job.findByIdAndUpdate(req.params.id, {
-      $set: req.body
-    }, (error, data) => {
+router.put('/edit_job/:id', upload.single("Image"), (req, res) => {
+    const photoFile = req.file;
+    const photoUrl = photoFile ? generateImageURL(req, photoFile.filename) : undefined;
+    
+    const updatedFields = { ...req.body };
+    if (photoUrl) {
+        updatedFields.logo = photoUrl;
+    }
+
+    Job.findByIdAndUpdate(req.params.id, { $set: updatedFields }, (error, data) => {
         if (error) {
             console.log(error);
+            res.status(500).send("Une erreur s'est produite lors de la mise à jour de l'emploi.");
         } else {
-            res.json(data)
-            console.log('Job updated successfully !')
+            res.json(data);
+            console.log('Job updated successfully!');
         }
-    })
-})
+    });
+});
 
 // DELETE request
 // Delete a job from the db

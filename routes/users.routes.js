@@ -54,7 +54,8 @@ async function verifyEmail(req, res) {
             if (user) {
                 user.verified = true;
                 await user.save();
-                return res.status(200).json({ message: 'Votre email a été vérifié!' });
+                return res.redirect("http://localhost:5173/validation");
+
             }
             res.status(404).json({ message: 'un utilisateur avec cet email nexsite pas ' });
         });
@@ -235,17 +236,15 @@ router.route('/edit_profile/:id').put((req, res, next) => {
 
 // POST request 
 // Login
-router.post("/login", (req, res) => {
-    // Form validation
-    const { errors, isValid } = validateLoginInput(req.body);
-    // Check validation
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
-    const email = req.body.email;
-    const password = req.body.password;
-    // Find user by email
-    User.findOne({ email }).then(user => {
+router.post("/login", async (req, res) => {
+    try {
+        const { errors, isValid } = validateLoginInput(req.body);
+        if (!isValid) {
+            return res.status(400).json(errors);
+        }
+        const email = req.body.email;
+        const password = req.body.password;
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ emailnotfound: "Email not found" });
         }
@@ -257,39 +256,38 @@ router.post("/login", (req, res) => {
               <p>Clickez sur ce lien afin de valider votre email:</p>
               <a href="${verificationLink}">  Clickez ici!!</a>
               `;
-            sendEmails(email, emailSubject, emailContent);
-            return res.status(500).json({ message: `veuillez valider dabord envoyé sur ${utilisateur.Email}` });
+            await sendEmails(email, emailSubject, emailContent);
+            return res.status(500).json({ message: `Veuillez d'abord vérifier votre email` });
         }
-        bcrypt.compare(password, user.password).then(isMatch => {
-            if (isMatch) {
-                // User matched
-                // Create JWT Payload
-                const payload = {
-                    id: user.id,
-                    name: user.name
-                };
-                // Sign token
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    {
-                        expiresIn: 31556926 // 1 year in seconds
-                    },
-                    (err, token) => {
-                        res.json({
-                            success: true,
-                            token: "Bearer " + token
-                        });
-                    }
-                );
-            } else {
-                return res
-                .status(400)
-                .json({ passwordincorrect: " Password incorrect" });
-            }
-        });
-    });
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+           
+            const payload = {
+                id: user.id,
+                name: user.name
+            };
+            jwt.sign(
+                payload,
+                keys.secretOrKey,
+                {
+                    expiresIn: 31556926 
+                },
+                (err, token) => {
+                    res.json({
+                        success: true,
+                        token: "Bearer " + token
+                    });
+                }
+            );
+        } else {
+            return res.status(400).json({ passwordincorrect: "Password incorrect" });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
 });
+
 
 // router.post("/login", (req, res) => {
 // 	const email = req.body.email;
