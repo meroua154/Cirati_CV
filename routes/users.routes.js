@@ -67,7 +67,7 @@ async function verifyEmail(req, res) {
 async function resetpassword(req, res) {
     try {
       const { email } = req.body.email;
-      const client = await User.findOne({ where: { email } });
+      const client = await User.findOne({ email: req.body.email });
       if (!client) {
         return res.status(404).json({ message: 'utilisateur introuvable' });
       }
@@ -75,14 +75,14 @@ async function resetpassword(req, res) {
       const expirationTime = Math.floor(currentTime / 1000) + (10 * 60);
   
       const resetToken = jwt.sign({ id: client.id, exp: expirationTime }, process.env.RESET_PASSWORD_SECRET);
-      const resetLink = `http://localhost:5173/password/${resetToken}`;
+      const resetLink = `http://localhost:5173/passrec/${resetToken}`;
   
       const emailSubject = 'réinitialisation du mot de passe';
       const emailContent = `
         <p>clickez sur le link afin de réinitialiser votre mot de passe</p>
         <a href="${resetLink}">${resetLink}</a>
       `;
-      sendEmails(email, emailSubject, emailContent);
+      sendEmails(req.body.email, emailSubject, emailContent);
   
       res.json({ message: 'un email de confirmation à été envoyé ' });
     } catch (error) {
@@ -92,6 +92,7 @@ async function resetpassword(req, res) {
   }
   async function resetPassword2(req, res) {
     try {
+
       const { resetToken } = req.params;
       const { newPassword } = req.body;
       jwt.verify(resetToken, process.env.RESET_PASSWORD_SECRET, async (err, decoded) => {
@@ -105,7 +106,7 @@ async function resetpassword(req, res) {
           return res.status(400).json({ message: 'le token est expiré' });
         }
         try {
-          const client = await User.findByPk(id);
+          const client = await User.findById(id);
           if (!client) {
             return res.status(404).json({ message: 'utilisateur introuvable' });
           }
