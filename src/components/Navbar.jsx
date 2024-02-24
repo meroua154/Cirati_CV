@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import store from "../store";
+
 import { navLinks } from "../../src/Constants";
 import { MdLightMode } from "react-icons/md";
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
@@ -17,7 +19,7 @@ const Navbar = () => {
 
   const handleLogout = (event) => {
     event.preventDefault();
-    logoutUser();
+    store.dispatch(logoutUser());
 };
   return (
     <header className={`mb-16 ${isDarkMode ? 'dark:bg-gray-900' : 'bg-white'}`}>
