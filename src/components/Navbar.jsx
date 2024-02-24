@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import store from "../store";
 
 import { navLinks } from "../../src/Constants";
-import { MdLightMode } from "react-icons/md";
+// import { MdLightMode } from "react-icons/md";
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { logoutUser } from "../actions/authActions";
 const Navbar = () => {
@@ -14,7 +14,7 @@ const Navbar = () => {
   const defaultUserImage = "https://via.placeholder.com/150";
 
   const toggleTheme = () => {
-    
+
     document.documentElement.classList.toggle("dark");
   };
 

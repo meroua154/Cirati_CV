@@ -24,6 +24,12 @@ const Jobs = ({JobsData}) => {
                       <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
                         {job.address}
                       </p>
+                      <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
+                        {job.type}
+                      </p>
+                      <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
+                        {job.salary} DA 
+                      </p>
                     </div>
                     <span className="mt-[-20px] text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-300">
                       <BiTimeFive className="inline mb-0.5 mr-1" />
