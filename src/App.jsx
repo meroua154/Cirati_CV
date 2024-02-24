@@ -12,7 +12,7 @@ import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -24,7 +24,8 @@ import RecForm from './containers/RecruiterPage/RecForm';
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
-  const decoded = jwt_decode(token);
+  const decoded = jwtDecode(token);
+
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000; 

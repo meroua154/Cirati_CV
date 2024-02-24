@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'
+
 
 
 import {
@@ -10,36 +11,52 @@ import {
 } from "./types";
 
 // Register User
-export const registerUser = async (userData, history) => {
-    try {
-        const res = await axios.post("http://localhost:4000/user/register", userData)
-        return res
-    } catch (err) {
-        console.log(err)
-        return {
-            type: GET_ERRORS,
-            payload: err.response.data,
-        };
-    }
+export const registerUser = (userData) => {
+    return async dispatch => {
+        try {
+            const res = await axios.post("http://localhost:4000/user/register", userData);
+            
+            return res.data;
+        } catch (err) {
+            console.log(err);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+            return {
+                type: GET_ERRORS,
+                payload: err.response.data,
+            };
+        }
+    };
 };
 
 
 
-export const loginUser = userData => async dispatch => {
+export const loginUser = (userData) => {
+    return async dispatch => {
     try {
       const res = await axios.post("http://localhost:4000/user/login", userData);
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
-      const decoded = jwt_decode(token);
+      const decoded = jwtDecode(token);
+
       dispatch(setCurrentUser(decoded));
+      return res
     } catch (err) {
+        console.log(err)
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      return {
+        type: GET_ERRORS,
+        payload: err.response.data,
+    };
     }
-  };
+  }
+};
   
 
 // Set logged in user

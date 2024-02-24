@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
-
+import { loginUser } from "../../actions/authActions";
+import { useSelector, useDispatch } from 'react-redux';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const dispatch = useDispatch(); 
+  const errors = useSelector(state => state.errors);
+  const [notification, setNotification] = useState(null);
   const responseGoogle = (response) => {
     console.log(response);
-    // Ici, vous pouvez gérer la réponse de Google, comme l'authentification du côté serveur, etc.
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Gérer la soumission du formulaire ici
-    const formData = new FormData(event.target);
-    const email = formData.get('email');
-    const password = formData.get('password');
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const res = await dispatch(loginUser({ email, password }));
+      if(res.status=="200"){
+        setNotification({
+          type: "success",
+          message: "User Logged In."
+        });
+  
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   return (
@@ -37,11 +49,29 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input type="email" name="email" id="email" autoComplete="email" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+            <input 
+              type="email" 
+              name="email" 
+              id="email" 
+              autoComplete="email" 
+              required 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
+            />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
-            <input type="password" name="password" id="password" autoComplete="current-password" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+            <input 
+              type="password" 
+              name="password" 
+              id="password" 
+              autoComplete="current-password" 
+              required 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
+            />
             <a href="/password" className='text-blue-500 mt-2'>Mot de passe oublié</a>
           </div>
           <div>
@@ -50,7 +80,22 @@ const LoginPage = () => {
             </button>
           </div>
         </form>
+
       </div>
+      {errors && (
+        <div className="text-red-500">
+          {errors.email && <p>{errors.email}</p>}
+          {errors.password && <p>{errors.password}</p>}
+          {errors.emailnotfound && <p>{errors.emailnotfound}</p>}
+          {errors.message && <p>{errors.message}</p>}
+        </div>
+      )}
+        {notification && (
+            <div className={`text-center text-${notification.type === 'success' ? 'green' : 'red'}-500`}>
+              {notification.message}
+            </div>
+          )}
+
     </div>
   );
 };
