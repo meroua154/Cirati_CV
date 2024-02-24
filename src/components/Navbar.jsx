@@ -14,6 +14,7 @@ const Navbar = () => {
   const defaultUserImage = "https://via.placeholder.com/150";
 
   const toggleTheme = () => {
+    
     document.documentElement.classList.toggle("dark");
   };
 
