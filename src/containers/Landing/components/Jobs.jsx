@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { JobsData } from "../../../Constants";
@@ -5,6 +6,14 @@ import { JobsData } from "../../../Constants";
 
 const Jobs = () => {
 
+=======
+import React, { useState, useEffect } from "react"
+import { BiTimeFive } from "react-icons/bi";
+// import { JobsData } from "../../../Constants";
+import axios from 'axios';
+
+const Jobs = ({JobsData}) => {
+>>>>>>> origin/main
   
 
   return (
@@ -23,27 +32,54 @@ const Jobs = () => {
                         {job.title}
                       </p>
                       <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
+<<<<<<< HEAD
                         {job.location}
+=======
+                        {job.address}
+                      </p>
+                      <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
+                        {job.type}
+                      </p>
+                      <p className="text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-400 ">
+                        {job.salary} DA 
+>>>>>>> origin/main
                       </p>
                     </div>
                     <span className="mt-[-20px] text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-300">
                       <BiTimeFive className="inline mb-0.5 mr-1" />
+<<<<<<< HEAD
                       {job.time}
+=======
+                      {job.duration}
+>>>>>>> origin/main
                     </span>
                   </div>
                   <div className="lowerpart border-t-2 mt-4 group-hover:text-white ">
                     <p className="mt-4 text-sm text-[#adaaaa] group-hover:text-white dark:text-slate-200">
+<<<<<<< HEAD
                       {job.desc}
+=======
+                      {job.description}
+                      
+>>>>>>> origin/main
                     </p>
                     <div className="company flex justify-start items-center mt-4 mb-3">
                       <img
                         className="p-0"
                         src={job.logo}
                         width={25}
+<<<<<<< HEAD
                         alt={job.title}
                       />
                       <p className="text-sm font-medium ml-1 dark:text-slate-300">
                         {job.company}
+=======
+                        height={25}
+                        // alt={job.title}
+                      />
+                      <p className="text-sm font-medium ml-1 dark:text-slate-300">
+                        {job.recruiterName}
+>>>>>>> origin/main
                       </p>
                     </div>
                   </div>

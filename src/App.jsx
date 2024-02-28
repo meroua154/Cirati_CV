@@ -5,7 +5,10 @@ import Landing from "../src/containers/Landing/Landing";
 import CompanyPage from "../src/containers/CompanyPage/CompanyPage";
 import OffresEmploi from './containers/CompanyPage/OffresEmploi';
 import FormPage from './containers/CV/FormPage';
+<<<<<<< HEAD
 import FormPagered from './containers/CV-red/src/Cv';
+=======
+>>>>>>> origin/main
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Password from './containers/LoginPage/Password';
@@ -13,7 +16,11 @@ import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
+<<<<<<< HEAD
 import * as jwt_decode from 'jwt-decode';
+=======
+import { jwtDecode } from 'jwt-decode'
+>>>>>>> origin/main
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import PrivateRoute from "./components/private-route/PrivateRoute";
@@ -25,7 +32,12 @@ import RecForm from './containers/RecruiterPage/RecForm';
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
+<<<<<<< HEAD
   const decoded = jwt_decode(token);
+=======
+  const decoded = jwtDecode(token);
+
+>>>>>>> origin/main
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000; 
@@ -45,6 +57,7 @@ function App() {
   <Route path="/" element={<Landing />} />
   <Route path="/login" element={<LoginPage />} />
   <Route path="/register" element={<RegisterPage />} />
+<<<<<<< HEAD
   <Route path="/password/:resetToken" element={<Password />} />
   <Route path="/company" element={<PrivateRoute component={CompanyPage} />} />
   <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
@@ -57,6 +70,20 @@ function App() {
   <Route path="/passrec" element={<PrivateRoute component={PassRecLog} />} />
   <Route path="/recform" element={<PrivateRoute component={RecForm} />} />
   {/* <Route path="/recform" exact element={<RecForm />} /> */}
+=======
+  <Route path="/password" element={<Password />} />
+  <Route path="/validation" element={<ValidationEmail/>}  />
+  <Route path="/passrec/:resetToken" element={<PassRecLog/>}  /> 
+      {/* <Route path="/reclog" element={<PrivateRoute element={<RecLogin/>} />} />
+            <Route path="/ess" element={<PrivateRoute element={<EssGratuitement/>} />} />  ???why hado than*/}
+              {/* <Route path="/recform" element={<RecForm />} />  no need  */}
+            <Route path="/company" element={<PrivateRoute element={<CompanyPage/>} />} />
+            <Route path="/emploi" element={<PrivateRoute element={<OffresEmploi/>} />} />
+            <Route path="/form" element={<PrivateRoute element={<FormPage/>} />} />
+            <Route path="/rec" element={<PrivateRoute element={<RecuiterPage/>} />} />
+        
+
+>>>>>>> origin/main
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
           </div>

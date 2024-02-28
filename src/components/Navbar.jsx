@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import {navLinks}  from "../../src/Constants";
 import { MdLightMode } from "react-icons/md";
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
@@ -11,6 +12,31 @@ const Navbar = () => {
     document.documentElement.classList.toggle("dark");
   };
 
+=======
+import { useSelector } from "react-redux";
+import store from "../store";
+
+import { navLinks } from "../../src/Constants";
+// import { MdLightMode } from "react-icons/md";
+import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { logoutUser } from "../actions/authActions";
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const user = useSelector(state => state.auth.user);
+  const defaultUserImage = "https://via.placeholder.com/150";
+
+  const toggleTheme = () => {
+
+    document.documentElement.classList.toggle("dark");
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    store.dispatch(logoutUser());
+};
+>>>>>>> origin/main
   return (
     <header className={`mb-16 ${isDarkMode ? 'dark:bg-gray-900' : 'bg-white'}`}>
       <nav className="shadow-md w-full fixed top-0 left-0">
@@ -39,6 +65,7 @@ const Navbar = () => {
                 <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-[#2a68ff] duration-500" href={li.href}>{li.label}</a>
               </li>
             ))}
+<<<<<<< HEAD
             <a href="/login">
             <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static">Se connecter</button>
             </a>
@@ -54,11 +81,36 @@ const Navbar = () => {
          
         
       
+=======
+          </ul>
+          {isAuthenticated && user ? (
+            <div className="flex items-center md:ml-auto">
+              <img src={defaultUserImage} alt="User" className="w-10 h-10 rounded-full" />
+              <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-[#2a68ff] duration-500" href="#">{user.name}</a>
+              <button onClick={(event) => handleLogout(event)} className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 ml-4 rounded-2xl">Déconnexion</button>
+
+            </div>
+          ) : (
+            <>
+              <a href="/login">
+                <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static">Se connecter</button>
+              </a>
+              <a href="/rec">
+                <button className="text-blue-600 hover:text-[#6f6f6f] ml-4 text-sm whitespace-nowrap md:static">espace recruteur</button>
+              </a>
+            </>
+          )}
+        </div>
+      </nav>
+>>>>>>> origin/main
     </header>
   );
 };
 
 export default Navbar;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> origin/main

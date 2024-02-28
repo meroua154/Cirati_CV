@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 
@@ -16,6 +17,46 @@ const LoginPage = () => {
     const password = formData.get('password');
     console.log('Email:', email);
     console.log('Password:', password);
+=======
+import React, { useState, useEffect } from 'react';
+import { GoogleLogin } from 'react-google-login';
+import { loginUser } from "../../actions/authActions";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const dispatch = useDispatch(); 
+  const errors = useSelector(state => state.errors);
+  const auth = useSelector(state => state.auth);
+  console.log(auth)
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/"); 
+    }
+  }, [auth.isAuthenticated, navigate]);
+  const [notification, setNotification] = useState(null);
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await dispatch(loginUser({ email, password }));
+      if(res.status=="200"){
+        setNotification({
+          type: "success",
+          message: "User Logged In."
+        });
+  
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+>>>>>>> origin/main
   };
 
   return (
@@ -37,11 +78,37 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+<<<<<<< HEAD
             <input type="email" name="email" id="email" autoComplete="email" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
             <input type="password" name="password" id="password" autoComplete="current-password" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+=======
+            <input 
+              type="email" 
+              name="email" 
+              id="email" 
+              autoComplete="email" 
+              required 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
+            <input 
+              type="password" 
+              name="password" 
+              id="password" 
+              autoComplete="current-password" 
+              required 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
+            />
+>>>>>>> origin/main
             <a href="/password" className='text-blue-500 mt-2'>Mot de passe oublié</a>
           </div>
           <div>
@@ -50,7 +117,26 @@ const LoginPage = () => {
             </button>
           </div>
         </form>
+<<<<<<< HEAD
       </div>
+=======
+
+      </div>
+      {errors && (
+        <div className="text-red-500">
+          {errors.email && <p>{errors.email}</p>}
+          {errors.password && <p>{errors.password}</p>}
+          {errors.emailnotfound && <p>{errors.emailnotfound}</p>}
+          {errors.message && <p>{errors.message}</p>}
+        </div>
+      )}
+        {notification && (
+            <div className={`text-center text-${notification.type === 'success' ? 'green' : 'red'}-500`}>
+              {notification.message}
+            </div>
+          )}
+
+>>>>>>> origin/main
     </div>
   );
 };
