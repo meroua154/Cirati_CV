@@ -48,13 +48,14 @@ function App() {
   <Route path="/password" element={<Password />} />
   <Route path="/validation" element={<ValidationEmail/>}  />
   <Route path="/passrec/:resetToken" element={<PassRecLog/>}  /> 
+  <Route path="/rec" element={<RecuiterPage/>} />
       {/* <Route path="/reclog" element={<PrivateRoute element={<RecLogin/>} />} />
             <Route path="/ess" element={<PrivateRoute element={<EssGratuitement/>} />} />  ???why hado than*/}
               {/* <Route path="/recform" element={<RecForm />} />  no need  */}
             <Route path="/company" element={<PrivateRoute element={<CompanyPage/>} />} />
             <Route path="/emploi" element={<PrivateRoute element={<OffresEmploi/>} />} />
             <Route path="/form" element={<PrivateRoute element={<FormPage/>} />} />
-            <Route path="/rec" element={<PrivateRoute element={<RecuiterPage/>} />} />
+            {/* <Route path="/rec" element={<PrivateRoute element={<RecuiterPage/>} />} /> */}
         
 
   <Route path="*" element={<Navigate to="/login" />} />
