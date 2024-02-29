@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+import React from 'react';
+import { GoogleLogin } from 'react-google-login';
+
+
+const LoginPage = () => {
+  const responseGoogle = (response) => {
+    console.log(response);
+    // Ici, vous pouvez gérer la réponse de Google, comme l'authentification du côté serveur, etc.
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Gérer la soumission du formulaire ici
+    const formData = new FormData(event.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    console.log('Email:', email);
+    console.log('Password:', password);
+=======
 import React, { useState, useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { loginUser } from "../../actions/authActions";
@@ -36,6 +56,7 @@ const LoginPage = () => {
     } catch (error) {
       console.error("Error during login:", error);
     }
+>>>>>>> origin/main
   };
 
   return (
@@ -57,6 +78,13 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+<<<<<<< HEAD
+            <input type="email" name="email" id="email" autoComplete="email" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
+            <input type="password" name="password" id="password" autoComplete="current-password" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+=======
             <input 
               type="email" 
               name="email" 
@@ -80,6 +108,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)} 
               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" 
             />
+>>>>>>> origin/main
             <a href="/password" className='text-blue-500 mt-2'>Mot de passe oublié</a>
           </div>
           <div>
@@ -88,6 +117,9 @@ const LoginPage = () => {
             </button>
           </div>
         </form>
+<<<<<<< HEAD
+      </div>
+=======
 
       </div>
       {errors && (
@@ -104,6 +136,7 @@ const LoginPage = () => {
             </div>
           )}
 
+>>>>>>> origin/main
     </div>
   );
 };

@@ -1,4 +1,18 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
+import {navLinks}  from "../../src/Constants";
+import { MdLightMode } from "react-icons/md";
+import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    document.documentElement.classList.toggle("dark");
+  };
+
+=======
 import { useSelector } from "react-redux";
 import store from "../store";
 
@@ -22,6 +36,7 @@ const Navbar = () => {
     event.preventDefault();
     store.dispatch(logoutUser());
 };
+>>>>>>> origin/main
   return (
     <header className={`mb-16 ${isDarkMode ? 'dark:bg-gray-900' : 'bg-white'}`}>
       <nav className="shadow-md w-full fixed top-0 left-0">
@@ -50,6 +65,23 @@ const Navbar = () => {
                 <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-[#2a68ff] duration-500" href={li.href}>{li.label}</a>
               </li>
             ))}
+<<<<<<< HEAD
+            <a href="/login">
+            <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static">Se connecter</button>
+            </a>
+            <a href="/rec">
+            <button className="text-blue-600 hover:text-[#6f6f6f] ml-4 text-sm whitespace-nowrap md:static">espace recruteur</button>
+            </a>
+          </ul>
+          
+        </div>
+        
+      </nav>
+      
+         
+        
+      
+=======
           </ul>
           {isAuthenticated && user ? (
             <div className="flex items-center md:ml-auto">
@@ -70,8 +102,15 @@ const Navbar = () => {
           )}
         </div>
       </nav>
+>>>>>>> origin/main
     </header>
   );
 };
 
 export default Navbar;
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> origin/main

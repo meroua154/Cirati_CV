@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+import React, { useState } from 'react';
+import { GoogleLogin } from 'react-google-login';
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../actions/authActions";
+
+=======
 import React, { useState,useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../actions/authActions";
 import { useSelector, useDispatch } from 'react-redux';
+>>>>>>> origin/main
 const RegisterPage = () => {
   const [notification, setNotification] = useState(null);
   const [formData, setFormData] = useState({
@@ -17,6 +25,9 @@ const RegisterPage = () => {
     skills: ''
   });
   const navigate = useNavigate();
+<<<<<<< HEAD
+
+=======
   const dispatch = useDispatch(); 
   const errors = useSelector(state => state.errors);
   const auth = useSelector(state => state.auth);
@@ -26,6 +37,7 @@ const RegisterPage = () => {
       navigate("/"); 
     }
   }, [auth.isAuthenticated, navigate]);
+>>>>>>> origin/main
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -47,9 +59,20 @@ const RegisterPage = () => {
         skills: formData.skills ? formData.skills.split(',').map(skill => skill.trim()) : []
       };
       
+<<<<<<< HEAD
+      const res = await registerUser(userData);
+      
+      if (res.type === "GET_ERRORS" && res.payload && res.payload.email) {
+        setNotification({
+          type: "error",
+          message: res.payload.email,
+        });
+      } else {
+=======
       const res = await dispatch(registerUser(userData));
 
        if(res.role){
+>>>>>>> origin/main
         setNotification({
           type: "success",
           message: "User registered successfully! You can log in now."
@@ -58,12 +81,24 @@ const RegisterPage = () => {
           navigate("/Login");
         }, 1000);
       }
+<<<<<<< HEAD
+    } catch (err) {
+      console.error("Error during registration:", err);
+      setNotification({
+        type: "error",
+        message: "An error occurred during registration. Please try again later.",
+      });
+    }
+  };
+  
+=======
  
 
     } catch (err) {
       console.error("Error during registration:", err);
     }
   };
+>>>>>>> origin/main
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
@@ -210,6 +245,13 @@ const RegisterPage = () => {
           </div>
         </form>
       </div>
+<<<<<<< HEAD
+      {notification && (
+        <div className={notification.type === "error" ? "text-red-500" : "text-green-500"}>
+          {notification.message}
+        </div>
+      )}
+=======
       {errors && (
         <div className="text-red-500">
           {errors.email && <p>{errors.email}</p>}
@@ -222,6 +264,7 @@ const RegisterPage = () => {
               {notification.message}
             </div>
           )}
+>>>>>>> origin/main
     </div>
   );
 };

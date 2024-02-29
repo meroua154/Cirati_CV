@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import React from 'react';
+
+const Password = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Gérer la soumission du formulaire ici
+    const formData = new FormData(event.target);
+    const email = formData.get('email');
+    console.log('Email:', email);
+    // Ajoutez ici la logique pour envoyer un e-mail de réinitialisation du mot de passe
+=======
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -21,6 +33,7 @@ const Password = () => {
     const formData = new FormData(event.target);
     const email = formData.get('email');
     await resetPassword(email);
+>>>>>>> origin/main
   };
 
   return (
@@ -40,10 +53,15 @@ const Password = () => {
               Envoyer moi un email
             </button>
           </div>
+<<<<<<< HEAD
+          <div  className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
+          
+=======
           <div className={`text-center mt-4 ${messageType === 'error' ? 'text-red-500' : 'text-green-500'}`}>
             {resetMessage}
           </div>
           <div className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
+>>>>>>> origin/main
         </form>
       </div>
     </div>

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import React from 'react'
+=======
 import React, {useEffect,useState} from 'react'
+>>>>>>> origin/main
 import Head from './components/Head'
 
 const OffresEmploi = ({ company }) => {
