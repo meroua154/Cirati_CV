@@ -5,6 +5,7 @@ import Value from "../Landing/components/Value";
 import Jobs from "../Landing/components/Jobs";
 import axios from 'axios';
 
+
 const Landing = () => {
   const [jobsData, setJobsData] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -14,11 +15,15 @@ const Landing = () => {
       .then(response => {
         setJobsData(response.data);
         setFilteredJobs(response.data); 
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
+        console.log("hello");
       });
   }, []);
+
+  console.log("hello");
 
   const handleSearch = (searchData) => {
     let filtered = jobsData.filter(job =>
@@ -59,11 +64,13 @@ const Landing = () => {
   }
 
   return (
+ 
     <div>
       <Search onSearch={handleSearch} resetFilters={resetFilters}  jobsData ={jobsData}/>
       <Jobs JobsData={filteredJobs} />
       <Value />
     </div>
+   
   );
 };
 
