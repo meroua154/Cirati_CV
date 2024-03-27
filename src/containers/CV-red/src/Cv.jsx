@@ -205,7 +205,7 @@ function App() {
             onColChange={setResumeLayout}
           />
         </div>
-        <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static" onClick={downloadPDF}>Download as PDF</button>
+        <button className="btn bg-primary  hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static" onClick={downloadPDF}>Download as PDF</button>
       </div>
       <div className="downl">
         <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />

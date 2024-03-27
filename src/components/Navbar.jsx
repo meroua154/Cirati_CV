@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "../store";
-import logo from "../assets/Images/logo.png";
 
-import { navLinks } from "../../src/Constants";
+import { navLinks } from "../Constants";
 // import { MdLightMode } from "react-icons/md";
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { logoutUser } from "../actions/authActions";
@@ -29,13 +28,12 @@ const Navbar = () => {
         <div className="md:px-10 py-4 px-7 md:flex items-center bg-white dark:bg-gray-900">
           <div className="flex text-xl cursor-pointer items-center">
             <a href="/">
-               <img
-                        className="p-0"
-                        src={logo}
-                        width={100}
-                        height={100}
-                        // alt={job.title}
-               />
+              <h1 className="font-medium dark:text-white mr-42">
+                <strong className="text-[#196a5c] font-extrabold mr-0.5">
+                  Cirati
+                </strong>
+                CV
+              </h1>
             </a>
           </div>
           
@@ -49,7 +47,7 @@ const Navbar = () => {
                 className="text-sm  my-7 md:my-0 md:ml-8"
                 key={li.label}
               >
-                <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-clr1 duration-500" href={li.href}>{li.label}</a>
+                <a className="text-[#6f6f6f] dark:text-white whitespace-nowrap hover:text-[#2a68ff] duration-500" href={li.href}>{li.label}</a>
               </li>
             ))}
           </ul>
@@ -63,10 +61,10 @@ const Navbar = () => {
           ) : (
             <>
               <a href="/login">
-                <button className="btn bg-clr1 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-20 rounded-2xl md:static mt-4">Se connecter</button>
+                <button className="btn bg-blue-600 text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static">Se connecter</button>
               </a>
               <a href="/rec">
-                <button className="text-teal hover:text-[#6f6f6f] ml-4 text-sm whitespace-nowrap md:static">espace recruteur</button>
+                <button className="text-blue-600 hover:text-[#6f6f6f] ml-4 text-sm whitespace-nowrap md:static">espace recruteur</button>
               </a>
             </>
           )}

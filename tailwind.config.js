@@ -1,70 +1,31 @@
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/flowbite/**/*.js",
-  ],
-  darkMode: "class",
+    './src/pages/**/*.{html,js,jsx,ts,tsx}',
+    './src/components/**/*.{html,js,jsx,ts,tsx}',
+    "./node_modules/react-tailwindcss-select/dist/index.esm.js",],
+
+  darkMode:"class",
   theme: {
+    fontFamily: {
+      'sans': ['ui-sans-serif', 'system-ui', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+    },
     extend: {
-      colors: {
-        primary: {
-          "50": "#eff6ff",
-          "100": "#dbeafe",
-          "200": "#bfdbfe",
-          "300": "#93c5fd",
-          "400": "#60a5fa",
-          "500": "#3b82f6",
-          "600": "#2563eb",
-          "700": "#1d4ed8",
-          "800": "#1e40af",
-          "900": "#1e3a8a",
-          "950": "#172554",
-        },
-        blueColor: "#2a68ff",
-        grey: "#f1f4f8",
-        cardShadow: "#f7f8f9",
-        background: "#252b36", // changed from 'cardShadow' to 'background' for clarity
-        clr1: "#196a5c", // Use a valid hexadecimal color code for teal
-        clr2: "#6f9888",
-      },
-      fontFamily: {
-        body: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "system-ui",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "Noto Sans",
-          "sans-serif",
-          "Apple Color Emoji",
-          "Segoe UI Emoji",
-          "Segoe UI Symbol",
-          "Noto Color Emoji",
-        ],
-        sans: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "system-ui",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "Noto Sans",
-          "sans-serif",
-          "Apple Color Emoji",
-          "Segoe UI Emoji",
-          "Segoe UI Symbol",
-          "Noto Color Emoji",
-        ],
-      },
+      colors:{
+        'blueColor' : '#2a68ff',
+        'grey' : '#f1f4f8',
+        'cardShadow' : '#f7f8f9',
+        'cardShadow' : '#252b36',
+        primary: "#196a5c",
+        light: "#6f9888",
+        
+      }
     },
   },
-  plugins: [require("flowbite/plugin")],
-};
+  plugins: [
+    require('flowbite/plugin')
+  ],
+}

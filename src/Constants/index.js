@@ -25,6 +25,15 @@ export const type = [
     { id: 4, value: "Fulltime" },
     { id: 5, value: "Parttime" }
 ];
+export const typejob = [
+    { id: 1, value: "all" },
+    { id: 2, value: "Remote" },
+    { id: 3, value: "Contract" },
+    { id: 4, value: "Fulltime" },
+    { id: 5, value: "Parttime" }
+];
+
+
 
 export const level = [
     { id: 1, value: "all" },

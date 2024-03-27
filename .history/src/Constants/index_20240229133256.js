@@ -23,12 +23,13 @@ export const type = [
     { id: 4, value: "Parttime" }
 ];
 
+
+
 export const level = [
     { id: 1, value: "Beginner" },
     { id: 2, value: "Experienced" },
     { id: 3, value: "Intermediate" },
-    { id: 4, value: "Professional" }
-=======
+    { id: 4, value: "Professional" },
     { id: 1, value: "all" },
     { id: 2, value: "Less than 10000" },
     { id: 3, value: "Between 10000 and 40000" },
