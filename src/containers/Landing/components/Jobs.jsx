@@ -10,13 +10,13 @@ const Jobs = ({JobsData}) => {
     <section id="jobs" className="full-width-div">
         <div className=" container mx-auto px-16 pb-24">
         <h2 className="text-center text-3xl font-bold pt-12 pb-8 md:pt-20 md:pb-8 dark:text-white lettre-espace" >Dernieres offres</h2> 
-        <div className=" flex gap-10 justify-center flex-wrap items-center sm:px-4 sm:py-10">
+        <div className="flex sm:items-center gap-8 flex-wrap md:ml-16  sm:px-2 sm:py-10 ">
           {JobsData.slice(0, 6).map((job) => {
              return (
                 <div key={job.id}
-                  className="flex-grow group flex flex-col justify-between h-[300px] w-[250px] p-3 md:p-[20px]  bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-[#2a68ff] dark:bg-slate-700 dark:shadow-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"
+                className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-[#2a68ff] dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
                 >
-                  <div className="upperpart flex justify-between items-center">
+                  <div className="upperpart flex justify-between">
                     <div className="titlecountry flex-grow">
                       <p className="title font-bold group-hover:text-white text-xl dark:text-blueColor">
                         {job.title}
@@ -31,8 +31,8 @@ const Jobs = ({JobsData}) => {
                         {job.salary} DA 
                       </p>
                     </div>
-                    <span className="mt-[-20px] text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-300">
-                      <BiTimeFive className="inline mb-0.5 mr-1" />
+                    <span className="mt-[-5px] text-[#8b8b8b] group-hover:text-[#dadada] dark:text-slate-300">
+                      <BiTimeFive className="inline mb-0.5 mt-2 mr-1" />
                       {job.duration}
                     </span>
                   </div>
