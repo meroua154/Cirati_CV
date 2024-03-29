@@ -3,16 +3,14 @@
 @import 'tailwindcss/utilities';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 
 
 
-* {
-  -webkit-text-size-adjust: none; /* Pour les anciens navigateurs WebKit */
-  text-size-adjust: none; /* Pour les navigateurs modernes */
+
+ *{
+  -webkit-text-size-adjust: none; 
+  text-size-adjust: none; 
 }
 
 :root {
@@ -54,17 +52,17 @@ body, html {
 
 #jobs {
   width: 100%;
-  background-color: #f5f6fc!important; /* Remplacez par votre couleur de fond souhaitée */
+  background-color: #f5f6fc!important; 
 }
 
 .container {
   width: 100%;
-  max-width: 2000px; /* Réglez la largeur maximale selon vos besoins */
-  margin: 0 auto; /* Centre le contenu horizontalement */
+  max-width: 2000px; 
+  margin: 0 auto; 
 }
 
 .full-width-section {
-  width: 100%; /* Fait en sorte que la div prenne toute la largeur */
+  width: 100%; 
 }
 
 .background-image {
@@ -72,10 +70,10 @@ body, html {
 }
 
 .lettre-espace {
-  letter-spacing: 0.1em; /* ajustez la valeur selon vos préférences */
+  letter-spacing: 0.1em; 
 }
 .border-black {
-  border-top-color: #000; /* Couleur noire */
+  border-top-color: #000; 
 }
 
 * {

@@ -1,6 +1,6 @@
 import React from "react";
 import { ValuesData } from "../../../Constants";
-
+import ValueBG from "../../../assets/Images/ValueBG.jpg"
 const Value = () => {
   return (
     <section className="Value">
@@ -56,7 +56,7 @@ const Value = () => {
           </div>
           <div className="right ml-2 mb-4">
           <a href="/formred">
-            <button className="border-2 border-clr1 rounded-lg text-lg font-semibold px-8 py-5 text-clr2 hover:bg-white hover:text-black ">
+            <button className="border-2 border-primary rounded-lg text-lg font-semibold px-8 py-5 text-clr2 hover:bg-white hover:text-black ">
               Commençons !
             </button>
           </a>

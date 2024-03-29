@@ -22,7 +22,7 @@ export default App;*/
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Layout from "./hocs/Layout";
+
 import Landing from "../src/containers/Landing/Landing";
 import CompanyPage from "../src/containers/CompanyPage/CompanyPage";
 import OffresEmploi from './containers/CompanyPage/OffresEmploi';
@@ -31,7 +31,6 @@ import FormPagered from './containers/CV-red/src/Cv';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Password from './containers/LoginPage/Password';
-import RecuiterPage from './containers/RecruiterPage/RecuiterPage';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
@@ -47,6 +46,10 @@ import PassRecLog from './containers/RecruiterPage/PassRecLog';
 import RecForm from './containers/RecruiterPage/RecForm';
 import MultiStepjobForm from './containers/Annonceform/form';
 import Fullcompanyinfo from "./containers/Annonceform/fullcompany";
+import FrontendLayout from "./hocs/FrontendLayout";
+import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
+
+
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
@@ -64,7 +67,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Layout>
+        <FrontendLayout>
           <div className="container">
           <Routes>
   <Route path="/" element={<Landing />} />
@@ -79,7 +82,7 @@ function App() {
   
    <Route path="/Fullcompany" element={<Fullcompanyinfo/>} />
   <Route path="/fullcv" element={<Fullcv/>} />
-  <Route path="/rec" element={<RecuiterPage/> }/>
+  <Route path="/rec" element={<RecruiterPage/> }/>
   <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
   <Route path="/ess" element={<PrivateRoute component={EssGratuitement} />} />
   <Route path="/validation" element={<PrivateRoute component={ValidationEmail} />} />
@@ -91,7 +94,7 @@ function App() {
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
           </div>
-        </Layout>
+        </FrontendLayout>
       </Router>
     </Provider>
   );

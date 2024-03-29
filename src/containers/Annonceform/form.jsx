@@ -9,6 +9,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import hire from "../../assets/Images/hire.jpg"
 
 function MultiStepjobForm() {
     const contractTypeOptions = [
@@ -167,9 +168,10 @@ function MultiStepjobForm() {
     
     
     return (
-        <Card color="transparent" shadow={false}>
-          <div className="flex justify-center items-center h-screen bg-slate-50">
-            <form onSubmit={handleSubmit} className="border border-gray-300 p-4 bg-white rounded  mb-10" style={{ maxWidth: '600px' }}>
+        <div className='bg-cover'style={{ backgroundImage: `url(${hire})` }}>
+        <Card color="transparent" shadow={true} className='drop-shadow-xl'>
+          <div className="flex justify-center items-center mt-32 ">
+            <form onSubmit={handleSubmit} className="border border-gray-300 p-4 bg-white rounded  mb-12" style={{ maxWidth: '600px' }}>
                 {step === 1 && (
                     <>
                         <Typography variant="h4" color="black">
@@ -228,7 +230,7 @@ function MultiStepjobForm() {
                        
                       
                         
-                        <Button className="mt-6 text-white bg-green-500 hover:bg-green-400 w-full" onClick={nextStep}>Next</Button>
+                        <Button className="mt-6 text-white bg-light hover:bg-primary w-full" onClick={nextStep}>Next</Button>
                     </>
                 )}
 
@@ -412,6 +414,7 @@ function MultiStepjobForm() {
             </form>
           </div>
         </Card>
+        </div>
     );
 }
 

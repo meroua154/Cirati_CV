@@ -3,13 +3,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 
+import Navbarred from "../components/Navbarred";
 
 
-const FrontendLayout  = () => {
+const FrontendLayout  = ({children}) => {
   return (
     <>
-      <Navbar />
-       <Outlet />
+      <Navbarred />
+       {children}
       <Footer />
      
     </>

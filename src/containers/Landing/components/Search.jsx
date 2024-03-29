@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineSearch, AiFillCloseCircle, AiOutlineHome } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { sortby, level, type } from "../../../Constants";
-import pic1 from "../../../assets/Images/pic1.png";
-
+import back from "../../../assets/Images/back.jpg"
 
 
 const Search = ({ onSearch, resetFilters, jobsData }) => {
@@ -73,23 +72,18 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
   };
 
   return (
-    <section className="Search px-20 "> 
-      <div>
-        <h1 className="text-center text-3xl md:text-4xl md:mt-40 font-bold leading-relaxed mx-0 md:p-[1rem]">Trouvez le <span className="text-clr2">job</span> de vos rêves en quelques clics</h1>
-        <img 
-        className="ml-auto"
-        src={pic1} 
-        alt=""
-        width={75}
-        height={75} />
+    <section className="Search px-20 bg-cover"style={{ backgroundImage: `url(${back})` }}> 
+     
+      <div className="grid gap-9 rounded-[10px] p-[1rem] md:p-[2rem] px-0 ">
+      <div className="mt-32">
+        <h1 className="text-center text-3xl md:text-3xl letter-spacing font-bold leading-relaxed mx-0 md:p-[1rem]">Trouvez le <span className="text-light">job</span> de vos rêves en quelques clics</h1>
       </div>
-      <div className="grid gap-9  rounded-[10px] p-[1rem] md:p-[2rem] px-0 ">
         <form onSubmit={handleSearch}>
           <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-5 shadow-lg shadow-grey-700 dark:bg-slate-600 "> 
             <div className="flex flex-grow items-center ">
               <AiOutlineSearch className="icon mr-1 dark:invert" />
               <input
-                className="bg-transparent w-full text-blue-600 focus:outline-none font-medium dark:text-white border-none"
+                className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
                 placeholder="Search Job..."
                 type="text"
                 name="title"
@@ -101,7 +95,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
             <div className="flex flex-grow justify-between items-center">
               <AiOutlineHome className="icon mr-1 dark:invert" />
               <input
-                className="bg-transparent w-full text-blue-600 focus:outline-none font-medium dark:text-white border-none"
+                className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
                 placeholder="Search Company..."
                 type="text"
                 name="recruiterName"
@@ -113,7 +107,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
             <div className="flex flex-grow justify-between items-center">
               <GoLocation className="icon mr-1 dark:invert" />
               <input
-                className="bg-transparent w-full text-blue-600 focus:outline-none font-medium dark:text-white border-none"
+                className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
                 placeholder="Search Location..."
                 type="text"
                 name="address"
@@ -122,7 +116,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               />
               {searchData.address && <AiFillCloseCircle className="text-lg text-[#a5a6a6] hover:text-black hover:dark:invert cursor-pointer" onClick={() => setSearchData(prevSearchData => ({ ...prevSearchData, address: '' }))} />}
             </div>
-            <button type="submit" className="bg-clr1 flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-clr2">
+            <button type="submit" className="bg-light flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-primary">
               Search
             </button>
           </div>
@@ -190,7 +184,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               ))}
             </select>
           </div>
-          <button className="hover:text-[#2a68ff] text-[#6f6f6f] text-md px-2 py-2 dark:text-white" onClick={handleClearQuery}>
+          <button className="hover:text-[#2a68ff] text-primary text-md px-2 py-2 dark:text-white" onClick={handleClearQuery}>
             Clear All
           </button>
         </div>

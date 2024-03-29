@@ -75,12 +75,12 @@ const Landing = () => {
   }
 
   return (
-    <div>
+    <div className="">
       <Search onSearch={handleSearch} resetFilters={resetFilters}  jobsData ={jobsData}/>
       <Jobs JobsData={filteredJobs} />
+      <RecommendedJobs/>
+      <Top_company/>
       <Value />
-       <RecommendedJobs/>
-     <Top_company/>
     </div>
   );
   }

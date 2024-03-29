@@ -49,30 +49,30 @@ export default function RecruiterPage() {
     return (
         <div>
             <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 m-auto">
-                <div className='mt-20 sm:mr-12'>
+                <div className='mt-36 sm:mr-12'>
                     <h1 className='ml-12 text-3xl sm:text-5xl font-extrabold text-left'>Recrutez mieux et <br />plus vite !</h1> 
                     <p className='text-xl sm:text-left mt-8 ml-12 border-l-4 border-gray-700 pl-8'>
                          <strong>Publiez</strong> vos annonces et trouvez rapidement vos <strong>futurs talents</strong> sur le site d’emploi leader en Algérie !
                     </p>
                     <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 mt-12'>
                         <a href="/ess">
-                        <button className="btn bg-blue-600 text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 sm:ml-8 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
+                        <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
                              Essayer gratuitement
                         </button>
                         </a>
                         <a href="/reclog">
-                        <button className="btn bg-white text-blue-600 border border-blue-600 text-sm whitespace-nowrap py-2 px-4 sm:mr-12 rounded-2xl sm:static w-auto overflow-hidden">
+                        <button className="btn bg-white text-primary border border-primary text-sm whitespace-nowrap py-2 px-4 sm:mr-12 ml-12 md:ml-2 rounded-2xl sm:static w-auto overflow-hidden">
                             Se connecter
                         </button>
                         </a>
                     </div>
                 </div>
-                <div>
-                  <img src={s6} alt="" className="w-full sm:w-auto" />
+                <div className='mt-20'>
+                  <img src={s6} alt="" className="w-full hidden sm:block" />
                 </div>
             </div>
 
-            <div className="py-16 bg-blue-600 mt-28 mb-20">
+            <div className="py-16 bg-primary mt-12 md:mt-28 mb-20">
                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-center text-white text-4xl font-bold mb-8">Pourquoi CiratiCV ?</h2>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -98,23 +98,23 @@ export default function RecruiterPage() {
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mx-20 my-28'>
                     <h2 className="text-center text-4xl font-bold mb-12">Ce que nos clients disent de nous !</h2>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-3 px-16">
-                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-sky-700 shadow-xl py-8 px-4">
+                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-light shadow-xl py-8 px-4">
                              <img src={logo1} alt="" style={{ width: '80px' }}/>
-                             <p className='text-center text-xs text-slate-400 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>
+                             <p className='text-center text-xs text-slate-600 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>
                         </div>
-                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-sky-700 shadow-xl py-8 px-4">
+                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-light shadow-xl py-8 px-4">
                              <img src={logo4} alt="" style={{ width: '80px' }}/>
-                             <p className='text-center text-xs text-slate-400 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>  
+                             <p className='text-center text-xs text-slate-600 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>  
                         </div>
-                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-sky-700 shadow-xl py-8 px-4">
+                        <div className="flex flex-col items-center justify-center border border-inherit rounded-lg hover:bg-light shadow-xl py-8 px-4">
                              <img src={logo3} alt="" style={{ width: '80px' }}/>
-                             <p className='text-center text-xs text-slate-400 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>
+                             <p className='text-center text-xs text-slate-600 mt-8 mb-8'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est ipsa ullam deleniti praesentium facere, quam officiis illum nisi maiores. Ab incidunt asperiores commodi porro modi accusantium eveniet hic veritatis rem!</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="max-w-3xl mx-auto mt-8">
-               <h2 className="text-center text-4xl font-bold mb-8">Questions fréquentes</h2>
+               <h2 className="text-center text-3xl md:text-4xl font-bold mb-8">Questions fréquentes</h2>
                     {faqs.map((faq, index) => (
                       <div key={index} className="mb-4">
                             <button
@@ -137,9 +137,9 @@ export default function RecruiterPage() {
                       </div>
                     ))}
             </div>
-            <div className='my-24 mr-8'>
-                <h1 className='text-center text-4xl font-bold'>Besoin d'en savoir plus ?</h1>
-                <div className='grid gap-2 grid-cols-2 mt-12 ml-12'>
+            <div className='my-24 '>
+                <h1 className='text-center text-3xl md:text-4xl font-bold'>Besoin d'en savoir plus ?</h1>
+                <div className={`grid gap-2 grid-cols-1 md:grid-cols-2 mt-12 ml-12 mr-8 md:mr-8${isScrolled ? 'md:grid-cols-1' : ''}`}>
                     <div className={`bg-slate-50 p-8 rounded-xl ${isScrolled ? 'relative' : ''}`}>
                         <p className='text-left mt-12 border-l-4 border-gray-700 pl-4'>
                             N’hésitez pas à nous contacter pour tout complément d’information
@@ -154,20 +154,20 @@ export default function RecruiterPage() {
                     <div className={`bg-slate-50 p-8 rounded-xl ${isScrolled ? 'relative' : ''}`}>
                         <form className="mx-12 mt-12">
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
-                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nom & Prénom</label>
+                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nom & Prénom</label>
                             </div>
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
-                                <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+                                <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
                             </div>
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
-                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Entreprise</label>
+                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Entreprise</label>
                             </div>
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
-                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telephone</label>
+                                <input type="text" name="floating_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                <label htmlFor="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telephone</label>
                             </div>
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
                                 <label for="underline_select" class="sr-only">Underline select</label>
@@ -180,22 +180,21 @@ export default function RecruiterPage() {
                                    </select>
                             </div>
                             <div className={`relative z-0 w-full mb-5 group ${isScrolled ? 'relative' : ''}`}>
-                                 <input type="text" name="repeat_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                 <label for="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Specifier votre demande</label>
+                                 <input type="text" name="repeat_text" id="floating_text" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                 <label for="floating_text" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-primary peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Specifier votre demande</label>
                             </div>
                             {/* Ajoutez les autres champs du formulaire avec des classes similaires */}
-                            <button type="submit" className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                            <h6 className='text-sm text-left font-semibold mt-4'>Vous cherchez un emploi ? <a href="/" className='text-blue-600'>Cliquez ici</a></h6>
+                            <button type="submit" className="text-white bg-primary hover:bg-light focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            <h6 className='text-sm text-left font-semibold mt-4'>Vous cherchez un emploi ? <a href="/" className='text-primary'>Cliquez ici</a></h6>
                         </form>
                     </div>
                 </div>
             </div>
-            <div className='grid gap-2 grid-cols-2 m-auto bg-slate-100'>
-                <div className='mx-16 my-20'>
-                    <h1 className='text-xl font-bold mb-8'>A propos de CiratiCV</h1>
-                    <p className='text-left text-sm'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate numquam, ducimus eos quasi labore vero nam veniam autem nesciunt impedit sit dolore repellendus deleniti temporibus, voluptates neque repellat, officiis explicabo.</p>
-                </div>
-
+            <div className='grid gap-2 md:grid-cols-2 m-auto bg-slate-100'>
+              <div className='mx-16 my-20'>
+                  <h1 className='text-xl font-bold mb-8'>A propos de CiratiCV</h1>
+                  <p className='text-left text-sm'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate numquam, ducimus eos quasi labore vero nam veniam autem nesciunt impedit sit dolore repellendus deleniti temporibus, voluptates neque repellat, officiis explicabo.</p>
+              </div>
             </div>
             
         </div>

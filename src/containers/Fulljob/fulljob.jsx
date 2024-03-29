@@ -10,7 +10,6 @@ export default function Fulljob() {
 return (
     
 <div>
-    <div><Navbar/></div>
     <div><Hero/></div>
     <div>< Matchingjob/></div>
     <div><RecommendedJobs/></div>

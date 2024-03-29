@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
+import logo from "../assets/Images/logo.png"
 
 
-
-export default function Navbar() {
+export default function Navbarred() {
   const [dropdown, setDropdown] = useState(false);
 
   const showDropdown = () => {
@@ -12,50 +12,51 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full h-24 flex flex-col justify-center items-center bg-white fixed z-20">
+    <nav className=" backdrop-blur-xl bg-white/30  w-full h-24 justify-center items-center fixed z-20">
       <div className="container mx-auto lg:px-6">
         <div className="lg:w-full w-11/12 mx-auto h-full flex justify-between items-center">
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
-              <span className="flex items-center lg:text-5xl text-3xl">
-              <p className="font-semibold leading-tight">Cirati</p>
-                <button className="rounded-full py-1 text-white bg-primary lg:text-5xl text-3xl">
-                  CV
-                </button>
-              </span>
+              <a href="/">
+              <img src={logo} 
+                   alt="logo"
+                   width={90}
+                   height={90} 
+              />
+              </a>
             </div>
           </div>
           <ul className="flex-1 flex justify-center items-center xl:gap-12 gap-x-4 max-lg:hidden">
             <a
               href="#"
-              className="leading-normal no-underline text-black font-bold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-primary font-semibold text-lg hover:text-primary"
             >
               Find jobs
             </a>
             <a
               href="#"
-              className="leading-normal no-underline text-black font-bold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
             >
               People
             </a>
             <a
               href="#"
-              className="leading-normal no-underline text-black font-bold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
             >
               Hiring site
             </a>
             <a
               href="#"
-              className="leading-normal no-underline text-black font-bold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
             >
               Resume
             </a>
           </ul>
           <div className="flex max-lg:hidden gap-x-4">
-            <button className="rounded-full bg-[#f3f3f4] text-lg text-black border-none font-bold px-8 py-3 hoverBtn">
+            <button className="rounded-2xl bg-primary text-lg text-white border-none font-medium px-6 py-2 hoverBtn">
               Sign Up
             </button>
-            <button className="rounded-full bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+            <button className="rounded-lg bg-none text-lg text-primary border-none font-medium px-8 py-3 hoverBtn">
               Sign In
             </button>
           </div>
@@ -78,40 +79,40 @@ export default function Navbar() {
         {dropdown ? (
           <div
             onClick={showDropdown}
-            className="lg:hidden w-full h-[100vh] fixed top-24 bg-black ease-in-out duration-100"
+            className="lg:hidden w-full h-[100vh] fixed top-24 bg-white ease-in-out duration-100"
           >
             <div className="w-full h-[320px] flex flex-col items-baseline pt-8 gap-4">
               <ul className="text-center p-0 flex flex-col justify-center w-full gap-y-8">
                 <a
                   href="#"
-                  className="leading-normal no-underline text-white font-bold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
                 >
                   Find jobs
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-white font-bold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
                 >
                   People
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-white font-bold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
                 >
                   Hiring site
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-white font-bold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
                 >
                   Resume
                 </a>
               </ul>
               <div className="flex flex-col justify-center items-center w-full gap-y-8 mt-4">
-                <button className="rounded-full bg-[#f3f3f4] text-lg text-black border-none font-bold px-8 py-3 hoverBtn">
+                <button className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
                   Sign Up
                 </button>
-                <button className="rounded-full bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+                <button className="rounded-full bg-none text-lg text-primary border-none font-bold px-8 py-3 hoverBtn">
                   Sign In
                 </button>
               </div>

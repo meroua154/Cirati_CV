@@ -8,7 +8,7 @@ import {
 const Footer = () => {
   return (
     <footer className="w-full">
-      <div className="grid grid-cols-2 p-10 sm:grid-cols-3  lg:grid-cols-5 gap-6 bg-[#196a5c] rounded-lg">
+      <div className="container mx-auto grid grid-cols-2 p-10 sm:grid-cols-3  lg:grid-cols-5 gap-6 bg-[#196a5c] rounded-lg">
         <div>
           <a href="/">
             <h1 className="text-lg font-medium text-white pb-2">

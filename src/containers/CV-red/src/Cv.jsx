@@ -146,71 +146,72 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <div className="edit-side">
-        <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
-        <div className="form-container">
-          <TemplateLoader
-            onTemplateLoad={() => {
-              setPersonalInfo(exampleData.personalInfo);
-              setSections(exampleData.sections);
-            }}
-            onClear={() => {
-              setPersonalInfo({
-                fullName: "",
-                email: "",
-                phoneNumber: "",
-                address: "",
-              });
-              setSections({ educations: [], experiences: [] });
-              setPrevState(null);
-            }}
+    <div className="app flex flex-col md:flex-row">
+  <div className="edit-side mt-24 md:w-1/3">
+    <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
+    <div className="form-container">
+      <TemplateLoader
+        onTemplateLoad={() => {
+          setPersonalInfo(exampleData.personalInfo);
+          setSections(exampleData.sections);
+        }}
+        onClear={() => {
+          setPersonalInfo({
+            fullName: "",
+            email: "",
+            phoneNumber: "",
+            address: "",
+          });
+          setSections({ educations: [], experiences: [] });
+          setPrevState(null);
+        }}
+      />
+      {currentPage === "content" && (
+        <>
+          <PersonalDetails
+            onChange={handlePersonalInfoChange}
+            fullName={personalInfo.fullName}
+            email={personalInfo.email}
+            phoneNumber={personalInfo.phoneNumber}
+            address={personalInfo.address}
           />
-          {currentPage === "content" && (
-            <>
-              <PersonalDetails
-                onChange={handlePersonalInfoChange}
-                fullName={personalInfo.fullName}
-                email={personalInfo.email}
-                phoneNumber={personalInfo.phoneNumber}
-                address={personalInfo.address}
-              />
-              <AddEducationSection
-                educations={sections.educations}
-                isOpen={sectionOpen === "Education"}
-                onChange={handleSectionChange}
-                createForm={createEducationForm}
-                setOpen={setOpen}
-                onCancel={cancelForm}
-                toggleCollapsed={toggleCollapsed}
-                onHide={toggleHidden}
-                onRemove={removeForm}
-              />
-              <AddExperienceSection
-                experiences={sections.experiences}
-                isOpen={sectionOpen === "Experience"}
-                onChange={handleSectionChange}
-                createForm={createExperienceForm}
-                setOpen={setOpen}
-                onCancel={cancelForm}
-                toggleCollapsed={toggleCollapsed}
-                onHide={toggleHidden}
-                onRemove={removeForm}
-              />
-            </>
-          )}
+          <AddEducationSection
+            educations={sections.educations}
+            isOpen={sectionOpen === "Education"}
+            onChange={handleSectionChange}
+            createForm={createEducationForm}
+            setOpen={setOpen}
+            onCancel={cancelForm}
+            toggleCollapsed={toggleCollapsed}
+            onHide={toggleHidden}
+            onRemove={removeForm}
+          />
+          <AddExperienceSection
+            experiences={sections.experiences}
+            isOpen={sectionOpen === "Experience"}
+            onChange={handleSectionChange}
+            createForm={createExperienceForm}
+            setOpen={setOpen}
+            onCancel={cancelForm}
+            toggleCollapsed={toggleCollapsed}
+            onHide={toggleHidden}
+            onRemove={removeForm}
+          />
+        </>
+      )}
 
-          <Customize
-            isShown={currentPage === "customize"}
-            onColChange={setResumeLayout}
-          />
-        </div>
-        <button className="btn bg-primary  hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 md:ml-24 rounded-2xl md:static" onClick={downloadPDF}>Download as PDF</button>
-      </div>
-      <div className="downl">
-        <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />
-      </div>
+      <Customize
+        isShown={currentPage === "customize"}
+        onColChange={setResumeLayout}
+      />
     </div>
+    <button className="btn bg-primary hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 ml-32 md:ml-32 rounded-2xl md:static mt-4 md:mt-0" onClick={downloadPDF}>Download as PDF</button>
+  </div>
+  <div className="downl mt-4 md:mt-24  md:w-2/3">
+    <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />
+  </div>
+</div>
+
     
   );
 }

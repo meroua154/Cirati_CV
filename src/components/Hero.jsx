@@ -1,18 +1,22 @@
 import { HiSearch } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
+import femme from "../assets/Images/femme.jpg"
+
 /* eslint-disable react/no-unescaped-entities */
+
+
 export default function Hero() {
   return (
-    <div className="bg-[#fafbfc] pt-24">
-      <div className="flex flex-col items-center justify-center min-h-[60vh] py-16 px-6">
-        <h1 className="xl:text-7xl lg:text-5xl sm:text-3xl text-2xl xl:leading-normal lg:leading-normal font-bold text-center">
+    <div className=" pt-24" >
+      <div className="flex flex-col items-center justify-center min-h-[60vh] py-16 px-6  bg-cover"style={{ backgroundImage: `url(${femme})` }}>
+        <h1 className="xl:text-4xl lg:text-3xl sm:text-3xl text-2xl xl:leading-normal lg:leading-normal font-bold text-center ml-64">
           Find your{" "}
           <span className="bg-primary text-white whitespace-pre">
             dream jobs
           </span>{" "}
           in <br /> New Castle
         </h1>
-        <p className="text-2xl lg:w-1/2 text-center leading-10 my-8">
+        <p className="text-lg lg:w-1/2 text-center leading-10 my-8 ml-8">
           When you're searching for a job, there are a few things you can do to
           get the most out of your search
         </p>

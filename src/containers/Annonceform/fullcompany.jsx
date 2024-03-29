@@ -23,7 +23,7 @@ return (
                                    </div>
                                </div>
                                <div class="mx-auto">
-                                   <div class="xl:w-9/12 w-11/12 mx-auto xl:mx-0">
+                                   <div class=" mx-auto">
                                        <div class="rounded relative mt-8 h-48">
                                            <img src="https://cdn.tuk.dev/assets/webapp/forms/form_layouts/form1.jpg" alt="" class="w-full h-full object-cover rounded absolute shadow" />
                                            <div class="absolute bg-black opacity-50 top-0 right-0 bottom-0 left-0 rounded"></div>
@@ -60,11 +60,11 @@ return (
                                </div>
                            </div>
                                        
-                                       <div class="mt-16 flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
+                                       <div class="mt-16 flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full px-6">
                                            <label for="username" class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">Nom d'Entreprise</label>
                                            <input tabindex="0" type="text" id="username" name="username" required class="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 bg-transparent placeholder-gray-500 text-gray-600 dark:text-gray-400" placeholder="@example" />
                                        </div>
-                                       <div class="mt-8 flex flex-col xl:w-3/5 lg:w-1/2 md:w-1/2 w-full">
+                                       <div class="mt-8 flex flex-col xl:w-3/5 lg:w-1/2 md:w-1/2 w-full px-6">
                                            <label for="about" class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">About</label>
                                            <textarea id="about" name="about" required class="bg-transparent border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-600 dark:text-gray-400" placeholder="Let the world know who you are" rows="5"></textarea>
                                            <p class="w-full text-right text-xs pt-1 text-gray-600 dark:text-gray-400">Character Limit: 200</p>
@@ -271,8 +271,8 @@ return (
                            </div>
                            <div class="container mx-auto w-11/12 xl:w-full">
                                <div class="w-full py-4 sm:px-0 bg-white dark:bg-gray-800 flex justify-end">
-                                   <button role="button" aria-label="cancel form" class="bg-gray-200 focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-indigo-600 dark:text-indigo-600 px-6 py-2 text-xs mr-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">Cancel</button>
-                                   <button role="button" aria-label="Save form" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2 text-sm" type="submit">Save</button>
+                                   <button role="button" aria-label="cancel form" class="bg-primary focus:outline-none transition duration-150 ease-in-out hover:bg-gray-300 dark:bg-gray-700 rounded text-white dark:text-indigo-600 px-6 py-2 text-xs mr-4 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">Cancel</button>
+                                   <button role="button" aria-label="Save form" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-light focus:outline-none transition duration-150 ease-in-out hover:bg-slate-300 rounded text-white px-8 py-2 text-sm" type="submit">Save</button>
                                </div>
                            </div>
                        </div>

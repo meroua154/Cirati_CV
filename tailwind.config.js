@@ -21,8 +21,9 @@ export default {
         'cardShadow' : '#252b36',
         primary: "#196a5c",
         light: "#6f9888",
-        clr1: "#196a5c", // Use a valid hexadecimal color code for teal
-        clr2: "#6f9888"
+      },
+      backdropBlur: {
+        xs: '2px',
       }
     },
   },

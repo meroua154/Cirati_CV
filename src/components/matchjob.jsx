@@ -22,7 +22,7 @@ const Jobs = ({ type, img, title, color, bg_color }) => {
         className="rounded-b-md px-6 py-8"
         style={{ backgroundColor: bg_color }}
       >
-        <p className="text-2xl font-semibold">{title}</p>
+        <p className="text-lg font-bold">{title}</p>
         <p className="py-2 text-lg">803 46th St Brooklyn, NY</p>
         <div className="pb-4 flex items-center gap-2">
           {[...Array(5)].map((_, index) => {
@@ -81,7 +81,7 @@ const Matchingjob = () => {
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
       const randomBgColor = bgColors[Math.floor(Math.random() * bgColors.length)];
       return (
-        <div key={index} className="job-card">
+        <div key={index} className="job-card mx-8">
           <Jobs
             bg_color={randomBgColor}
             color={randomColor}
@@ -139,7 +139,7 @@ const Matchingjob = () => {
     </button>
   ))*/}
   <button
-    className={`rounded-full py-2 px-4 ${currentPage === pageNumbers.length ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-green-500 text-white  hover:bg-green-400' }`}
+    className={`rounded-full py-2 px-4 ${currentPage === pageNumbers.length ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-primary text-white  hover:bg-light' }`}
     onClick={handleNextPage}
     disabled={currentPage === pageNumbers.length}
   >
