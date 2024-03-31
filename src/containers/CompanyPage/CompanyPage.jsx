@@ -3,8 +3,6 @@ import Axios from 'axios';
 import CompanyMap from './CompanyMap'; // Importez le composant CompanyMap
 import Head from './components/Head';
 import Map from './components/Map';
-import Navbarred from '../../components/Navbarred';
-import Footer from '../../components/Footer';
 import yassir from "../../assets/Images/yassir.png"
 import yass from "../../assets/Images/yass.png"
 import Description from './components/Description';
@@ -119,7 +117,6 @@ const CompanyPage = () => {
         </div>
       </div>
     </div>
-    <Footer />
     </div>
   );
 };
