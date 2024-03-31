@@ -39,7 +39,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
+    <div>
+    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Connectez-vous</h2>
@@ -104,6 +105,7 @@ const LoginPage = () => {
             </div>
           )}
 
+    </div>
     </div>
   );
 };

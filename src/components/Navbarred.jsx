@@ -12,8 +12,8 @@ export default function Navbarred() {
   };
 
   return (
-    <nav className=" backdrop-blur-xl bg-white/30  w-full h-24 justify-center items-center fixed z-20">
-      <div className="container mx-auto lg:px-6">
+    <nav className="backdrop-blur-xl bg-white/30 container   w-full h-24 justify-center items-center fixed z-20">
+      <div className="mx-auto lg:px-6">
         <div className="lg:w-full w-11/12 mx-auto h-full flex justify-between items-center">
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-2">

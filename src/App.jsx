@@ -26,7 +26,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Landing from "../src/containers/Landing/Landing";
 import CompanyPage from "../src/containers/CompanyPage/CompanyPage";
 import OffresEmploi from './containers/CompanyPage/OffresEmploi';
-import FormPage from './containers/CV/FormPage';
 import FormPagered from './containers/CV-red/src/Cv';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
@@ -74,13 +73,11 @@ function App() {
   <Route path="/login" element={<LoginPage />} />
   <Route path="/register" element={<RegisterPage />} />
   <Route path="/password/:resetToken" element={<Password />} />
-  <Route path="/company" element={<PrivateRoute component={CompanyPage} />} />
+  <Route path="/company" element={<CompanyPage />} />
   <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
-  <Route path="/form" element={<FormPage/> }/>
   <Route path="/annonce" element={<MultiStepjobForm /> }/>
   <Route path="/formred" element={<FormPagered />} />
-  
-   <Route path="/Fullcompany" element={<Fullcompanyinfo/>} />
+  <Route path="/Fullcompany" element={<Fullcompanyinfo/>} />
   <Route path="/fullcv" element={<Fullcv/>} />
   <Route path="/rec" element={<RecruiterPage/> }/>
   <Route path="/reclog" element={<PrivateRoute component={RecLogin} />} />
