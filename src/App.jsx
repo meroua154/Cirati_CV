@@ -32,8 +32,6 @@ import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Password from './containers/LoginPage/Password';
 import RecLogin from './containers/RecruiterPage/RecLogin';
 import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
-import Offrescompany from './containers/CompanyPage/offrepagesingle'
-import Offrejob from './containers/CompanyPage/offre'
 import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
 import Fulljob from './containers/Fulljob/fulljob';
 import Fullcv from "./containers/Full-stage/Fullcv";
@@ -78,9 +76,6 @@ function App() {
   <Route path="/company" element={<CompanyPage />} />
   <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
   <Route path="/annonce" element={<MultiStepjobForm /> }/>
-  <Route path="/offre" element={<Offrescompany/> }/>
- 
-  
   <Route path="/formred" element={<FormPagered />} />
   <Route path="/Fullcompany" element={<Fullcompanyinfo/>} />
   <Route path="/fullcv" element={<Fullcv/>} />
@@ -91,8 +86,7 @@ function App() {
   <Route path="/passrec" element={<PrivateRoute component={PassRecLog} />} />
   <Route path="/recform" element={<PrivateRoute component={RecForm} />} />
   <Route path="/Fulljob" element={<Fulljob/>} />
-  <Route path="/offrejob" element={< Offrejob/>} />
- 
+  
   {/* <Route path="/recform" exact element={<RecForm />} /> */}
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
