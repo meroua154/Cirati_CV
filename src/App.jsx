@@ -78,7 +78,7 @@ function App() {
   <Route path="/company" element={<CompanyPage />} />
   <Route path="/emploi" element={<PrivateRoute component={OffresEmploi} />} />
   <Route path="/annonce" element={<MultiStepjobForm /> }/>
-  <Route path="/offre" element={<Offrescompany /> }/>
+  <Route path="/offre" element={<Offrescompany/> }/>
  
   
   <Route path="/formred" element={<FormPagered />} />
