@@ -47,7 +47,8 @@ import MultiStepjobForm from './containers/Annonceform/form';
 import Fullcompanyinfo from "./containers/Annonceform/fullcompany";
 import FrontendLayout from "./hocs/FrontendLayout";
 import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
-
+import Offre from "./containers/CompanyPage/Offre";
+import Offrepagesingle from "./containers/CompanyPage/Offrepagesingle";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -86,7 +87,8 @@ function App() {
   <Route path="/passrec" element={<PrivateRoute component={PassRecLog} />} />
   <Route path="/recform" element={<PrivateRoute component={RecForm} />} />
   <Route path="/Fulljob" element={<Fulljob/>} />
-  
+  <Route path="/offre" element={<Offre/>} />
+  <Route path="/singleoffre" element={<Offrepagesingle/>} />
   {/* <Route path="/recform" exact element={<RecForm />} /> */}
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>

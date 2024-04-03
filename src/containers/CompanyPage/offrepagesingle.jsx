@@ -212,7 +212,7 @@ const CompanyPage = () => {
                     Previous
                   </button>
                   <button
-                    className={`rounded-full py-2 px-4 ${currentPage === totalPages ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-400'}`}
+                    className={`rounded-full py-2 px-4 ${currentPage === totalPages ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-primary text-white hover:bg-light'}`}
                     onClick={nextPage}
                     disabled={currentPage === totalPages}
                   >
@@ -227,7 +227,7 @@ const CompanyPage = () => {
     <span className='flex items-center space-x-4 ml-4 font-semibold italic text-gray-900 leading-8 text-base'> 
       Candidature Spontanée
     </span>
-    <label htmlFor="file-upload" className="cursor-pointer bg-green-500 py-2 px-10  rounded-full text-white text-lg hover:bg-green-400">
+    <label htmlFor="file-upload" className="cursor-pointer bg-light py-2 px-10  rounded-full text-white text-lg hover:bg-primary">
   Déposer votre CV
 </label>
 <input id="file-upload" type="file" className="hidden" />

@@ -25,86 +25,86 @@ const Offrejob = () => {
         linkedinLink="https://www.linkedin.com/company/yassir/" 
       />
       </div>
-        <div class="container mx-auto my-5 p-10  min-h-screen relative mx-20">
-          <div class="md:flex no-wrap md:-mx-2 ">
+        <div className="container mx-auto my-5 p-10  min-h-screen relative mx-20">
+          <div className="md:flex no-wrap md:-mx-2 ">
        
-            <div class="w-full md:w-3/12 md:mx-2">
+            <div className="w-full md:w-3/12 md:mx-2">
               
-                <div class="bg-white p-3 border-t-4 border-green-400">
-                    <div class="image overflow-hidden">
-                        <img class="h-auto w-full mx-auto"
+                <div className="bg-white p-3 border-t-4 border-light">
+                    <div className="image overflow-hidden">
+                        <img className="h-auto w-full mx-auto"
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt=""/>
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Yassir Corp</h1>
-                    <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Créé en 2017, YASSIR est le premier opérateur ayant développé et lancé une plateforme de mise en relation numérique pour les déplacements personnalisés des citoyens, 
+                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Yassir Corp</h1>
+                    <h3 className="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
+                    <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Créé en 2017, YASSIR est le premier opérateur ayant développé et lancé une plateforme de mise en relation numérique pour les déplacements personnalisés des citoyens, 
                     en Algérie fondé par des Algériens avec un riche parcours académique et entrepreneurial
                      entre l'Algérie et La Silicon Valley. Avec plus de 100 000 partenaires chauffeurs / 
                      livreurs YASSIR couvre 38 Willayas.</p>
                     <ul
-                        class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                        className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         
-                        <li class="flex items-center py-3">
+                        <li className="flex items-center py-3">
                             <span>Member since</span>
-                            <span class="ml-auto">Nov 07, 2016</span>
+                            <span className="ml-auto">Nov 07, 2016</span>
                         </li>
                     </ul>
                 </div>
               
-                <div class="my-4"></div>
+                <div className="my-4"></div>
      
                 
                 
             </div>
            
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div className="w-full md:w-9/12 mx-2">
           
             <div className="bg-white p-3 shadow-sm rounded-sm flex justify-between items-center">
                             <div className="flex items-center space-x-20 font-semibold text-gray-900 leading-8 text-2xl">
-                                <span className="">Testeur D'application web et mobile </span>
+                                <span classNameName="">Testeur D'application web et mobile </span>
                             </div>
-                            <button className="bg-green-500 py-2 px-10  rounded-full text-white text-lg hover:bg-green-400">Postuler</button> {/* Updated button classes */}
+                            <button className="bg-light py-2 px-10  rounded-full text-white text-lg hover:bg-primary">Postuler</button> {/* Updated button classNamees */}
                             </div>
 
-                <div class="my-1"></div>
+                <div className="my-1"></div>
                 
                            
-                <div class="bg-white p-3 shadow-sm rounded-sm">
+                <div className="bg-white p-3 shadow-sm rounded-sm">
                    
                    
-                    <div class="text-gray-700">
-                        <div class="grid md:grid-cols-2 text-sm">
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Lieu de Travail</div>
-                                <div class="px-4 py-2">Alger, Algerie</div>
+                    <div className="text-gray-700">
+                        <div className="grid md:grid-cols-2 text-sm">
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Lieu de Travail</div>
+                                <div className="px-4 py-2">Alger, Algerie</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Secteur D'activiter</div>
-                                <div class="px-4 py-2">IT, Informmatique</div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Secteur D'activiter</div>
+                                <div className="px-4 py-2">IT, Informmatique</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Date d'expiration</div>
-                                <div class="px-4 py-2">1 juin 2023</div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Date d'expiration</div>
+                                <div className="px-4 py-2">1 juin 2023</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Niveau d'etude (diplome)</div>
-                                <div class="px-4 py-2">Master 2</div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Niveau d'etude (diplome)</div>
+                                <div className="px-4 py-2">Master 2</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Niveau de Poste</div>
-                                <div class="px-4 py-2">Confirme/Experemente</div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Niveau de Poste</div>
+                                <div className="px-4 py-2">Confirme/Experemente</div>
                             </div>
 
                             
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Nombre de poste</div>
-                                <div class="px-4 py-2">1</div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Nombre de poste</div>
+                                <div className="px-4 py-2">1</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Type de contrat </div>
-                                <div class="px-4 py-2">
-                                    <a class="">cdi</a>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">Type de contrat </div>
+                                <div className="px-4 py-2">
+                                    <a className="">cdi</a>
                                 </div>
                             </div>
                             
@@ -113,7 +113,7 @@ const Offrejob = () => {
                 </div>
                 <div className='my-1'></div>
                 <div className="bg-white p-3 shadow-sm rounded-sm flex justify-between items-center">
-                <div class="text-gray-700">
+                <div className="text-gray-700">
                     <span>Afin de renfoncer nos équipes du Digital IT nous recrutons un :</span>
                     <br /><br />
     
@@ -148,25 +148,25 @@ const Offrejob = () => {
                 
                 </div>
 
-                <div class="my-1"></div>
+                <div className="my-1"></div>
 
-                <div class="bg-white p-3 shadow-sm rounded-sm">
+                <div className="bg-white p-3 shadow-sm rounded-sm">
                    
                    
-                <div class="text-gray-700 flex justify-center"> 
+                <div className="text-gray-700 flex justify-center"> 
                         <div>
                             <span className='flex items-center space-x-20 font-semibold italic text-gray-900 leading-8 text-base'> 
                            Vous êtes peut-être là où le candidat que nous recherchons
                            
                             </span>
-                            <span className='flex items-center ml-40 space-x-20 font-semibold italic text-gray-900 leading-8 text-base'>  N’attendez Plus !</span>
+                            <span className='flex items-center ml-28 md:ml-40 space-x-20 font-semibold italic text-gray-900 leading-8 text-base'>  N’attendez Plus !</span>
                             <br /><br />
                             <a href="mailto:r_messaoud@estin.dz">
-                            <button className="bg-green-500 py-2 px-10 rounded-full text-white text-lg hover:bg-green-400">
+                            <button className="bg-primary py-2 px-10 rounded-full text-white  text-lg hover:bg-light">
                                 Contact us
                             </button>
                             </a>
-                            <button className="bg-green-500 py-2 px-10 ml-40 rounded-full text-white text-lg hover:bg-green-400">Postuler</button>
+                            <button className="bg-primary py-2 px-10 ml-4 md:ml-40 rounded-full text-white text-lg hover:bg-light">Postuler</button>
                                                         
                         </div>
                         </div>
