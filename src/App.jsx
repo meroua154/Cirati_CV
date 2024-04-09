@@ -49,6 +49,7 @@ import FrontendLayout from "./hocs/FrontendLayout";
 import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
 import Offre from "./containers/CompanyPage/Offre";
 import Offrepagesingle from "./containers/CompanyPage/Offrepagesingle";
+import UserProfil from "./containers/UserProfil/UserProfil";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -89,6 +90,7 @@ function App() {
   <Route path="/Fulljob" element={<Fulljob/>} />
   <Route path="/offre" element={<Offre/>} />
   <Route path="/singleoffre" element={<Offrepagesingle/>} />
+  <Route path="/user" element={<UserProfil/>} />
   {/* <Route path="/recform" exact element={<RecForm />} /> */}
   <Route path="*" element={<Navigate to="/login" />} />
 </Routes>
