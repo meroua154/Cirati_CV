@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { generateImageURL } = require('../commun/communfun')
+
 const userSchema = new Schema({
+    
     name: {
         type: String,
         required: true
@@ -41,8 +43,68 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-    skills: {
-        type: [String] 
+    // skills: {
+    //     type: [String] 
+    // },
+    profilpic: {
+        type: String
+    },
+    coverpic: {
+        type: String
+    },
+    website: {
+        type: String
+    },
+    LinkedIn: {
+        type: String
+    },
+    Facebook: {
+        type: String
+    },
+    preferences: {
+        secteur: {
+            type: [String] 
+        },
+        salaire: {
+            type: Number 
+        },
+        mobilite: {
+            type: String,
+            enum: ['Willing to relocate', 'local']
+        },
+        metier: {
+            type: String 
+        },
+        statut: {
+            type: String,
+            enum: ['all', 'Remote', 'Contract', 'Fulltime', 'Parttime']
+        }
+    },
+    cv: {
+        type: String
+    },
+    experiences: [{
+        _id: {
+            type: String,
+            default: () => Math.random().toString(36).substring(7)
+        },
+        titre: {
+            type: String
+        },
+        annees: {
+            type: String
+        },
+        company: {
+            type: String
+        },
+    }],
+    langues: {
+        Kabyle: Boolean,
+        Arabe: Boolean,
+        Français: Boolean,
+        Anglais: Boolean,
+        Espagnol: Boolean,
+        Turc: Boolean
     },
 });
 

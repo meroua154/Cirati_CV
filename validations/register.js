@@ -12,7 +12,7 @@ module.exports = function validateRegisterInput(data) {
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";
     data.location = !isEmpty(data.location) ? data.location : "";
     data.phone_number = !isEmpty(data.phone_number) ? data.phone_number : "";
-    data.bio = !isEmpty(data.bio) ? data.bio : "";
+    // data.bio = !isEmpty(data.bio) ? data.bio : "";
 
     // Name checks
     if (Validator.isEmpty(data.name)) {
@@ -59,9 +59,9 @@ module.exports = function validateRegisterInput(data) {
     }
 
     // Bio checks
-    if (Validator.isEmpty(data.bio)) {
-        errors.bio = "Bio field is required";
-    }
+    // if (Validator.isEmpty(data.bio)) {
+    //     errors.bio = "Bio field is required";
+    // }
 
     return {
         errors,

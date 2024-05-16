@@ -7,29 +7,57 @@ const jobSchema = new Schema({
         ref: 'Recruiter',
         //required: true
     },
-    recruiterName: {
-        type: String,
-    },
-    recruiterEmail: {
-        type: String,
-    },
     title: {
         type: String,
+        required: true
+    },
+    recruiterName: { 
+        type: String,
+    
+    },
+    recruiterPic: { 
+        type: String,
+    
+    },
+    secteur: {
+        type: Schema.Types.Mixed,
         //required: true
     },
-    logo: {
+    address: {
+        type: String,
+        required: true
+    },
+    AnneeExperience: {
         type: String,
         //required: true
     },
+    level: {
+        type: String,
+        enum: ['Débutant', 'Junior', 'Intermédiaire', 'Senior','Cadre supérieur'],
+        default: 'Débutant'
+        //required: true
+    },
+    levelEducation: {
+        type: String,
+        enum: ["Pas de formation formelle", "Diplôme d'études secondaires", "Diplôme d'associé", 'Licence','Master','Doctorat'],
+        default: 'Débutant'
+        //required: true
+    },
+    Nbposts: {
+        type: Number,
+    },
+
     description: {
         type: String,
+        required: true
     },
-    type: {
+    Contratype: {
         type: String,
-        enum: ['Remote', 'Contract', 'Fulltime', 'Parttime'],
-        default: 'Remote'
+        enum: ["Temps plein", "Temps partiel","Contrat à durée déterminée (CDD)", "Contrat à durée indéterminée (CDI)","Contrat d'apprentissage","Contrat de professionnalisation","Contrat de stage","Contrat d'intérim","Contrat de freelance","Contrat de mission"],
+        default: "Temps plein"
         //required: true
     },
+
     duration: {
         type: Number,
         //required: true
@@ -37,51 +65,14 @@ const jobSchema = new Schema({
     salary: {
         type: Number,
     },
-    app: {
-        type: Number,
-        default: 0
-    },
-    appmax: {
-        type: Number,
-    },
-    numapp: {
-        type: Number,
-    },
-    address: {
-        type: String,
-        //required: true
-    },
-    skills: {
-        type: [String],
-        //required: true
-    },
-    rating: {
-        type: Number,
-        //default: 5
-    },
-    numrate: {
-        type: Number,
-    },
-    posmax: {
-        type: Number,
-    },
-    numpos: {
-        type: Number,
-    },
     dateOfPost: {
         type: Date,
         default: new Date()
     },
     deadline: {
-        type: Date,
+        atype: Date,
         //required: true
     },
-    level: {
-        type: String,
-        enum: ['Beginner', 'Experienced', 'Intermediate', 'Professional'],
-        default: 'Beginner'
-        //required: true
-    }
 });
 
 jobSchema.index({ recruiter: 1 });

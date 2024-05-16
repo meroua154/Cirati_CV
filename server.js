@@ -20,13 +20,17 @@ var ApplicationRouter = require("./routes/application.routes");
 var educatmodel=require("./models/education.model");
 app.use(cors());
 // Body-Parser Middleware
+// app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //====================Assets==============================================
-app.use('/ciraticv/Images', express.static('Images'));
+app.use('/ciraticv/Images/profilpic', express.static('images/profilpic'));
+app.use('/ciraticv/Images/coverpic' , express.static("images/coverpic"))
+app.use('/ciraticv/pdfs/cvs' , express.static("pdfs/cvs"))
 // Connect to MongoDB
 // To localhost
-mongoose.connect('mongodb://127.0.0.1:27017/JobsPlanet', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1:27017/JobsPlanet', { 
+    useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 connection.once('open', function() {
