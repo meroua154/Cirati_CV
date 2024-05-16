@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  console.log("ici",isAuthenticated)
   const user = useSelector(state => state.auth.user);
   const defaultUserImage = "https://via.placeholder.com/150";
 

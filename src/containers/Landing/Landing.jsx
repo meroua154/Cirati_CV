@@ -19,23 +19,15 @@ const Landing = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:4000/job/get_jobs')
+    axios.get('http://localhost:4000/job/derniersjobs')
       .then(response => {
         setJobsData(response.data);
         setFilteredJobs(response.data); 
-  
-        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
-        console.log("hello");
       });
   }, []);
-  
-  console.log("hello");
-  
-
-
   const handleSearch = (searchData) => {
     let filtered = jobsData.filter(job =>
       
@@ -73,7 +65,7 @@ const Landing = () => {
   const resetFilters = () => {
     setFilteredJobs(jobsData);
   }
-
+console.log(jobsData)
   return (
     <div className="">
       <Search onSearch={handleSearch} resetFilters={resetFilters}  jobsData ={jobsData}/>

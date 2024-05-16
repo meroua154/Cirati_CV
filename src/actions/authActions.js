@@ -2,20 +2,23 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import { jwtDecode } from 'jwt-decode'
 
-
-
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
     USER_LOADING
 } from "./types";
 
-// Register User
+
 export const registerUser = (userData) => {
     return async dispatch => {
         try {
-            const res = await axios.post("http://localhost:4000/user/register", userData);
-            
+            console.log(userData)
+            const res = await axios.post("http://localhost:4000/user/register", userData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(userData)
             return res.data;
         } catch (err) {
             console.log(err);
@@ -23,13 +26,13 @@ export const registerUser = (userData) => {
                 type: GET_ERRORS,
                 payload: err.response.data
             });
-            return {
-                type: GET_ERRORS,
-                payload: err.response.data,
-            };
+
+            throw err;
         }
     };
 };
+
+
 
 
 

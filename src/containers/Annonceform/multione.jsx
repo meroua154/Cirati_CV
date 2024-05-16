@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Select from "react-tailwindcss-select";
 
-const Multione = ({ options }) => {
+const Multione = ({ options, onChange }) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
-    const handleChange = value => {
-        console.log("value:", value);
-        setSelectedOption(value);
+    const handleChange = option => {
+        setSelectedOption(option);
+        onChange(option);
     };
 
     return (

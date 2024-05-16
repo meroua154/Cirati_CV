@@ -6,13 +6,13 @@ import Jobs from '../Landing/components/Jobs';
 
 export default function Fullcv() {
   const [jobsData, setJobsData] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [applicants, Setapplicants] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/job/get_jobs')
+    axios.get('http://localhost:4000/user/applicants')
       .then(response => {
         setJobsData(response.data);
-        setFilteredJobs(response.data); 
+        Setapplicants(response.data); 
       })
       .catch(error => {
         console.log(error);
@@ -62,7 +62,7 @@ export default function Fullcv() {
   return (
     <div>
       <Search onSearch={handleSearch} resetFilters={resetFilters} jobsData={jobsData} />
-      <div><Matchingjob /></div>
+      <div><JobCard applicants={applicants} /></div>
     </div>
   );
 }

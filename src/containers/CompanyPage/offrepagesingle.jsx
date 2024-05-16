@@ -9,7 +9,7 @@ import yass from "../../assets/Images/yass.png";
 import Description from './components/Description';
 import Offre from './components/Offre';
 
-const CompanyPage = () => {
+const Offrepagesingle = () => {
   const idcomp = '65d4b14cb1ef74374875bf9a';
   const [company, setCompany] = useState('');
   const [deuxDernieresOffres, setDeuxDernieresOffres] = useState([]);
@@ -259,4 +259,4 @@ const CompanyPage = () => {
   );
 };
 
-export default CompanyPage;
+export default Offrepagesingle;
