@@ -83,7 +83,7 @@ const UserProfil = () => {
     formData.append('phone_number', userData.phone_number)
     formData.append('email', userData.email)
     
-    instance.put(`http://localhost:4000/user/update1/${userId}`, formData)
+    instance.put(`/user/update1/${userId}`, formData)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour du CV');
@@ -110,7 +110,7 @@ const UserProfil = () => {
         preferences: userData.preferences
     };
 
-    instance.put(`http://localhost:4000/user/update2/${userId}`, preferencesData
+    instance.put(`/user/update2/${userId}`, preferencesData
   )
     .then(response => {
         if (!response.ok) {
@@ -155,7 +155,7 @@ const UserProfil = () => {
         annees: newExperience.annees
     };
 
-    instance.post(`http://localhost:4000/user/add-experience/${id}`, newExperienceData)
+    instance.post(`/user/add-experience/${id}`, newExperienceData)
     .then(response => {
         if (!response.data.message) {
             throw new Error('Erreur lors de l\'ajout de l\'expérience');
@@ -177,7 +177,7 @@ const UserProfil = () => {
 const handleDeleteExperience = (id) => {
   console.log(id)
   const userId=userData._id
-  instance.delete(`http://localhost:4000/user/delete-experience/${userId}/${id}`)
+  instance.delete(`/user/delete-experience/${userId}/${id}`)
   .then(response => {
     if (!response.data.message) {
       throw new Error('Erreur lors de la suppression de l\'expérience');
@@ -220,7 +220,7 @@ const handleDeleteExperience = (id) => {
     const formData = new FormData();
     formData.append('cv', userData.cv);
     const userId = userData._id;
-    instance.put(`http://localhost:4000/user/update-cv/${userId}`,formData)
+    instance.put(`/user/update-cv/${userId}`,formData)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour du CV');
@@ -279,7 +279,7 @@ const handleDeleteExperience = (id) => {
         langues: userData.langues
     }; 
 
-     instance.put(`http://localhost:4000/user/update-languages/${userId}`,languesData )
+     instance.put(`/user/update-languages/${userId}`,languesData )
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour des langues');

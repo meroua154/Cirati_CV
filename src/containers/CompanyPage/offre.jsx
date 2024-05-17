@@ -9,20 +9,47 @@ import yass from "../../assets/Images/yass.png";
 import Description from './components/Description';
 import Offre from './components/Offre';
 
+import { useParams } from 'react-router-dom';
 const Offrejob = () => {
- 
+    const { recId,id } = useParams(); 
+    const [offre, setOffre] = useState([]);
+    const [company, setCompany] = useState('');
+    useEffect(() => {
+      const fetchCompany = async () => {
+        try {
+          const response = await instance.get(`/user/recruiter/${recId}`);
+          const companyData = response.data; 
+          setCompany(companyData); 
+        } catch (error) {
+          console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
+        }
+      };
+  
+      fetchCompany();
+        const fetchOffres = async () => {
 
+          try {
+            const response = await instance.get(`/job/get_job/${recId}/${id}`);
+            setOffre(response.data);
+          } catch (error) {
+            console.error('Erreur lors de la récupération des offres d\'emploi:', error);
+          }
+        };
+
+        fetchOffres();
+    }, [id]);
   return (
     <div className="bg-gray-100 min-h-screen relative" style={{ paddingTop: '50px' }} >
         <div className=''>
       <Head 
-        coverPhoto={yass}
-        profilePhoto={yassir}
-        companyName="Nom de votre entreprise"
-        Location="Alger, Bir Mourad Rais "
-        website="https://yassir.com/"
-        facebookLink="https://web.facebook.com/Yassir.Algerie/?locale=fr_FR&_rdc=1&_rdr"
-        linkedinLink="https://www.linkedin.com/company/yassir/" 
+    coverPhoto={company.coverpic}
+    profilePhoto={company.profilpic}
+    companyName={company.name}
+    Location={company.localisation}
+    website={company.website}
+    facebookLink={company.Facebook}
+    linkedinLink={company.LinkedIn}
+    idcomp={recId}
       />
       </div>
         <div className="container mx-auto my-5 p-10  min-h-screen relative mx-20">
@@ -36,8 +63,10 @@ const Offrejob = () => {
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt=""/>
                     </div>
-                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Yassir Corp</h1>
-                    <h3 className="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
+                    <Description 
+              description={company.bio} />
+                    {/* <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Qui nous sommes?</h1> */}
+                    {/* <h3 className="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
                     <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Créé en 2017, YASSIR est le premier opérateur ayant développé et lancé une plateforme de mise en relation numérique pour les déplacements personnalisés des citoyens, 
                     en Algérie fondé par des Algériens avec un riche parcours académique et entrepreneurial
                      entre l'Algérie et La Silicon Valley. Avec plus de 100 000 partenaires chauffeurs / 
@@ -49,7 +78,7 @@ const Offrejob = () => {
                             <span>Member since</span>
                             <span className="ml-auto">Nov 07, 2016</span>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
               
                 <div className="my-4"></div>

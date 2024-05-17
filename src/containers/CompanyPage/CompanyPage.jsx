@@ -16,7 +16,7 @@ const CompanyPage = () => {
    
     const fetchCompany = async () => {
       try {
-        const response = await instance.get(`http://localhost:4000/user/recruiter/${idcomp}`);
+        const response = await instance.get(`/user/recruiter/${idcomp}`);
         const companyData = response.data; 
         setCompany(companyData); 
       } catch (error) {
@@ -28,7 +28,7 @@ const CompanyPage = () => {
 
     const fetchDernieresOffres = async () => {
       try {
-        const response = await instance.get(`http://localhost:4000/job/latest_jobs/${idcomp}`);
+        const response = await instance.get(`/job/latest_jobs/${idcomp}`);
         const data = response.data;
         setDeuxDernieresOffres(data);
       } catch (error) {
@@ -53,6 +53,7 @@ console.log(deuxDernieresOffres)
         website={company.website}
         facebookLink={company.Facebook}
         linkedinLink={company.LinkedIn}
+        idcomp={idcomp}
       />
       </div>
        
@@ -66,7 +67,7 @@ console.log(deuxDernieresOffres)
               <Offre
                 key={index}
                 title={offre.title}
-                poste={Object.entries(offre.secteur).map(([secteur, sousSecteurs]) => ` ${sousSecteurs.join(', ')}`).join(', ')}
+                poste={offre.title}
                 lieu={offre.address}
                 diplome={offre.levelEducation}
                 experience={offre.AnneeExperience}
