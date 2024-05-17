@@ -18,7 +18,7 @@ const getColor = (status) => {
 };
 
 const ApplicantCard = ({ applicant }) => {
-  const { profilpic, name, preferences, cv } = applicant;
+  const { profilpic, name, preferences, cv, } = applicant;
 
   return (
  
@@ -36,6 +36,8 @@ const ApplicantCard = ({ applicant }) => {
         </div>
         <div className="rounded-b-md px-6 py-8" >
           <p className="text-lg font-bold">{preferences.secteur.join(', ')}</p>
+          <p className="py-2 text-lg">{preferences.metier ? preferences.metier : 'Métier non spécifié'}</p>
+
           <p className="py-2 text-lg">{name}</p>
           <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
             <p>Salaire</p>

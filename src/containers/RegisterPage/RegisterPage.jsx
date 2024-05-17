@@ -371,6 +371,7 @@ block text-sm font-medium text-gray-700">Localisation</label>
           >
             <option value="">Sélectionnez le statut</option>
             <option value="all">Tous</option>
+            <option value="Stager">Stage</option>
             <option value="Remote">Remote</option>
             <option value="Contract">Contrat</option>
             <option value="Fulltime">Temps plein</option>
