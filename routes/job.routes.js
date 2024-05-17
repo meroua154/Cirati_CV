@@ -31,6 +31,7 @@ router.get("/derniersjobs", function(req, res) {
         });
 });
 
+
 // Getting one job
 
 router.get('/secteurs', async (req, res) => {
@@ -68,7 +69,33 @@ router.get('/secteurs', async (req, res) => {
 router.get("/latest_jobs/:recruiterId", function(req, res) {
     Job.find({ recruiter: req.params.recruiterId }) 
         .sort({ dateOfPost: -1 }) 
-        .limit(10) 
+        .limit(2) 
+        .exec(function(err, jobs) {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Erreur lors de la récupération des emplois.");
+            } else {
+                res.json(jobs);
+            }
+        });
+});
+router.get("/get_job/:recruiterId/:jobId", function(req, res) {
+    const { recruiterId, jobId } = req.params;
+    Job.findOne({ _id: jobId, recruiter: recruiterId })
+        .then(job => {
+            if (!job) {
+                return res.status(404).json({ message: "Offre d'emploi non trouvée pour ce recruteur." });
+            }
+            res.json(job);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send("Erreur lors de la récupération de l'offre d'emploi.");
+        });
+});
+router.get("/get_jobs/:recruiterId", function(req, res) {
+    Job.find({ recruiter: req.params.recruiterId }) 
+        .sort({ dateOfPost: -1 }) 
         .exec(function(err, jobs) {
             if (err) {
                 console.log(err);
