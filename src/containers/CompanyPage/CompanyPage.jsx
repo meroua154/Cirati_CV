@@ -39,7 +39,7 @@ const CompanyPage = () => {
     fetchDernieresOffres();
   }, [idcomp]);
 
-
+console.log(deuxDernieresOffres)
   
   return (
     <div>
@@ -62,22 +62,17 @@ const CompanyPage = () => {
           <div className="flex items-start">
             <div className="ml-2 border-black">
              <h1 className='text-lg font-bold pb-8 border-b-2'>Les derniers offres d'emploi</h1>
-             <Offre
-                title="Développeur Full Stack"
-                poste="Développeur Full Stack"
-                lieu="Paris, France"
-                diplome="Bac+5 en informatique"
-                experience="2 ans d'expérience minimum"
-                service="Développement web"
-              />
+             {deuxDernieresOffres.map((offre, index) => (
               <Offre
-                title="Designer UI/UX"
-                poste="Designer UI/UX"
-                lieu="New York, USA"
-                diplome="Bac+3 en design graphique"
-                experience="Expérience dans le design d'interfaces utilisateur"
-                service="Conception visuelle"
-              />
+                key={index}
+                title={offre.title}
+                poste={Object.entries(offre.secteur).map(([secteur, sousSecteurs]) => ` ${sousSecteurs.join(', ')}`).join(', ')}
+                lieu={offre.address}
+                diplome={offre.levelEducation}
+                experience={offre.AnneeExperience}
+                service={Object.keys(offre.secteur).join(', ')} 
+            />
+            ))}
               <button className="mt-4 text-primary text-sm  px-4 py-2 font-lg">
                 Voir toutes les offres d'emploi
               </button>
