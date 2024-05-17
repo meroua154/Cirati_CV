@@ -1,6 +1,5 @@
-// PrivateRoute.jsx
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import PropTypes from "prop-types";
 
@@ -13,10 +12,10 @@ const PrivateRoute = ({ element, requiredRole }) => {
   } else {
     return <Navigate to="/login" />;
   }
-}
+};
 
 PrivateRoute.propTypes = {
-  element: PropTypes.func.isRequired,
+  element: PropTypes.element.isRequired,
   requiredRole: PropTypes.string.isRequired
 };
 

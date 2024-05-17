@@ -17,7 +17,6 @@ import Fulljob from './containers/Fulljob/fulljob';
 import Fullcv from "./containers/Full-stage/Fullcv";
 import PassRecLog from './containers/RecruiterPage/PassRecLog';
 import RecForm from './containers/RecruiterPage/RecForm';
-import PrivateRoute from "./components/private-route/PrivateRoute";
 import Fullcompanyinfo from "./containers/Annonceform/fullcompany";
 import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
 import Offrejob from "./containers/CompanyPage/offre"
