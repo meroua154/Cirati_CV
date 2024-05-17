@@ -11,8 +11,20 @@ import Offre from './components/Offre';
 
 import { useParams } from 'react-router-dom';
 const Offrejob = () => {
+
     const { recId,id } = useParams(); 
     const [offre, setOffre] = useState([]);
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+      };
+      const renderSecteurs = (secteurs) => {
+        return Object.entries(secteurs).map(([secteur, sousSecteurs]) => (
+            <div key={secteur}>
+               {sousSecteurs.join(' et ')}
+            </div>
+        ));
+    };
     const [company, setCompany] = useState('');
     useEffect(() => {
       const fetchCompany = async () => {
@@ -38,6 +50,7 @@ const Offrejob = () => {
 
         fetchOffres();
     }, [id]);
+    const secteurs = offre.secteur ? Object.keys(offre.secteur).join(', ') : '';
   return (
     <div className="bg-gray-100 min-h-screen relative" style={{ paddingTop: '50px' }} >
         <div className=''>
@@ -91,9 +104,9 @@ const Offrejob = () => {
           
             <div className="bg-white p-3 shadow-sm rounded-sm flex justify-between items-center">
                             <div className="flex items-center space-x-20 font-semibold text-gray-900 leading-8 text-2xl">
-                                <span classNameName="">Testeur D'application web et mobile </span>
+                                <span classNameName="">{offre.title} </span>
                             </div>
-                            <button className="bg-light py-2 px-10  rounded-full text-white text-lg hover:bg-primary">Postuler</button> {/* Updated button classNamees */}
+                            <button className="bg-light py-2 px-10  rounded-full text-white text-lg hover:bg-primary">Postuler</button> 
                             </div>
 
                 <div className="my-1"></div>
@@ -106,52 +119,62 @@ const Offrejob = () => {
                         <div className="grid md:grid-cols-2 text-sm">
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">Lieu de Travail</div>
-                                <div className="px-4 py-2">Alger, Algerie</div>
+                                <div className="px-4 py-2">{offre.address}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">Secteur D'activiter</div>
-                                <div className="px-4 py-2">IT, Informmatique</div>
+                                <div className="px-4 py-2">{secteurs}</div>
                             </div>
                             <div className="grid grid-cols-2">
-                                <div className="px-4 py-2 font-semibold">Date d'expiration</div>
-                                <div className="px-4 py-2">1 juin 2023</div>
+                                <div className="px-4 py-2 font-semibold">Duration</div>
+                                <div className="px-4 py-2">{offre.duration}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">Niveau d'etude (diplome)</div>
-                                <div className="px-4 py-2">Master 2</div>
+                                <div className="px-4 py-2">{offre.levelEducation}</div>
                             </div>
                             <div className="grid grid-cols-2">
-                                <div className="px-4 py-2 font-semibold">Niveau de Poste</div>
-                                <div className="px-4 py-2">Confirme/Experemente</div>
+                                <div className="px-4 py-2 font-semibold">date de poste</div>
+                                <div className="px-4 py-2">{formatDate(offre.dateOfPost)}</div>
                             </div>
 
                             
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">Nombre de poste</div>
-                                <div className="px-4 py-2">1</div>
+                                <div className="px-4 py-2">{offre.Nbposts}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-semibold">Type de contrat </div>
                                 <div className="px-4 py-2">
-                                    <a className="">cdi</a>
+                                    <a className="">{offre.Contratype}</a>
                                 </div>
+                           
+                  
                             </div>
-                            
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold"> Année d'éxperience</div>
+                                <div className="px-4 py-2">{offre.AnneeExperience}</div>
+                            </div>
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold"> Salaire</div>
+                                <div className="px-4 py-2">{offre.salary} DA</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className='my-1'></div>
                 <div className="bg-white p-3 shadow-sm rounded-sm flex justify-between items-center">
                 <div className="text-gray-700">
-                    <span>Afin de renfoncer nos équipes du Digital IT nous recrutons un :</span>
+                    <span>Afin de renfoncer nos équipes du {renderSecteurs(offre.secteur)}
+                        nous recrutons un :</span>
                     <br /><br />
     
-                    <span className='font-semibold flex justify-center'>Testeur D'application web et mobile</span>
+                    <span className='font-semibold flex justify-center'>{offre.title}</span>
                     <br />
                     <span>
-    Description du poste de Testeur d'application web et mobile :<br /><br />
-    
-    En tant que testeur d'applications web et mobile, vous serez responsable de garantir la qualité et la fiabilité des applications développées pour le web et les appareils mobiles. Votre rôle consistera à effectuer des tests fonctionnels, de performance et de compatibilité sur différentes plateformes et navigateurs. Vous travaillerez en étroite collaboration avec les développeurs pour identifier, signaler et résoudre les défauts et les bogues.<br /><br />
+    Description du poste {offre.title} :<br /><br />
+    {offre.description}
+    {/* En tant que testeur d'applications web et mobile, vous serez responsable de garantir la qualité et la fiabilité des applications développées pour le web et les appareils mobiles. Votre rôle consistera à effectuer des tests fonctionnels, de performance et de compatibilité sur différentes plateformes et navigateurs. Vous travaillerez en étroite collaboration avec les développeurs pour identifier, signaler et résoudre les défauts et les bogues.<br /><br />
     
     Principales responsabilités :<br />
     - Effectuer des tests manuels et automatisés sur les applications web et mobiles.<br />
@@ -169,7 +192,7 @@ const Offrejob = () => {
     - Capacité à s'adapter rapidement aux changements et aux nouvelles technologies.<br />
     - Souci du détail et rigueur dans l'exécution des tests.<br /><br />
     
-    Si vous êtes passionné par l'assurance qualité des applications web et mobiles, doté d'un esprit analytique et d'une forte attention aux détails, ce poste pourrait vous convenir parfaitement.
+    Si vous êtes passionné par l'assurance qualité des applications web et mobiles, doté d'un esprit analytique et d'une forte attention aux détails, ce poste pourrait vous convenir parfaitement. */}
 </span>
 
 

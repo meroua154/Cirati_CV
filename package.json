@@ -24,6 +24,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@uc-react-ui/multiselect": "^0.1.1",
     "axios": "^1.6.7",
+    "date-fns": "^3.6.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.7.2",
     "framer-motion": "^11.0.24",
