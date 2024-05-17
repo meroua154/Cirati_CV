@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { BiTimeFive } from "react-icons/bi";
 
-
+import { useNavigate } from 'react-router-dom';
 const Jobs = ({JobsData}) => {
   
+  const navigate = useNavigate();
+  const handleApplyNow = (recurId,OffreId) => {
 
+    navigate(`/offre/${recurId}/${OffreId}`);
+  };
   return (
     <section id="jobs" className="full-width-div">
         <div className=" container mx-auto px-16 pb-24">
@@ -61,7 +65,9 @@ const Jobs = ({JobsData}) => {
                       </p>
                     </div>
                   </div>
-                  <button className="border-[2px] font-medium rounded-[10px] block p-2 w-full dark:text-slate-100 dark:bg-blueColor dark:border-transparent dark:group-hover:border dark:group-hover:border-white dark:hover:text-blueColor dark:hover:bg-white hover:bg-white">
+                  <button className="border-[2px] font-medium rounded-[10px] block p-2 w-full dark:text-slate-100 dark:bg-blueColor dark:border-transparent dark:group-hover:border dark:group-hover:border-white dark:hover:text-blueColor dark:hover:bg-white hover:bg-white"
+                      onClick={() => handleApplyNow(job.recruiter,job._id)}
+                  >
                     Apply Now
                   </button>
                 </div>
