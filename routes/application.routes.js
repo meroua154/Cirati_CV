@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
+const {generateImageURL,generateImageURL2,upload} = require('../commun/communfun');
 // Load Application model
 const Application = require("../models/application.model");
 
@@ -18,21 +18,13 @@ router.get("/get_applications", function(req, res) {
 
 // POST request 
 // Add an application to db
-router.post("/add_application", (req, res) => {
-    const newApplication = new Application({
-        jobId: req.body.jobId,
-        applicantId: req.body.applicantId,
-        recruiterId: req.body.recruiterId,
-        stage: req.body.stage,
-        status: req.body.status,
-        sop: req.body.sop,
-        doj: req.body.doj,
-        salary: req.body.salary,
-        recruiterName: req.body.recruiterName,
-        title: req.body.title,
-        rating: req.body.rating
-    });
-
+router.post("/add_application", 
+upload.fields([{ name: 'cv', maxCount: 1 }]),
+(req, res) => {
+    const cv = req.files["cv"] ? req.files["cv"][0].filename : undefined;
+    const cvs = generateImageURL2(req, cv, 'cvs');
+    if (cv !== undefined) req.body.cv = cvs;
+    const newApplication = new Application(req.body);
     newApplication.save()
         .then(application => {
             res.status(200).json(application);

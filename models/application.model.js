@@ -5,7 +5,7 @@ const applicationSchema = new Schema({
     jobId: {
         type: Schema.Types.ObjectId,
         ref: 'Job',
-        required: true
+        // required: true
     },
     applicantId: {
         type: Schema.Types.ObjectId,
@@ -17,10 +17,10 @@ const applicationSchema = new Schema({
         ref: 'User',
         required: true
     },
-    stage: {
-        type: Number,
-        default: 4
-    },
+    // stage: {
+    //     type: Number,
+    //     default: 4
+    // },
     status: {
         type: String
     },
@@ -36,19 +36,23 @@ const applicationSchema = new Schema({
     recruiterName: {
         type: String
     },
-    title: {
-        type: String
-    },
-    rating: {
-        type: Number
-    },
-    applicantRating: {
-        type: Number,
-        default: -1
-    },
+    // title: {
+    //     type: String
+    // },
+    // rating: {
+    //     type: Number
+    // },
+    // applicantRating: {
+    //     type: Number,
+    //     default: -1
+    // },
     dateOfApplication: {
         type: Date,
         default: new Date()
+    },
+    cv : {
+        type: String
+    
     }
 });
 applicationSchema.index({ jobId: 1 });
