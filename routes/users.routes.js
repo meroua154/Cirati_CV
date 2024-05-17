@@ -586,15 +586,12 @@ async function addExperience(req, res) {
         }
 
         const newExperience = {
+            _id:req.body._id,
             titre: req.body.titre,
             company: req.body.company,
             annees: req.body.annees
         };
-
-        // Ajoute la nouvelle expérience à la liste des expériences de l'utilisateur
         user.experiences.push(newExperience);
-
-        // Enregistre les modifications dans la base de données
         await user.save();
 
         return res.status(200).json({ message: 'Expérience ajoutée avec succès', experience: newExperience });

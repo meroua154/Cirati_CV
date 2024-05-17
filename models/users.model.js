@@ -77,7 +77,7 @@ const userSchema = new Schema({
         },
         statut: {
             type: String,
-            enum: ['all', 'Remote', 'Contract', 'Fulltime', 'Parttime']
+            enum: ['all', 'Remote', 'Contract', 'Fulltime', 'Parttime','Stager']
         }
     },
     cv: {
@@ -86,7 +86,7 @@ const userSchema = new Schema({
     experiences: [{
         _id: {
             type: String,
-            default: () => Math.random().toString(36).substring(7)
+            // default: () => Math.random().toString(36).substring(7)
         },
         titre: {
             type: String

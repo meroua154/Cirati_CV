@@ -6,13 +6,16 @@ const keys = require("../config/keys");
 const User = require("../models/users.model");
 
 const opts = {};
+
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
 module.exports = passport => {
+
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
-      User.findById(jwt_payload.id)
+      User.findById(jwt_payload._id)
         .then(user => {
+          console.log(jwt_payload);
           if (user) {
             return done(null, user);
           }
