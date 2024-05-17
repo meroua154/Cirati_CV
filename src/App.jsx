@@ -62,7 +62,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
             <Route path="/company" element={<ApplicantRoute element={<CompanyPage/>} />} />
-            <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} />
+       
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered />} />} />
             <Route path="/Fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
@@ -74,7 +74,9 @@ function App() {
             <Route path="/Fulljob"  element={<ApplicantRoute element={<Fulljob />} />} />
             <Route path="/offre/:recId/:id"
              element={<ApplicantRoute element={<Offrejob />} />}  />
-            <Route path="/singleoffre" element={<Offrepagesingle />} />
+                  {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}
+                  <Route path="/singleoffre/:id" element={<ApplicantRoute element={<Offrepagesingle />} />} />
+            {/* <Route path="/singleoffre" element={<Offrepagesingle />} /> */}
             <Route path="/user" 
             element={<ApplicantRoute element={<UserProfil />} />} />
             <Route path="*" element={<Navigate to="/login" />} />

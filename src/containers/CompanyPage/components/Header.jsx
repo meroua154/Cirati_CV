@@ -10,7 +10,7 @@ export default function Header({ idcomp }) {
               <a href="/company" className="hover">Entreprise</a>
             </li>
             <li>
-              <a href={`/emploi/${idcomp}`} className="hover">Offres d'emploi</a>
+              <a href={`/singleoffre/${idcomp}`} className="hover">Offres d'emploi</a>
             </li>
           </ul>
         </div>
