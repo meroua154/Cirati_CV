@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import CompanyMap from './CompanyMap';
 import Head from './components/Head';
 import Map from './components/Map';

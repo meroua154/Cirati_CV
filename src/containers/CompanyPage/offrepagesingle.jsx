@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import CompanyMap from './CompanyMap';
 import Head from './components/Head';
 import Map from './components/Map';
@@ -117,7 +117,7 @@ const Offrepagesingle = () => {
   useEffect(() => {
     const fetchCompany = async () => {
       try {
-        const response = await Axios.get(`http://localhost:4000/user/recruiter/${idcomp}`);
+        const response = await instance.get(`http://localhost:4000/user/recruiter/${idcomp}`);
         const companyData = response.data;
         setCompany(companyData);
         const location = await getLocationCoordinates(companyData.localisation);
@@ -131,7 +131,7 @@ const Offrepagesingle = () => {
 
     const fetchDernieresOffres = async () => {
       try {
-        const response = await Axios.get(`http://localhost:4000/job/latest_jobs/${idcomp}`);
+        const response = await instance.get(`http://localhost:4000/job/latest_jobs/${idcomp}`);
         const data = response.data;
         setDeuxDernieresOffres(data);
       } catch (error) {
@@ -144,7 +144,7 @@ const Offrepagesingle = () => {
 
   const getLocationCoordinates = async (location) => {
     try {
-      const response = await Axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`);
+      const response = await instance.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`);
       const data = response.data;
       if (data.length > 0) {
         const result = data[0];

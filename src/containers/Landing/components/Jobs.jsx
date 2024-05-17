@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { BiTimeFive } from "react-icons/bi";
-// import { JobsData } from "../../../Constants";
-import axios from 'axios';
+
 
 const Jobs = ({JobsData}) => {
   

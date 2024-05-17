@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import '@fortawesome/fontawesome-free/css/all.css'; // Importation des icônes FontAwesome
-
+import { v4 as uuidv4 } from 'uuid';
 const UserProfil = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState({
@@ -83,10 +83,7 @@ const UserProfil = () => {
     formData.append('phone_number', userData.phone_number)
     formData.append('email', userData.email)
     
-    fetch(`http://localhost:4000/user/update1/${userId}`, {
-        method: 'PUT',
-        body: formData,
-    })
+    instance.put(`http://localhost:4000/user/update1/${userId}`, formData)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour du CV');
@@ -113,13 +110,8 @@ const UserProfil = () => {
         preferences: userData.preferences
     };
 
-    fetch(`http://localhost:4000/user/update2/${userId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json' // Spécifiez que le contenu est JSON
-        },
-        body: JSON.stringify(preferencesData) // Convertit les données en JSON
-    })
+    instance.put(`http://localhost:4000/user/update2/${userId}`, preferencesData
+  )
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour des préférences de recrutement');
@@ -154,54 +146,49 @@ const UserProfil = () => {
   const handleAddExperience = () => {
 
     const id = userData._id
+    const idex = uuidv4();
 
-    // Créer un objet représentant la nouvelle expérience
     const newExperienceData = {
+      _id: idex, 
         titre: newExperience.titre,
         company: newExperience.company,
         annees: newExperience.annees
     };
 
-    fetch(`http://localhost:4000/user/add-experience/${id}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // Spécifier que le contenu est JSON
-        },
-        body: JSON.stringify(newExperienceData) // Convertir les données en JSON
-    })
+    instance.post(`http://localhost:4000/user/add-experience/${id}`, newExperienceData)
     .then(response => {
-        if (!response.ok) {
+        if (!response.data.message) {
             throw new Error('Erreur lors de l\'ajout de l\'expérience');
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message); // Afficher un message de succès si nécessaire
-    })
+       
+    setUserData(prevState => ({
+      ...prevState,
+      experiences: [...prevState.experiences, newExperienceData]
+  }))
+  console.log(response.data.message); 
+  return response;
+})
     .catch(error => {
         console.error(error);
     });
 
-    // Réinitialiser le formulaire après l'ajout de l'expérience
     setNewExperience({ titre: '', company: '', annees: '' });
 };
 const handleDeleteExperience = (id) => {
+  console.log(id)
   const userId=userData._id
-  fetch(`http://localhost:4000/user/delete-experience/${userId}/${id}`, {
-    method: 'DELETE',
-  })
+  instance.delete(`http://localhost:4000/user/delete-experience/${userId}/${id}`)
   .then(response => {
-    if (!response.ok) {
+    if (!response.data.message) {
       throw new Error('Erreur lors de la suppression de l\'expérience');
     }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data.message); 
-    setUserData(prevState => ({
-      ...prevState,
-      experiences: prevState.experiences.filter(exp => exp._id !== id)
-    }));
+
+  setUserData(prevState => ({
+    ...prevState,
+    experiences: prevState.experiences.filter(exp => exp._id !== id)
+  }));
+  console.log(response.data.message);
+  return response;
   })
   .catch(error => {
     console.error(error);
@@ -233,10 +220,7 @@ const handleDeleteExperience = (id) => {
     const formData = new FormData();
     formData.append('cv', userData.cv);
     const userId = userData._id;
-    fetch(`http://localhost:4000/user/update-cv/${userId}`, {
-        method: 'PUT',
-        body: formData,
-    })
+    instance.put(`http://localhost:4000/user/update-cv/${userId}`,formData)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour du CV');
@@ -295,13 +279,7 @@ const handleDeleteExperience = (id) => {
         langues: userData.langues
     }; 
 
-    fetch(`http://localhost:4000/user/update-languages/${userId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify(languesData) 
-    })
+     instance.put(`http://localhost:4000/user/update-languages/${userId}`,languesData )
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur lors de la mise à jour des langues');

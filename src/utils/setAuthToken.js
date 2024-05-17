@@ -1,12 +1,22 @@
 import React from 'react'
-import axios from "axios";
-const setAuthToken = token => {
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: 'http://localhost:4000',
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+export const setAuthToken = token => {
+
     if (token) {
-        // Apply authorization token to every request if logged in
-        axios.defaults.headers.common["Authorization"] = token;
+      instance.defaults.headers.common["Authorization"] = `${token}`;
     } else {
-        // Delete auth header
-        delete axios.defaults.headers.common["Authorization"];
+
+      delete instance.defaults.headers.common["Authorization"];
     }
-};
-export default setAuthToken;
+  };
+  
+
+
+export default instance;

@@ -1,16 +1,15 @@
 import React, {useEffect,useState} from 'react'
 import Head from './components/Head'
-
+import instance from '../../utils/setAuthToken';
 const OffresEmploi = ({ company }) => {
     const [offres, setOffres] = useState([]);
 
     useEffect(() => {
         const fetchOffres = async () => {
-          // Récupérer toutes les offres d'emploi de cette entreprise
+
           try {
-            const response = await fetch(`/api/offres/${company.id}`);
-            const data = await response.json();
-            setOffres(data);
+            const response = await instance.get(`/api/offres/${company.id}`);
+            setOffres(response.data);
           } catch (error) {
             console.error('Erreur lors de la récupération des offres d\'emploi:', error);
           }

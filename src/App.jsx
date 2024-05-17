@@ -26,24 +26,24 @@ import FrontendLayout from "./hocs/FrontendLayout";
 // Importer le store Redux
 import { Provider } from "react-redux";
 import store from "./store";
-
+import { setAuthToken } from "./utils/setAuthToken";
 // Importer les composants de route personnalisés
 import RecRoute from "./components/private-route/RecRoute";
 import ApplicantRoute from "./components/private-route/applicantroute";
 // Importer les fonctions utilitaires
 import { jwtDecode } from 'jwt-decode' ;
-import setAuthToken from "./utils/setAuthToken";
+
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 // Fonction principale de l'application
 function App() {
   // Vérifier si un token JWT est stocké dans le localStorage
   if (localStorage.jwtToken) {
+
     const token = localStorage.jwtToken;
-    setAuthToken(token);
     const decoded = jwtDecode(token);
     store.dispatch(setCurrentUser(decoded));
-
+    setAuthToken(token);
     const currentTime = Date.now() / 1000; 
     if (decoded.exp < currentTime) {
       store.dispatch(logoutUser());

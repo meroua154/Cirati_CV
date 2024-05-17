@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import Search from './components/Search';
 import Matchingjob from '../../components/matchjob';
 
@@ -8,7 +8,7 @@ export default function Fullcv() {
   const [filteredApplicants, setFilteredApplicants] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/user/applicants')
+    instance.get('http://localhost:4000/user/applicants')
       .then(response => {
         setApplicantsData(response.data);
         setFilteredApplicants(response.data);

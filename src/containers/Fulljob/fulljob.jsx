@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import Navbar from "../../components/Navbar";
 import Hero from "../../components/Hero";
 import RecommendedJobs from "../../components/Recommended-jobs";
@@ -12,7 +12,7 @@ export default function Fulljob() {
   const [location, setLocation] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/job/get_jobs')
+    instance.get('http://localhost:4000/job/get_jobs')
       .then(response => {
         SETJOBS(response.data);
       })

@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { GrAnnounce } from "react-icons/gr";
 import { HiOutlineHeart } from "react-icons/hi";
-import axios from "axios";
 
 import ITImage from "/it.png";
 import StockImage from "/stock.png";
 import ComplianceImage from "/compliant.png";
 import TravelImage from "/travel.png";
 import ArchitectImage from "/architect.png";
-
+import instance from "../utils/setAuthToken";
 export default function RecommendedJobs() {
   const [Secteurs, SetSecteurs] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:4000/job/secteurs')
+    instance.get('/job/secteurs')
       .then(response => {
         SetSecteurs(response.data); 
       })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import instance from '../../utils/setAuthToken';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
@@ -72,7 +72,7 @@ export default function Fullcompanyinfo() {
 
 
         try {
-            const response = await Axios.put(`http://localhost:4000/user/update/${user.id}`, formData, {
+            const response = await instance.put(`http://localhost:4000/user/update/${user.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Spécifiez le type de contenu comme multipart/form-data
                 },
@@ -109,7 +109,7 @@ export default function Fullcompanyinfo() {
             formData.append('coverpic', file);
     
             try {
-                const response = await Axios.put(`http://localhost:4000/user/update-coverpic/${user.id}`, formData, {
+                const response = await instance.put(`http://localhost:4000/user/update-coverpic/${user.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -129,7 +129,7 @@ export default function Fullcompanyinfo() {
             formData.append('profilpic', file );
     
             try {
-                const response = await Axios.put(`http://localhost:4000/user/update-profilpic/${user.id}`, formData, {
+                const response = await instance.put(`http://localhost:4000/user/update-profilpic/${user.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

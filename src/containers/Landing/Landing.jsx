@@ -5,11 +5,10 @@ import React, { useState, useEffect } from "react";
 import Search from "../Landing/components/Search";
 import Value from "../Landing/components/Value";
 import Jobs from "../Landing/components/Jobs";
-import axios from 'axios';
+
 import RecommendedJobs from "../../components/Recommended-jobs";
 import Top_company from "../../components/topcompany"
-
-
+import instance from "../../utils/setAuthToken";
 
 
 
@@ -19,7 +18,7 @@ const Landing = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:4000/job/derniersjobs')
+    instance.get('/job/derniersjobs')
       .then(response => {
         setJobsData(response.data);
         setFilteredJobs(response.data); 
@@ -65,7 +64,7 @@ const Landing = () => {
   const resetFilters = () => {
     setFilteredJobs(jobsData);
   }
-console.log(jobsData)
+
   return (
     <div className="">
       <Search onSearch={handleSearch} resetFilters={resetFilters}  jobsData ={jobsData}/>
