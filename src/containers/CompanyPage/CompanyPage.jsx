@@ -7,8 +7,9 @@ import yass from "../../assets/Images/yass.png"
 import Description from './components/Description';
 import Offre from './components/Offre';
 import instance from '../../utils/setAuthToken';
+import { useParams } from 'react-router-dom';
 const CompanyPage = () => {
-  const idcomp = '662c00b86646862a4001b896'; 
+  const {id} = useParams(); 
   const [company, setCompany] = useState('');
   const [deuxDernieresOffres, setDeuxDernieresOffres] = useState([]);
 
@@ -16,7 +17,7 @@ const CompanyPage = () => {
    
     const fetchCompany = async () => {
       try {
-        const response = await instance.get(`/user/recruiter/${idcomp}`);
+        const response = await instance.get(`/user/recruiter/${id}`);
         const companyData = response.data; 
         setCompany(companyData); 
       } catch (error) {
@@ -28,7 +29,7 @@ const CompanyPage = () => {
 
     const fetchDernieresOffres = async () => {
       try {
-        const response = await instance.get(`/job/latest_jobs/${idcomp}`);
+        const response = await instance.get(`/job/latest_jobs/${id}`);
         const data = response.data;
         setDeuxDernieresOffres(data);
       } catch (error) {
@@ -37,7 +38,7 @@ const CompanyPage = () => {
     };
 
     fetchDernieresOffres();
-  }, [idcomp]);
+  }, [id]);
 
 console.log(deuxDernieresOffres)
   
@@ -53,7 +54,7 @@ console.log(deuxDernieresOffres)
         website={company.website}
         facebookLink={company.Facebook}
         linkedinLink={company.LinkedIn}
-        idcomp={idcomp}
+        idcomp={id}
       />
       </div>
        

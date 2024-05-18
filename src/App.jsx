@@ -61,8 +61,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
-            <Route path="/company" element={<ApplicantRoute element={<CompanyPage/>} />} />
-            <Route path="/Fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
+            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
+       
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered />} />} />
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />

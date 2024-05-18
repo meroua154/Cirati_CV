@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useParams } from 'react-router-dom';
 
 export default function Fullcompanyinfo() {
     const navigate=useNavigate()
@@ -72,7 +72,7 @@ export default function Fullcompanyinfo() {
 
 
         try {
-            const response = await instance.put(`http://localhost:4000/user/update/${user.id}`, formData, {
+            const response = await instance.put(`/user/update/${user.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Spécifiez le type de contenu comme multipart/form-data
                 },
@@ -109,7 +109,7 @@ export default function Fullcompanyinfo() {
             formData.append('coverpic', file);
     
             try {
-                const response = await instance.put(`http://localhost:4000/user/update-coverpic/${user.id}`, formData, {
+                const response = await instance.put(`/user/update-coverpic/${user.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -129,7 +129,7 @@ export default function Fullcompanyinfo() {
             formData.append('profilpic', file );
     
             try {
-                const response = await instance.put(`http://localhost:4000/user/update-profilpic/${user.id}`, formData, {
+                const response = await instance.put(`/user/update-profilpic/${user.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
