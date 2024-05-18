@@ -13,7 +13,9 @@ const LoginPage = () => {
   const auth = useSelector(state => state.auth);
   console.log(auth)
   useEffect(() => {
-    if (auth.isAuthenticated) {
+    if (auth.isAuthenticated&&auth.user.role=="recruiter") {
+      navigate("/rec"); 
+    }else if(auth.isAuthenticated&&auth.user.role=="applicant"){
       navigate("/"); 
     }
   }, [auth.isAuthenticated, navigate]);
