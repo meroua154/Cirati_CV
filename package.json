@@ -24,6 +24,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@uc-react-ui/multiselect": "^0.1.1",
     "axios": "^1.6.7",
+    "date-fns": "^3.6.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.7.2",
     "framer-motion": "^11.0.24",
@@ -44,11 +45,13 @@
     "react-router-dom": "^6.22.0",
     "react-scripts": "^3.0.1",
     "react-tailwindcss-select": "^1.8.5",
+    "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.8",
     "tw-elements-react": "^1.0.0-alpha2",
     "uniqid": "^5.4.0",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

@@ -1,82 +1,141 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import instance from '../../utils/setAuthToken';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
 import '@fortawesome/fontawesome-free/css/all.css'; // Importation des icônes FontAwesome
-
+import { v4 as uuidv4 } from 'uuid';
 const UserProfil = () => {
-  // État local pour les informations du profil utilisateur
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phoneNumber: '123-456-7890',
-    region: 'New York',
-    profilePicture: 'https://via.placeholder.com/150', // Placeholder image
-    recruitmentPreferences: {
-      industry: 'Technology',
-      salary: '$100,000',
-      mobility: 'Willing to relocate',
-      jobTitle: 'Software Developer',
-      employmentStatus: 'Full-time'
-    },
-    experiences: [
-      { id: 1, title: 'Software Developer', company: 'ABC Inc.', duration: '2020 - Present' },
-      { id: 2, title: 'Intern', company: 'XYZ Corp.', duration: '2018 - 2019' }
-    ]
+    preferences: {
+      secteur: [],
+      salaire: null,
+      mobilite: "",
+
+      metier: "",
+      statut: ""
+  },
+  role: "",
+  verified: false,
+  _id: "",
+  name: "",
+  email: "",
+  password: "",
+  localisation: "",
+  phone_number: "",
+  bio: "",
+  website: "",
+  LinkedIn: "",
+  Facebook: "",
+  cv: null,
+  langues: {
+    Kabyle: false,
+    Arabe: false,
+    Français: false,
+    Anglais: false,
+    Espagnol: false,
+    Turc: false
+  },
+  experiences: [
+      {
+          _id: "",
+          titre: "",
+          annees: null,
+          company:""
+      }
+  ],
+  profilpic: "",
+  coverpic: "",
+  date: ""
   });
-
-  // État local pour gérer l'édition des informations utilisateur
+    const extractFileName = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
+  useEffect(() => {
+    setUserData(user);
+   }, [user]);
+   useEffect(() => {
+    // Récupérer le nom du fichier du CV à partir de l'URL
+    const cvFileName = extractFileName(user.cv);
+    const OldCv = new File([userData.cv], cvFileName, { type: 'application/pdf' });
+    setUserData(prevState => ({
+      ...prevState,
+      cv: OldCv
+    }));
+  }, [user.cv]);
   const [isEditingUserInfo, setIsEditingUserInfo] = useState(false);
-
-  // État local pour gérer l'édition des préférences de recrutement
   const [isEditingRecruitmentPreferences, setIsEditingRecruitmentPreferences] = useState(false);
-
-  // État local pour gérer l'édition des expériences
   const [isEditingExperiences, setIsEditingExperiences] = useState(false);
-
-  // État local pour stocker une nouvelle expérience
-  const [newExperience, setNewExperience] = useState({ title: '', company: '', duration: '' });
-
-  // Fonction pour activer le mode édition des informations utilisateur
+  const [newExperience, setNewExperience] = useState({ titre: '', company: '', annees: '' });
   const handleEditUserInfo = () => {
     setIsEditingUserInfo(true);
   };
-
-  // Fonction pour enregistrer les modifications des informations utilisateur
+  const [ProfPic,SetProfilPic]=useState()
   const handleSaveUserInfo = () => {
+    
     setIsEditingUserInfo(false);
-    // Enregistrer les modifications dans la base de données, par exemple
+    const userId = userData._id;
+    const formData = new FormData();
+    formData.append('profilpic', ProfPic)
+    formData.append('name', userData.name)
+    formData.append('phone_number', userData.phone_number)
+    formData.append('email', userData.email)
+    
+    instance.put(`/user/update1/${userId}`, formData)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour du CV');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
   };
-
-  // Fonction pour annuler les modifications des informations utilisateur
   const handleCancelEditUserInfo = () => {
     setIsEditingUserInfo(false);
-    // Réinitialiser les champs avec les valeurs d'origine, par exemple
   };
-
-  // Fonction pour activer le mode édition des préférences de recrutement
   const handleEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(true);
   };
-
-  // Fonction pour enregistrer les modifications des préférences de recrutement
   const handleSaveRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(false);
-    // Enregistrer les modifications dans la base de données, par exemple
-  };
+    const userId = userData._id;
+    const preferencesData = {
+        preferences: userData.preferences
+    };
 
-  // Fonction pour annuler les modifications des préférences de recrutement
+    instance.put(`/user/update2/${userId}`, preferencesData
+  )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour des préférences de recrutement');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
+};
   const handleCancelEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(false);
-    // Réinitialiser les champs avec les valeurs d'origine, par exemple
   };
-
-  // Fonction pour gérer le changement de la photo de profil
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
+    SetProfilPic(file)
     const reader = new FileReader();
     reader.onloadend = () => {
       setUserData(prevState => ({
         ...prevState,
-        profilePicture: reader.result // Mettre à jour la photo de profil avec le contenu du fichier
+        profilpic: reader.result 
       }));
     };
     if (file) {
@@ -84,92 +143,165 @@ const UserProfil = () => {
     }
   };
 
-  // Fonction pour gérer l'ajout d'une nouvelle expérience
   const handleAddExperience = () => {
-    const id = userData.experiences.length + 1;
+
+    const id = userData._id
+    const idex = uuidv4();
+
+    const newExperienceData = {
+      _id: idex, 
+        titre: newExperience.titre,
+        company: newExperience.company,
+        annees: newExperience.annees
+    };
+
+    instance.post(`/user/add-experience/${id}`, newExperienceData)
+    .then(response => {
+        if (!response.data.message) {
+            throw new Error('Erreur lors de l\'ajout de l\'expérience');
+        }
+       
     setUserData(prevState => ({
       ...prevState,
-      experiences: [...prevState.experiences, { ...newExperience, id }]
-    }));
-    setNewExperience({ title: '', company: '', duration: '' });
-  };
+      experiences: [...prevState.experiences, newExperienceData]
+  }))
+  console.log(response.data.message); 
+  return response;
+})
+    .catch(error => {
+        console.error(error);
+    });
 
-  // Fonction pour gérer la suppression d'une expérience
-  const handleDeleteExperience = (id) => {
-    setUserData(prevState => ({
-      ...prevState,
-      experiences: prevState.experiences.filter(exp => exp.id !== id)
-    }));
-  };
+    setNewExperience({ titre: '', company: '', annees: '' });
+};
+const handleDeleteExperience = (id) => {
+  console.log(id)
+  const userId=userData._id
+  instance.delete(`/user/delete-experience/${userId}/${id}`)
+  .then(response => {
+    if (!response.data.message) {
+      throw new Error('Erreur lors de la suppression de l\'expérience');
+    }
 
-  // Fonction pour activer le mode édition des expériences
+  setUserData(prevState => ({
+    ...prevState,
+    experiences: prevState.experiences.filter(exp => exp._id !== id)
+  }));
+  console.log(response.data.message);
+  return response;
+  })
+  .catch(error => {
+    console.error(error);
+  });
+};
   const handleEditExperiences = () => {
     setIsEditingExperiences(true);
   };
-
-  // Fonction pour enregistrer les modifications des expériences
   const handleSaveExperiences = () => {
     setIsEditingExperiences(false);
   };
-
-  // Fonction pour annuler les modifications des expériences
   const handleCancelEditExperiences = () => {
     setIsEditingExperiences(false);
-    setNewExperience({ title: '', company: '', duration: '' });
-  };
-
-  // Déclarez un état local pour gérer le CV et son édition
-  const [cv, setCv] = useState(null);
+    setNewExperience({ titre: '', company: '', annees: '' });
+  }
   const [isEditingCV, setIsEditingCV] = useState(false);
 
-  // Fonction pour gérer le changement du CV
   const handleCVChange = (e) => {
     const file = e.target.files[0];
-    setCv(file);
+   setUserData(prevState => ({
+    ...prevState,
+    cv: file 
+  }));
   };
 
   // Fonction pour enregistrer le CV
   const handleSaveCV = () => {
     setIsEditingCV(false);
-    // Enregistrer le CV dans la base de données ou dans le système de stockage, par exemple
+    const formData = new FormData();
+    formData.append('cv', userData.cv);
+    const userId = userData._id;
+    instance.put(`/user/update-cv/${userId}`,formData)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour du CV');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
   };
-
-  // Fonction pour annuler l'édition du CV
   const handleCancelEditCV = () => {
     setIsEditingCV(false);
-    setCv(null);
-    // Réinitialiser le champ avec la valeur d'origine, par exemple
+
+    const cvFileName = extractFileName(user.cv);
+    
+    const originalCv = new File([user.cv], cvFileName, { type: 'application/pdf' });
+    setUserData(prevState => ({
+      ...prevState,
+      cv: originalCv
+    }));
   };
+  
 
     // Déclarez un état local pour gérer les langues et leur édition
-    const [languages, setLanguages] = useState(['English', 'French']);
-    const [newLanguage, setNewLanguage] = useState('');
+    const [languages, setLanguages] = useState([
+      { name: 'Kabyle', value: false },
+      { name: 'Arabe', value: false },
+      { name: 'Français', value: false },
+      { name: 'Anglais', value: false },
+      { name: 'Espagnol', value: false },
+      { name: 'Turc', value: false }
+    ]);
     const [isEditingLanguages, setIsEditingLanguages] = useState(false);
   
     // Fonction pour ajouter une langue
-    const handleAddLanguage = () => {
-      if (newLanguage.trim() !== '') {
-        setLanguages(prevLanguages => [...prevLanguages, newLanguage]);
-        setNewLanguage('');
-      }
-    };
-  
-    // Fonction pour supprimer une langue
-    const handleDeleteLanguage = (index) => {
-      setLanguages(prevLanguages => prevLanguages.filter((_, i) => i !== index));
+    const handleLanguageChange = (lang) => {
+      setIsEditingLanguages(true)
+      setUserData(prevState => ({
+        ...prevState,
+        langues: {
+          ...prevState.langues,
+          [lang]: !prevState.langues[lang]
+        }
+      }));
     };
   
     // Fonction pour enregistrer les langues
     const handleSaveLanguages = () => {
       setIsEditingLanguages(false);
-      // Enregistrer les modifications dans la base de données, par exemple
+      const userId=userData._id
+      console.log("Langues modifiées :", userData.langues);
+      const languesData = {
+        langues: userData.langues
+    }; 
+
+     instance.put(`/user/update-languages/${userId}`,languesData )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour des langues');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
     };
   
-    // Fonction pour annuler l'édition des langues
-    const handleCancelEditLanguages = () => {
-      setIsEditingLanguages(false);
-      // Réinitialiser les champs avec les valeurs d'origine, par exemple
-    };
+ // Fonction pour annuler l'édition des langues
+ const handleCancelEditLanguages = () => {
+  setIsEditingLanguages(false);
+  setUserData(prevState => ({
+    ...prevState,
+    langues: user.langues
+  }));
+};
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -177,7 +309,7 @@ const UserProfil = () => {
       <div className="w-full md:w-1/4 md:h-screen  mt-24">
         <ul className="mt-8">
           <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-user mr-2"></i> Mon Profil</li>
-          <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-sign-out-alt mr-2"></i> Se Déconnecter</li>
+          {/* <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-sign-out-alt mr-2"></i> Se Déconnecter</li> */}
         </ul>
       </div>
       
@@ -192,6 +324,7 @@ const UserProfil = () => {
             <input
               type="file"
               accept="application/pdf"
+              
               onChange={handleCVChange}
               className="mb-2"
             />
@@ -200,10 +333,10 @@ const UserProfil = () => {
           </div>
         ) : (
           <div>
-            {cv ? (
+            {userData.cv ? (
               <div>
-                <p className='mb-2'>CV téléchargé : {cv.name}</p>
-                <a href={URL.createObjectURL(cv)} target="_blank" rel="noopener noreferrer" className='font-semibold text-primary'>Voir le CV</a>
+                <p className='mb-2'>CV téléchargé : {userData.cv.name}</p>
+                <a  href={user.cv} target="_blank" rel="noopener noreferrer" className='font-semibold text-primary'>Voir le CV</a>
               </div>
             ) : (
               <p>Aucun CV téléchargé</p>
@@ -223,37 +356,38 @@ const UserProfil = () => {
                   accept="image/*"
                   onChange={handleProfilePictureChange}
                   className="hidden"
+   
                   id="profilePictureInput"
                 />
                 <label htmlFor="profilePictureInput">
-                  <img src={userData.profilePicture} alt="Profile" className="w-20 h-20 rounded-full mr-4 cursor-pointer" />
+                  <img src={userData.profilpic} alt="Profile" className="w-20 h-20 rounded-full mr-4 cursor-pointer" />
                 </label>
               </>
             ) : (
-              <img src={userData.profilePicture} alt="Profile" className="w-20 h-20 rounded-full mr-4" />
+              <img src={userData.profilpic} alt="Profile" className="w-20 h-20 rounded-full mr-4" />
             )}
             <div>
               {isEditingUserInfo ? (
                 <>
                   <input
                     type="text"
-                    value={userData.firstName}
-                    onChange={(e) => setUserData({ ...userData, firstName: e.target.value })}
+                    value={userData.name}
+                    onChange={(e) => setUserData({ ...userData, name: e.target.value })}
                     className="text-lg font-lg mb-2 focus:outline-none border-b border-gray-400"
                   />
-                  <input
+                  {/* <input
                     type="text"
                     value={userData.lastName}
                     onChange={(e) => setUserData({ ...userData, lastName: e.target.value })}
                     className="text-lg font-lg mb-2 focus:outline-none border-b border-gray-400"
-                  />
+                  /> */}
                 </>
               ) : (
                 <>
-                  <p className="text-lg font-lg">{userData.firstName} {userData.lastName}</p>
+                  <p className="text-lg font-lg">{userData.name}</p>
                   <div className="flex items-center text-gray-600">
                     <i className="fas fa-map-marker-alt mr-2"></i>
-                    <p>{userData.region}</p>
+                    <p>{userData.localisation}</p>
                   </div>
                 </>
               )}
@@ -265,8 +399,8 @@ const UserProfil = () => {
               <>
                 <input
                   type="text"
-                  value={userData.phoneNumber}
-                  onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
+                  value={userData.phone_number}
+                  onChange={(e) => setUserData({ ...userData, phone_number: e.target.value })}
                   className="mb-2 focus:outline-none border-b border-gray-400"
                 />
                 <input
@@ -278,7 +412,7 @@ const UserProfil = () => {
               </>
             ) : (
               <>
-                <p><i className="fas fa-phone mr-4"></i>{userData.phoneNumber}</p>
+                <p><i className="fas fa-phone mr-4"></i>{userData.phone_number}</p>
                 <p><i className="fas fa-envelope mr-2"></i>{userData.email}</p>
               </>
             )}
@@ -299,42 +433,42 @@ const UserProfil = () => {
             <div className="mb-8">
               <input
                 type="text"
-                value={userData.recruitmentPreferences.industry}
-                onChange={(e) => setUserData({ ...userData, recruitmentPreferences: { ...userData.recruitmentPreferences, industry: e.target.value } })}
+                value={userData.preferences.secteur}
+                onChange={(e) => setUserData({ ...userData, preferences: { ...userData.preferences, secteur: e.target.value } })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <input
                 type="text"
-                value={userData.recruitmentPreferences.salary}
-                onChange={(e) => setUserData({ ...userData, recruitmentPreferences: { ...userData.recruitmentPreferences, salary: e.target.value } })}
+                value={userData.preferences.salaire}
+                onChange={(e) => setUserData({ ...userData, preferences: { ...userData.preferences, salaire: e.target.value } })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <input
                 type="text"
-                value={userData.recruitmentPreferences.mobility}
-                onChange={(e) => setUserData({ ...userData, recruitmentPreferences: { ...userData.recruitmentPreferences, mobility: e.target.value } })}
+                value={userData.preferences.mobilite}
+                onChange={(e) => setUserData({ ...userData, preferences: { ...userData.preferences, mobilite: e.target.value } })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <input
                 type="text"
-                value={userData.recruitmentPreferences.jobTitle}
-                onChange={(e) => setUserData({ ...userData, recruitmentPreferences: { ...userData.recruitmentPreferences, jobTitle: e.target.value } })}
+                value={userData.preferences.metier}
+                onChange={(e) => setUserData({ ...userData, preferences: { ...userData.preferences, metier: e.target.value } })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <input
                 type="text"
-                value={userData.recruitmentPreferences.employmentStatus}
-                onChange={(e) => setUserData({ ...userData, recruitmentPreferences: { ...userData.recruitmentPreferences, employmentStatus: e.target.value } })}
+                value={userData.preferences.statut}
+                onChange={(e) => setUserData({ ...userData, preferences: { ...userData.preferences, statut: e.target.value } })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
             </div>
           ) : (
             <div className="mb-8">
-              <p><span className="font-semibold text-sm">Secteur d'activité souhaité:<br/></span> {userData.recruitmentPreferences.industry}</p>
-              <p><span className="font-semibold text-sm">Salaire souhaité:<br/></span> {userData.recruitmentPreferences.salary}</p>
-              <p><span className="font-semibold text-sm">Mobilité:<br/></span> {userData.recruitmentPreferences.mobility}</p>
-              <p><span className="font-semibold text-sm">Métier:<br/></span> {userData.recruitmentPreferences.jobTitle}</p>
-              <p><span className="font-semibold text-sm">Statut:<br/></span> {userData.recruitmentPreferences.employmentStatus}</p>
+              <p><span className="font-semibold text-sm">Secteur d'activité souhaité:<br/></span> {userData.preferences.secteur}</p>
+              <p><span className="font-semibold text-sm">Salaire souhaité:<br/></span> {userData.preferences.salaire}</p>
+              <p><span className="font-semibold text-sm">Mobilité:<br/></span> {userData.preferences.mobilite}</p>
+              <p><span className="font-semibold text-sm">Métier:<br/></span> {userData.preferences.metier}</p>
+              <p><span className="font-semibold text-sm">Statut:<br/></span> {userData.preferences.statut}</p>
             </div>
           )}
           {isEditingRecruitmentPreferences ? (
@@ -354,8 +488,8 @@ const UserProfil = () => {
               <input
                 type="text"
                 placeholder="Titre"
-                value={newExperience.title}
-                onChange={(e) => setNewExperience({ ...newExperience, title: e.target.value })}
+                value={newExperience.titre}
+                onChange={(e) => setNewExperience({ ...newExperience, titre: e.target.value })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <input
@@ -368,8 +502,8 @@ const UserProfil = () => {
               <input
                 type="text"
                 placeholder="Durée"
-                value={newExperience.duration}
-                onChange={(e) => setNewExperience({ ...newExperience, duration: e.target.value })}
+                value={newExperience.annees}
+                onChange={(e) => setNewExperience({ ...newExperience, annees: e.target.value })}
                 className="mb-2 focus:outline-none border-b border-gray-400"
               />
               <button onClick={handleAddExperience} className="bg-green-500 text-white px-4 py-2 rounded-md mr-2">Ajouter</button>
@@ -377,11 +511,13 @@ const UserProfil = () => {
             </div>
           )}
           {userData.experiences.map(experience => (
-            <div key={experience.id} className="mb-2">
-              <p className="font-semibold text-base">{experience.title} - {experience.company}</p>
-              <p className="text-sm text-gray-600">{experience.duration}</p>
+            <div key={experience._id} className="mb-2">
+              <p className="font-semibold text-base">{experience.titre} - 
+              {experience.company}
+              </p>
+              <p className="text-sm text-gray-600">{experience.annees}</p>
               {isEditingExperiences && (
-                <button onClick={() => handleDeleteExperience(experience.id)} className="text-red-500 font-semibold">Supprimer</button>
+                <button onClick={() => handleDeleteExperience(experience._id)} className="text-red-500 font-semibold">Supprimer</button>
               )}
             </div>
           ))}
@@ -393,32 +529,22 @@ const UserProfil = () => {
           )}
         </div>
         {/* Box pour les langues */}
-      <div className="bg-white rounded shadow-md p-6 mb-8 md:mx-16">
-        <h2 className="text-xl font-bold mb-2">Langues</h2>
-        {isEditingLanguages && (
+        <div className="bg-white rounded shadow-md p-6 mb-8 md:mx-16">
+          <h2 className="text-xl font-bold mb-2">Langues</h2>
           <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Ajouter une langue"
-              value={newLanguage}
-              onChange={(e) => setNewLanguage(e.target.value)}
-              className="mb-2 focus:outline-none border-b border-gray-400"
-            />
-            <button onClick={handleAddLanguage} className="bg-primary text-white px-4 py-2 rounded-md mx-2">Ajouter</button>
-            <button onClick={handleCancelEditLanguages} className="bg-light text-white px-4 py-2 rounded-md">Annuler</button>
+            {Object.keys(userData.langues).map((lang, index) => (
+              <div key={index} className="mb-2">
+                <input
+                  type="checkbox"
+                  id={lang}
+                  checked={userData.langues[lang]}
+                  onChange={() => handleLanguageChange(lang)}
+                  className="mr-2"
+                />
+                <label htmlFor={lang} className="font-medium">{lang}</label>
+              </div>
+            ))}
           </div>
-        )}
-        {languages.map((language, index) => (
-          <div key={index} className="mb-2">
-            <p className="font-medium">{language}</p>
-            {isEditingLanguages && (
-              <button onClick={() => handleDeleteLanguage(index)} className="text-red-500 font-semibold">Supprimer</button>
-            )}
-          </div>
-        ))}
-        {!isEditingLanguages && (
-          <button onClick={() => setIsEditingLanguages(true)} className="bg-light text-white px-4 py-2 rounded-md">Ajouter</button>
-        )}
         {isEditingLanguages && (
           <button onClick={handleSaveLanguages} className="bg-primary text-white px-4 py-2 rounded-md mt-4">Enregistrer</button>
         )}

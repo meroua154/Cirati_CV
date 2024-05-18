@@ -1,14 +1,22 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import store from "../store";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
-import logo from "../assets/Images/logo.png"
-
+import logo from "../assets/Images/logo.png";
+import { logoutUser } from "../actions/authActions";
 
 export default function Navbarred() {
   const [dropdown, setDropdown] = useState(false);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const showDropdown = () => {
     setDropdown(!dropdown);
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    store.dispatch(logoutUser());
   };
 
   return (
@@ -18,11 +26,7 @@ export default function Navbarred() {
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
               <a href="/">
-              <img src={logo} 
-                   alt="logo"
-                   width={90}
-                   height={90} 
-              />
+                <img src={logo} alt="logo" width={90} height={90} />
               </a>
             </div>
           </div>
@@ -53,12 +57,20 @@ export default function Navbarred() {
             </a>
           </ul>
           <div className="flex max-lg:hidden gap-x-4">
-            <button className="rounded-2xl bg-primary text-lg text-white border-none font-medium px-6 py-2 hoverBtn">
-              Sign Up
-            </button>
-            <button className="rounded-lg bg-none text-lg text-primary border-none font-medium px-8 py-3 hoverBtn">
-              Sign In
-            </button>
+            {isAuthenticated ? (
+              <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+                Log out
+              </button>
+            ) : (
+              <>
+                <button className="rounded-2xl bg-primary text-lg text-white border-none font-medium px-6 py-2 hoverBtn">
+                  Sign Up
+                </button>
+                <button className="rounded-lg bg-none text-lg text-primary border-none font-medium px-8 py-3 hoverBtn">
+                  Sign In
+                </button>
+              </>
+            )}
           </div>
           {dropdown ? (
             <div
@@ -109,12 +121,20 @@ export default function Navbarred() {
                 </a>
               </ul>
               <div className="flex flex-col justify-center items-center w-full gap-y-8 mt-4">
-                <button className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
-                  Sign Up
-                </button>
-                <button className="rounded-full bg-none text-lg text-primary border-none font-bold px-8 py-3 hoverBtn">
-                  Sign In
-                </button>
+                {isAuthenticated ? (
+                  <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+                    Log out
+                  </button>
+                ) : (
+                  <>
+                    <button className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+                      Sign Up
+                    </button>
+                    <button className="rounded-full bg-none text-lg text-primary border-none font-bold px-8 py-3 hoverBtn">
+                      Sign In
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

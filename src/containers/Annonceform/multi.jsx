@@ -1,17 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Select from "react-tailwindcss-select";
 
-
-const Multi = ({ jobs }) => {
-    const [selectedJobs, setSelectedJobs] = useState(null);
+const Multi = ({ jobs, onChange }) => {
+    const [selectedJobs, setSelectedJobs] = useState([]);
 
     const handleChange = value => {
-        console.log("value:", value);
         setSelectedJobs(value);
+      
+        onChange(value);
     };
 
     return (
-        <div className="bg-gray-200"> {/* Wrap Select component with a div and apply background color */}
+        <div className="bg-gray-200">
             <Select
                 label='red'
                 value={selectedJobs}
