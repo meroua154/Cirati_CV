@@ -16,16 +16,17 @@ export default function Top_company() {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 3,
+      items: 1, // Réduit à 2 éléments par rangée sur les tablettes
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
     },
   };
+  
  const Jobs = ({ type, img, title, color, bg_color }) => {
   return (
-    <div className="shadow lg:w-[95%] mt-12">
+    <div className="shadow lg:w-[95%] mt-12 mx-auto max-w-md">
       <div className="bg-white rounded-t-md px-6 py-8 flex flex-col items-center">
         <span className="flex items-center justify-between w-full">
           <button
@@ -66,16 +67,16 @@ export default function Top_company() {
           <h2 className="xl:text-3xl lg:text-3xl text-2xl font-bold pl-12">
             Top Company Registered
           </h2>
-          <span className="md:flex ml-12 gap-x-4">
-            <button className="rounded-lg my-4 bg-primary text-lg text-white font-bold px-8 py-3 outline-none border-none hoverBtn">
+          <span className="md:flex  gap-x-4">
+            <button className="rounded-lg md:mt-8 mt-8 md:mb-8 mb-4 bg-primary ml-12 text-lg text-white font-medium px-8 py-3 outline-none border-none hoverBtn">
               Browse Jobs
             </button>
-            <button className="rounded-lg my-4 bg-transparent border border-solid border-[#e2e4e7] text-lg text-black font-bold px-8 py-3 outline-none shadow hoverBtn">
+            <button className="rounded-lg md:mt-8 mt-2 md:mb-8 mb-8 bg-transparent  md:ml-4 ml-2 border border-solid border-[#e2e4e7] text-lg text-black font-medium px-8 py-3 outline-none shadow hoverBtn">
               See all companies
             </button>
           </span>
         </div>
-        <p className="text-lg mb-6 font-light pl-12">
+        <p className="text-lg mb-6 text-black-400 font-light pl-12">
           Know your worth and find the job that qualifies your life
         </p>
         <div className="px-12">

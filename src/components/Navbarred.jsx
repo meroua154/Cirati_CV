@@ -5,7 +5,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
 import logo from "../assets/Images/logo.png";
 import { logoutUser } from "../actions/authActions";
-
+import { Link } from 'react-router-dom';
 export default function Navbarred() {
   const [dropdown, setDropdown] = useState(false);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -20,8 +20,8 @@ export default function Navbarred() {
   };
 
   return (
-    <nav className="backdrop-blur-xl bg-white/30  h-24  w-full justify-center items-center fixed z-20 mt-0">
-      <div className="mx-auto lg:px-6">
+    <nav className="container backdrop-blur-xl bg-white/30  h-12  w-full justify-center items-center relative z-20 mt-0">
+      <div className="mx-auto lg:px-6 mt-4">
         <div className="lg:w-full w-11/12 mx-auto  flex justify-between items-center">
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
@@ -30,28 +30,28 @@ export default function Navbarred() {
               </a>
             </div>
           </div>
-          <ul className="flex-1 flex justify-center items-center xl:gap-12 gap-x-4 max-lg:hidden">
+          <ul className="flex-auto flex justify-center items-center ml-32 xl:gap-12 gap-x-12 max-lg:hidden">
             <a
               href="#"
-              className="leading-normal tracking-wider no-underline text-primary font-semibold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-primary font-medium text-base hover:text-primary"
             >
               Find jobs
             </a>
             <a
               href="#"
-              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               People
             </a>
             <a
               href="#"
-              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               Hiring site
             </a>
             <a
               href="#"
-              className="leading-normal tracking-wider no-underline text-black font-semibold text-lg hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               Resume
             </a>
@@ -63,12 +63,16 @@ export default function Navbarred() {
               </button>
             ) : (
               <>
-                <button className="rounded-2xl bg-primary text-lg text-white border-none font-medium px-6 py-2 hoverBtn">
-                  Sign Up
-                </button>
-                <button className="rounded-lg bg-none text-lg text-primary border-none font-medium px-8 py-3 hoverBtn">
-                  Sign In
-                </button>
+                <Link to="/register">
+                    <button className="rounded-2xl bg-primary text-base text-white border-none font-medium px-6 py-2 hoverBtn">
+                       Sign Up
+                    </button>
+                </Link>
+                <Link to="/login">
+                    <button className="rounded-lg bg-none text-base text-primary border-none font-medium px-8 py-3 hoverBtn">
+                      Sign In
+                    </button>
+                </Link>
               </>
             )}
           </div>
@@ -91,31 +95,31 @@ export default function Navbarred() {
         {dropdown ? (
           <div
             onClick={showDropdown}
-            className="lg:hidden w-full h-[100vh] fixed top-24 bg-white ease-in-out duration-100"
+            className="lg:hidden w-full h-fit relative  bg-white ease-in-out duration-100"
           >
-            <div className="w-full h-[320px] flex flex-col items-baseline pt-8 gap-4">
+            <div className="w-full h-[380px] flex flex-col items-baseline pt-8 gap-4">
               <ul className="text-center p-0 flex flex-col justify-center w-full gap-y-8">
                 <a
                   href="#"
-                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
                   Find jobs
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
                   People
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
                   Hiring site
                 </a>
                 <a
                   href="#"
-                  className="leading-normal no-underline text-black font-semibold text-lg hover:text-primary"
+                  className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
                   Resume
                 </a>
@@ -127,12 +131,16 @@ export default function Navbarred() {
                   </button>
                 ) : (
                   <>
-                    <button className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
+                  <Link to="/register">
+                    <button className="rounded-2xl bg-primary text-base text-white border-none font-medium px-8 py-3 hoverBtn">
                       Sign Up
                     </button>
-                    <button className="rounded-full bg-none text-lg text-primary border-none font-bold px-8 py-3 hoverBtn">
+                  </Link>
+                  <Link to="/login">
+                    <button className="rounded-full bg-none text-base text-primary border-none font-medium px-8 py-2 hoverBtn">
                       Sign In
                     </button>
+                  </Link>
                   </>
                 )}
               </div>

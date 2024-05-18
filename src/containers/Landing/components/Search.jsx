@@ -74,8 +74,8 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
   return (
     <section className="Search px-20"> 
      
-      <div className="grid gap-9 rounded-[10px] p-[1rem] md:p-[3rem] px-0 " style={{ paddingTop: '60px' }}>
-      <div className="mt-32">
+      <div className="grid gap-9 rounded-[10px] p-[1rem] md:p-[3rem] px-0 mt-24">
+      <div className="">
         <h1 className="text-center text-3xl md:text-3xl letter-spacing font-bold leading-relaxed mx-0 md:p-[1rem]">Trouvez le <span className="text-light">job</span> de vos rêves en quelques clics</h1>
         <p className="text-lg text-center tracking-widest font-semibold">Parmi plus de <a href="" className="text-primary font-bold">5417</a> postes ouverts</p>
       </div>

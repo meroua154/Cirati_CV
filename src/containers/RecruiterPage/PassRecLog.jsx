@@ -61,11 +61,11 @@ const PassRecLog = () => {
             <input type="password" name="confirmPassword" id="confirmPassword" autoComplete="new-password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
           </div>
           <div>
-            <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Réinitialiser le mot de passe
             </button>
           </div>
-          <div className='text-blue-500 text-center text-xs mt-16'><a href="/reclog">Retour à la page de connexion</a></div>
+          <div className='text-primary text-center text-xs mt-16'><a href="/reclog">Retour à la page de connexion</a></div>
         </form>
       </div>
     </div>

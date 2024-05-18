@@ -62,16 +62,16 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
             <Route path="/company" element={<ApplicantRoute element={<CompanyPage/>} />} />
-       
+            <Route path="/Fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered />} />} />
-            <Route path="/Fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
-            <Route path="/rec" element={<RecRoute element={<RecruiterPage />} />} />
+            <Route path="/rec"  element={<RecruiterPage />}/>
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
+            
             {/* <Route path="/recform" element={<RecRoute element={<RecForm />} />} /> */}
-            <Route path="/Fulljob"  element={<ApplicantRoute element={<Fulljob />} />} />
+            <Route path="/Fulljob" element={<Fulljob />} />
             <Route path="/offre/:recId/:id"
              element={<ApplicantRoute element={<Offrejob />} />}  />
                   {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}

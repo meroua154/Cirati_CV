@@ -85,11 +85,11 @@ export default function RecommendedJobs() {
           <h2 className="xl:text-3xl lg:text-3xl text-2xl pl-12 font-bold">
             Recommended jobs
           </h2>
-          <span className="md:flex ml-12 gap-x-4">
-            <button className="rounded-lg my-4 bg-primary text-lg text-white font-semibold px-8 py-3 outline-none border-none hoverBtn">
+          <span className="md:flex  gap-x-4">
+            <button className="rounded-lg md:mt-8 mt-8 md:mb-8 mb-4 bg-primary ml-12 text-lg text-white font-medium px-8 py-3 outline-none border-none hoverBtn">
               Latest Job
             </button>
-            <button className="rounded-lg my-4 bg-transparent border border-solid border-[#e2e4e7] text-lg text-black font-semibold px-8 py-3 outline-none shadow hoverBtn">
+            <button className="rounded-lg md:mt-8 mt-2 md:mb-8 mb-8 bg-transparent  md:ml-4 ml-2 border border-solid border-[#e2e4e7] text-lg text-black font-medium px-8 py-3 outline-none shadow hoverBtn">
               Premium Job
             </button>
           </span>

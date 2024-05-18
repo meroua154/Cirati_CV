@@ -36,14 +36,14 @@ const Password = () => {
             <input type="email" name="email" id="email" autoComplete="email" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
           </div>
           <div>
-            <button type="submit" className=" w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className=" w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Envoyer moi un email
             </button>
           </div>
           <div className={`text-center mt-4 ${messageType === 'error' ? 'text-red-500' : 'text-green-500'}`}>
             {resetMessage}
           </div>
-          <div className='text-blue-500 text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
+          <div className='text-primary text-center mt-16'><a href="/login">Retour a la page de connexion</a></div>
         </form>
       </div>
     </div>
