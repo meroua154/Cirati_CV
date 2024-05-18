@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { useNavigate, Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 const Jobs = ({ JobsData }) => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
+
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 6;
@@ -22,7 +30,7 @@ const Jobs = ({ JobsData }) => {
 
   return (
     <section id="jobs" className="full-width-div">
-      <div className="container mx-auto px-16 pb-24">
+      <div  data-aos="zoom-in-down" data-aos-duration="2000" className="container mx-auto px-16 pb-24">
         <h2 className="text-center text-3xl font-bold pt-12 pb-8 md:pt-20 md:pb-8 dark:text-white lettre-espace">Dernieres offres</h2>
         <div className="flex sm:items-center gap-8 flex-wrap md:ml-16 sm:px-2 sm:py-10">
           {currentJobs.map((job) => {

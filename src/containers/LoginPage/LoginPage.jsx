@@ -3,7 +3,15 @@ import { GoogleLogin } from 'react-google-login';
 import { loginUser } from "../../actions/authActions";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 const LoginPage = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
@@ -42,7 +50,7 @@ const LoginPage = () => {
 
   return (
     <div>
-    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Connectez-vous</h2>

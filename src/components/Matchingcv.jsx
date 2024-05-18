@@ -2,6 +2,8 @@ import Carousel from "react-multi-carousel";
 import { HiStar } from "react-icons/hi";
 import "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const getColor = (type) => {
   switch (type) {
@@ -19,11 +21,14 @@ const getColor = (type) => {
 };
 
 const Jobs = ({ job }) => {
+  useEffect(() => {
+    AOS.init();
+  }, [])
   const { _id, title, address, Contratype, salary, recruiterName, recruiterPic } = job;
   const secteurArray  = Object.keys(job.secteur);
 
   return (
-    <div className="job-card mx-8">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="job-card mx-8">
       <div className="shadow lg:w-[95%] mt-12">
         <div className="bg-white rounded-t-md px-6 py-8 flex flex-col items-center">
           <span className="flex items-center justify-between w-full">
@@ -53,6 +58,9 @@ const Jobs = ({ job }) => {
 };
 
 export default function Matchigstage({jobs}) {
+  useEffect(() => {
+    AOS.init();
+  }, [])
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
@@ -64,7 +72,7 @@ export default function Matchigstage({jobs}) {
   }, []);
 
   return (
-    <div className="bg-[#fafbfc]">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="bg-[#fafbfc]">
       <div className="container mx-auto px-6 py-24 grid gap-12">
         <h2 className="text-3xl font-semibold">Matching Jobs</h2>
         <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}> 

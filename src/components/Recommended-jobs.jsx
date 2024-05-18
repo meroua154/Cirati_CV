@@ -9,9 +9,16 @@ import ComplianceImage from "/compliant.png";
 import TravelImage from "/travel.png";
 import ArchitectImage from "/architect.png";
 import instance from "../utils/setAuthToken";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 export default function RecommendedJobs() {
   const [Secteurs, SetSecteurs] = useState([]);
-  
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
   useEffect(() => {
     instance.get('/job/secteurs')
       .then(response => {
@@ -79,7 +86,7 @@ export default function RecommendedJobs() {
   };
     
   return (
-    <div className="bg-[#f5f6fc]">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="bg-[#f5f6fc]">
       <div className="container mx-auto px-6 py-24">
         <div className="md:flex items-center justify-between">
           <h2 className="xl:text-3xl lg:text-3xl text-2xl pl-12 font-bold">

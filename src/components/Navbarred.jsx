@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import store from "../store";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -6,7 +6,15 @@ import { MdClose } from "react-icons/md";
 import logo from "../assets/Images/logo.png";
 import { logoutUser } from "../actions/authActions";
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 export default function Navbarred() {
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
   const [dropdown, setDropdown] = useState(false);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
@@ -21,7 +29,7 @@ export default function Navbarred() {
 
   return (
     <nav className="container backdrop-blur-xl bg-white/30  h-12  w-full justify-center items-center relative z-20 mt-0">
-      <div className="mx-auto lg:px-6 mt-4">
+      <div  data-aos="zoom-in-down" data-aos-duration="1500" className="mx-auto lg:px-6 mt-4" >
         <div className="lg:w-full w-11/12 mx-auto  flex justify-between items-center">
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-2">
@@ -32,28 +40,22 @@ export default function Navbarred() {
           </div>
           <ul className="flex-auto flex justify-center items-center ml-32 xl:gap-12 gap-x-12 max-lg:hidden">
             <a
-              href="#"
+              href="/rec"
               className="leading-normal tracking-wider no-underline text-primary font-medium text-base hover:text-primary"
             >
-              Find jobs
+              Espace recruteur
             </a>
             <a
-              href="#"
+              href="/fulljob"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
-              People
+              Offres d'emploi
             </a>
             <a
-              href="#"
+              href="/fullcv"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
-              Hiring site
-            </a>
-            <a
-              href="#"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
-            >
-              Resume
+              Construire votre CV
             </a>
           </ul>
           <div className="flex max-lg:hidden gap-x-4">

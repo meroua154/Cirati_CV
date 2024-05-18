@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Password = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
   const [resetMessage, setResetMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
@@ -24,7 +30,7 @@ const Password = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 rounded-md shadow-md my-24 bg-slate-50">
+    <div  data-aos="zoom-in-down" data-aos-duration="2000" className="max-w-lg mx-auto p-6 rounded-md shadow-md my-24 bg-slate-50">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Mot de passe oublié</h2>

@@ -23,6 +23,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@uc-react-ui/multiselect": "^0.1.1",
+    "aos": "^3.0.0-beta.6",
     "axios": "^1.6.7",
     "date-fns": "^3.6.0",
     "flowbite": "^2.3.0",

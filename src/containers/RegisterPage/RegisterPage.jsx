@@ -3,8 +3,13 @@ import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../actions/authActions";
 import { useSelector, useDispatch } from 'react-redux';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const RegisterPage = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
   const [notification, setNotification] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -151,7 +156,7 @@ const handleSubmit = async (event) => {
 };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Inscrivez-vous</h2>

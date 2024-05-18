@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const PassRecLog = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { resetToken } = useParams();
@@ -45,7 +51,7 @@ const PassRecLog = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
+    <div  data-aos="zoom-in-down" data-aos-duration="2000" className="max-w-lg mx-auto p-6 bg-slate-50 rounded-md shadow-md my-24">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Réinitialisez le mot de passe (le lien est valide pour 10min)</h2>
