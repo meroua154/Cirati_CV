@@ -5,8 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 const Jobs = ({ JobsData }) => {
   const navigate = useNavigate(); 
 
-  const handleApplyNow = (jobId) => {
-    const applicationUrl = `/application?jobId=${jobId}`;
+  const handleApplyNow = (recId,id) => {
+    const applicationUrl = `/offre/${recId}/${id}`;
     navigate(applicationUrl);
   };
 
@@ -66,8 +66,8 @@ const Jobs = ({ JobsData }) => {
                   </Link>
                 </div>
                 <button
-                  className="border-[2px] font-medium rounded-[10px] block p-2 w-full dark:text-slate-100 dark:bg-blueColor dark:border-transparent dark:group-hover:border dark:group-hover:border-white dark:hover:text-blueColor dark:hover:bg-white hover:bg-white"
-                  onClick={() => handleApplyNow(job.id)} 
+                  className="border-[2px] font-medium rounded-[10px] block p-2 w-full dark:text-slate-100 dark:bg-blueColors dark:border-transparent dark:group-hover:border dark:group-hover:border-white dark:hover:text-blueColor dark:hover:bg-white hover:bg-white"
+                  onClick={() => handleApplyNow(job.recruiter,job._id)} 
                 >
                   Apply Now
                 </button>

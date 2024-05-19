@@ -5,7 +5,7 @@ import { SiGooglemaps } from "react-icons/si";
 import { TbWorld } from "react-icons/tb";
 
 
-const Head = ({ coverPhoto, profilePhoto, companyName, facebookLink, linkedinLink, Location, website,idcomp }) => {
+const Head = ({ coverPhoto, profilePhoto, companyName, facebookLink, linkedinLink, Location, website,idcomp}) => {
   return (
     <div className=''>
       {/* Photo de couverture */}
@@ -63,6 +63,7 @@ const Head = ({ coverPhoto, profilePhoto, companyName, facebookLink, linkedinLin
       </div>
       <Header
       idcomp={idcomp}
+      
       ></Header>
     </div>
   );

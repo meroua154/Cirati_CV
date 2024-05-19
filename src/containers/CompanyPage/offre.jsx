@@ -107,7 +107,10 @@ const Offrejob = () => {
                             <div className="flex items-center space-x-20 font-semibold text-gray-900 leading-8 text-2xl">
                                 <span className="">{offre.title}</span>
                             </div>
-                            <button className="bg-light py-2 px-10 rounded-full text-white text-lg hover:bg-primary">Postuler Avec CV</button>
+                            <label htmlFor="file-upload" className="bg-primary py-2 px-10 rounded-full text-white text-lg hover:bg-light">
+                  Déposer votre CV
+                </label>
+                            <input id="file-upload" type="file" className="hidden" onChange={handleFileChange} />
                         </div>
                         <div className="my-1"></div>
                         <div className="bg-white p-3 shadow-sm rounded-sm">

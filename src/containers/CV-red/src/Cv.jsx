@@ -23,6 +23,7 @@ function App() {
     const { key } = e.target.dataset;
     setPersonalInfo({ ...personalInfo, [key]: e.target.value });
   }
+ 
 
   function handleSectionChange(e) {
     const { key } = e.target.dataset;

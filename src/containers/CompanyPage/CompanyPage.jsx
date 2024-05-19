@@ -6,13 +6,20 @@ import yassir from "../../assets/Images/yassir.png"
 import yass from "../../assets/Images/yass.png"
 import Description from './components/Description';
 import Offre from './components/Offre';
-import instance from '../../utils/setAuthToken';
-import { useParams } from 'react-router-dom';
+import instance from '../../utils/setAuthToken'
+
+import { useParams,useNavigate } from 'react-router-dom';
 const CompanyPage = () => {
+  const navigate = useNavigate(); 
+
   const {id} = useParams(); 
   const [company, setCompany] = useState('');
   const [deuxDernieresOffres, setDeuxDernieresOffres] = useState([]);
+  const ToutesLesOffres = (recId) => {
 
+    const applicationUrl = `/singleoffre/${recId}`;
+    navigate(applicationUrl);
+  };
   useEffect(() => {
    
     const fetchCompany = async () => {
@@ -40,7 +47,7 @@ const CompanyPage = () => {
     fetchDernieresOffres();
   }, [id]);
 
-console.log(deuxDernieresOffres)
+
   
   return (
     <div>
@@ -55,6 +62,8 @@ console.log(deuxDernieresOffres)
         facebookLink={company.Facebook}
         linkedinLink={company.LinkedIn}
         idcomp={id}
+        
+
       />
       </div>
        
@@ -75,7 +84,9 @@ console.log(deuxDernieresOffres)
                 service={Object.keys(offre.secteur).join(', ')} 
             />
             ))}
-              <button className="mt-4 text-primary text-sm  px-4 py-2 font-lg">
+              <button className="mt-4 text-primary text-sm  px-4 py-2 font-lg"
+                 onClick={() => ToutesLesOffres(id)} 
+              >
                 Voir toutes les offres d'emploi
               </button>
             </div>

@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 const Offrepagesingle = () => {
   const [offres, setOffres] = useState([]);
   const [company, setCompany] = useState('');
-  const { id } = useParams(); 
+  const { id} = useParams(); 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
