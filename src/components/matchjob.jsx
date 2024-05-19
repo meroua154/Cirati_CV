@@ -106,7 +106,7 @@ const Matchingjob = ({applicants}) => {
             Précédent
           </button>
           <button
-            className={`rounded-full py-2 px-4 ${currentPage === pageNumbers ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-400'}`}
+            className={`rounded-full py-2 px-4 ${currentPage === pageNumbers ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-primary text-white hover:bg-light'}`}
             onClick={handleNextPage}
             disabled={currentPage === pageNumbers}
           >

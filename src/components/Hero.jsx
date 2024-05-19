@@ -31,7 +31,7 @@ export default function Hero({ setSearchTerm, setLocation }) {
   ];
   console.log(wilayas.length)
   return (
-    <div className="pt-24">
+    <div className="pt-12">
       <div className="flex flex-col items-center justify-center min-h-[60vh] py-16 px-6 bg-cover" style={{ backgroundImage: `url(${femme})` }}>
         <h1 className="xl:text-4xl lg:text-3xl sm:text-3xl text-2xl xl:leading-normal lg:leading-normal font-bold text-center ml-64">
           Find your{" "}

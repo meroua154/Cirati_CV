@@ -70,10 +70,10 @@ const Search = ({ onSearch, resetFilters, applicantsData }) => {
                 ))}
               </select>
             </div>
-            <button type="submit" className="bg-[#196a5c] flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-green-500">
+            <button type="submit" className="bg-light flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-primary">
               Search
             </button>
-            <button type="button" onClick={handleClearQuery} className="bg-[#196a5c] flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-green-500">
+            <button type="button" onClick={handleClearQuery} className="bg-primary flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-light">
               Clear
             </button>
           </div>

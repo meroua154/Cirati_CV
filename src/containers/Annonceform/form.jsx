@@ -140,10 +140,10 @@ function MultiStepjobForm() {
     
 
     return (
-        <div className='bg-cover' style={{ backgroundImage: `url(${hire})` }}>
+        <div className='bg-cover mt-8' style={{ backgroundImage: `url(${hire})` }}>
             <Card color="transparent" shadow={true} className='drop-shadow-xl'>
-                <div className="flex justify-center items-center mt-32 ">
-                    <form onSubmit={handleSubmit} className="border border-gray-300 p-4 bg-white rounded  mb-12" style={{ maxWidth: '600px' }}>
+                <div className="flex justify-center items-center">
+                    <form onSubmit={handleSubmit} className="border border-gray-300 p-4 bg-white rounded  mb-12 mt-12" style={{ maxWidth: '600px' }}>
                         {step === 1 && (
                             <>
                                 <Typography variant="h4" color="black">
@@ -222,7 +222,7 @@ function MultiStepjobForm() {
                                     />
                                 </div>
 
-                                <Button className="mt-6 text-white bg-light hover:bg-primary w-full" onClick={() => setStep(step + 1)}>Next</Button>
+                                <Button className="mt-6 text-white bg-primary hover:bg-light w-full" onClick={() => setStep(step + 1)}>Next</Button>
                             </>
                         )}
 
@@ -284,7 +284,7 @@ function MultiStepjobForm() {
                                     </button>
                                     <button
                                         onClick={() => setStep(step + 1)}
-                                        className="mt-4 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded text-black"
+                                        className="mt-4 bg-primary hover:bg-light text-white font-bold py-2 px-4 rounded text-black"
                                     >
                                         Next
                                     </button>
@@ -353,7 +353,7 @@ function MultiStepjobForm() {
                                     </button>
                                     <button
                                         onClick={() => setStep(step + 1)}
-                                        className="mt-4 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded text-black"
+                                        className="mt-4 bg-primary hover:bg-light text-white font-bold py-2 px-4 rounded text-black"
                                     >
                                         Next
                                     </button>
@@ -401,7 +401,7 @@ function MultiStepjobForm() {
                             </button>
                             <button
                                 type="submit"
-                                className="mt-4 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded text-black"
+                                className="mt-4 bg-primary hover:bg-light text-white font-bold py-2 px-4 rounded text-black"
                             >
                                 Submit
                             </button>

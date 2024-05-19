@@ -10,10 +10,16 @@ import RecommendedJobs from "../../components/Recommended-jobs";
 import Top_company from "../../components/topcompany"
 import instance from "../../utils/setAuthToken";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 
 const Landing = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []); 
+
   const [jobsData, setJobsData] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   
@@ -66,7 +72,7 @@ const Landing = () => {
   }
 
   return (
-    <div className="">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="">
       <Search onSearch={handleSearch} resetFilters={resetFilters}  jobsData ={jobsData}/>
       <Jobs JobsData={filteredJobs} />
       <RecommendedJobs/>

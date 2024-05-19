@@ -5,8 +5,14 @@ import { FaBriefcase } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
 import { IoBusiness } from 'react-icons/io5';
 import { logo1, logo3, logo4 } from '../../assets/Logo';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function RecruiterPage() {
+    useEffect(() => {
+        AOS.init();
+      }, []); 
+
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -48,14 +54,14 @@ export default function RecruiterPage() {
     
     return (
         <div>
-            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 m-auto">
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className="grid gap-2 grid-cols-1 sm:grid-cols-2 m-auto">
                 <div className='mt-36 sm:mr-12'>
                     <h1 className='ml-12 text-3xl sm:text-5xl font-extrabold text-left'>Recrutez mieux et <br />plus vite !</h1> 
                     <p className='text-xl sm:text-left mt-8 ml-12 border-l-4 border-gray-700 pl-8'>
                          <strong>Publiez</strong> vos annonces et trouvez rapidement vos <strong>futurs talents</strong> sur le site d’emploi leader en Algérie !
                     </p>
                     <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 mt-12'>
-                        <a href="/ess">
+                        <a href="/passrec">
                         <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
                              Essayer gratuitement
                         </button>
@@ -72,7 +78,7 @@ export default function RecruiterPage() {
                 </div>
             </div>
 
-            <div className="py-16 bg-primary mt-12 md:mt-28 mb-20">
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className="py-16 bg-primary mt-12 md:mt-28 mb-20">
                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-center text-white text-4xl font-bold mb-8">Pourquoi CiratiCV ?</h2>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -94,7 +100,7 @@ export default function RecruiterPage() {
                     </div>
                  </div>
             </div>
-            <div className=' bg-slate-50 pt-4 pb-8'>
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className=' bg-slate-50 pt-4 pb-8'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mx-20 my-28'>
                     <h2 className="text-center text-4xl font-bold mb-12">Ce que nos clients disent de nous !</h2>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-3 px-16">
@@ -113,7 +119,7 @@ export default function RecruiterPage() {
                     </div>
                 </div>
             </div>
-            <div className="max-w-3xl mx-auto mt-8">
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className="max-w-3xl mx-auto mt-8">
                <h2 className="text-center text-3xl md:text-4xl font-bold mb-8">Questions fréquentes</h2>
                     {faqs.map((faq, index) => (
                       <div key={index} className="mb-4">
@@ -137,7 +143,7 @@ export default function RecruiterPage() {
                       </div>
                     ))}
             </div>
-            <div className='my-24 '>
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className='my-24 '>
                 <h1 className='text-center text-3xl md:text-4xl font-bold'>Besoin d'en savoir plus ?</h1>
                 <div className={`grid gap-2 grid-cols-1 md:grid-cols-2 mt-12 ml-12 mr-8 md:mr-8${isScrolled ? 'md:grid-cols-1' : ''}`}>
                     <div className={`bg-slate-50 p-8 rounded-xl ${isScrolled ? 'relative' : ''}`}>
@@ -190,7 +196,7 @@ export default function RecruiterPage() {
                     </div>
                 </div>
             </div>
-            <div className='grid gap-2 md:grid-cols-2 m-auto bg-slate-100'>
+            <div data-aos="zoom-in-down" data-aos-duration="2000" className='grid gap-2 md:grid-cols-2 m-auto bg-slate-100'>
               <div className='mx-16 my-20'>
                   <h1 className='text-xl font-bold mb-8'>A propos de CiratiCV</h1>
                   <p className='text-left text-sm'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate numquam, ducimus eos quasi labore vero nam veniam autem nesciunt impedit sit dolore repellendus deleniti temporibus, voluptates neque repellat, officiis explicabo.</p>

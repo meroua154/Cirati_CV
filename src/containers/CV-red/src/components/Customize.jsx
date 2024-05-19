@@ -1,6 +1,7 @@
 import "../styles/customize/Customize.css";
 import AccentColorEdit from "./customize/AccentColorEdit";
 import FontEdit from "./customize/FontEdit";
+import LanguageSelector from "./customize/LanguageSelector";
 import ResumeColsEdit from "./customize/ResumeColsEdit";
 
 export default function Customize({ isShown, onColChange }) {
@@ -17,6 +18,9 @@ export default function Customize({ isShown, onColChange }) {
       </div>
       <div>
         <FontEdit />
+      </div>
+      <div>
+        <LanguageSelector />
       </div>
     </div>
   );

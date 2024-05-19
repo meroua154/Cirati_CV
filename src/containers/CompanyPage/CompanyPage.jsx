@@ -51,7 +51,7 @@ const CompanyPage = () => {
   
   return (
     <div>
-    <div className="bg-gray-100 min-h-screen relative" style={{ paddingTop: '44px' }}>
+    <div className="bg-gray-100 min-h-screen relative">
       <div className=''>
       <Head 
         coverPhoto={company.coverpic}
@@ -97,12 +97,14 @@ const CompanyPage = () => {
            <Description 
               description={company.bio} />
         </div>
-        {/* Boîte 2 */}
-        <div className="p-8 md:basis-1/3 rounded-lg shadow mb-4 sm:mr-4" style={{ height: '425px', position: 'relative' }}>
-            <Map 
-              companyName={company.localisation}
-            />
-        </div>
+       {/* Boîte 2 */}
+<div className="p-8 pb-4 md:basis-1/3 rounded-lg shadow mb-4 sm:mr-4 relative" style={{ height: '425px' }}>
+    <Map 
+        companyName={company.localisation}
+        className="mb-8 absolute inset-0" // Ajoutez la classe absolute et inset-0 pour remplir toute la boîte
+    />
+</div>
+
       </div>
     </div>
     </div>

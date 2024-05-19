@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import "./styles/App.css";
 import PersonalDetails from "./components/personal-info/PersonalDetails";
 import AddEducationSection from "./components/education/AddEducationSection";
@@ -10,8 +10,14 @@ import exampleData from "./example-data";
 import Sidebar from "./components/Sidebar";
 import Customize from "./components/Customize";
 import html2pdf from "html2pdf.js"; // Import html2pdf library
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
   const [personalInfo, setPersonalInfo] = useState(exampleData.personalInfo);
   const [sections, setSections] = useState(exampleData.sections);
   const [sectionOpen, setSectionOpen] = useState(null);
@@ -147,7 +153,7 @@ function App() {
   };
 
   return (
-    <div className="app flex flex-col md:flex-row">
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="app flex flex-col md:flex-row">
   <div className="edit-side mt-24 md:w-1/3">
     <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
     <div className="form-container">
