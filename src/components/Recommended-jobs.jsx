@@ -90,22 +90,22 @@ export default function RecommendedJobs() {
       <div className="container mx-auto px-6 py-24">
         <div className="md:flex items-center justify-between">
           <h2 className="xl:text-3xl lg:text-3xl text-2xl pl-12 font-bold">
-            Recommended jobs
+           Emplois recommandés
           </h2>
           <span className="md:flex  gap-x-4">
             <button className="rounded-lg md:mt-8 mt-8 md:mb-8 mb-4 bg-primary ml-12 text-lg text-white font-medium px-8 py-3 outline-none border-none hoverBtn">
-              Latest Job
+              Dernier emploi
             </button>
-            <button className="rounded-lg md:mt-8 mt-2 md:mb-8 mb-8 bg-transparent  md:ml-4 ml-2 border border-solid border-[#e2e4e7] text-lg text-black font-medium px-8 py-3 outline-none shadow hoverBtn">
-              Premium Job
+            <button className="rounded-lg md:mt-8 mt-2 md:mb-8 mb-8 bg-transparent  md:ml-4 ml-12 border border-solid border-[#e2e4e7] text-lg text-black font-medium px-8 py-3 outline-none shadow hoverBtn">
+              Emploi premium
             </button>
           </span>
         </div>
-        <p className="text-lg mb-6 font-light pl-12">Explore suggested job searches</p>
+        <p className="text-lg mb-6 font-light pl-12">Explorer les recherches d'emploi suggérées</p>
         <div className="xl:flex gap-x-8 mt-16 px-12">
           <div className="xl:w-1/3">
             <div className="bg-white rounded-[10px] py-8 pl-6 mb-4">
-              <h2 className="text-2xl font-semibold">Job Categories</h2>
+              <h2 className="text-2xl font-semibold">Catégories d'emplois</h2>
             </div>
             <div className="flex flex-col gap-y-4">
               {Secteurs.length > 0 && 
@@ -131,7 +131,7 @@ export default function RecommendedJobs() {
                 ))
               }
               <button className="rounded-lg my-4 bg-primary text-lg text-white font-bold px-8 py-3 outline-none border-none hoverBtn">
-                Latest Job
+                Dernier emploi
               </button>
             </div>
           </div>
@@ -142,13 +142,13 @@ export default function RecommendedJobs() {
               title="Manager"
               amount="2000-3000"
               country="Algerie"
-              job="Web Developer"
+              job="Développeur web"
               bgColor="#f5f5f5"
               color="#4b4efc"
             />
             <Recommended
               time="2024"
-              type="Full-time"
+              type="temps plein"
               title="Data Analyst"
               amount="2500-3500"
               country="United States"

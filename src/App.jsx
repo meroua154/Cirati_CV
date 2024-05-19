@@ -64,7 +64,7 @@ function App() {
             <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
        
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
-            <Route path="/formred" element={<ApplicantRoute element={<FormPagered />} />} />
+            <Route path="/formred" element={<FormPagered />} />
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
             <Route path="/rec"  element={<RecruiterPage />}/>
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}

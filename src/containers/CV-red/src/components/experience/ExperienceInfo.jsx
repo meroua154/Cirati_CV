@@ -2,7 +2,7 @@ import "../../styles/ExperienceInfo.css";
 
 function ExperienceInfo({ info }) {
   return (
-    <div className="experience-info">
+    <div className="experience-info h-fit">
       <div className="experience-info-group">
         <p className="dates">
           {info.startDate}

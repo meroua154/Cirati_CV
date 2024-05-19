@@ -14,7 +14,7 @@ const Value = () => {
     
     <section className="Value">
       <p className="text-center py-10 text-xl font-bold md:py-20 dark:text-white lettre-espace">
-        The Value that hold us true and to account
+      Les valeurs qui nous tiennent à cœur et nous responsabilisent
       </p>
       <div data-aos="zoom-in-down" data-aos-duration="2000" className="grid sm:grid-cols-3 gap-10 sm:gap-4 items-center justify-center pb-10 sm:pb-16 px-20">
         {ValuesData.slice(0, 3).map((ValuesData) => {

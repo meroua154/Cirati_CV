@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: auto; /* ou une valeur fixe comme 500px */
+  overflow: auto;
   border: none;
   background-color: transparent;
   padding: 24px;
