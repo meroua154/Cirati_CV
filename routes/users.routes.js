@@ -374,15 +374,16 @@ async function updateCoverPic(req, res) {
         return res.status(500).json({ message: 'Erreur lors de la mise à jour de l\'image de couverture' });
     }
 }
+router.put("/update-profilpic/:id", 
+upload.fields([
+    { name: "profilpic", maxCount: 1 },
+  ]), updateProfilPic);
 router.put("/update/:id", upload.fields([
     { name: "cv", maxCount: 1 },
     { name: "profilpic", maxCount: 1 },
     { name: "coverpic", maxCount: 1 },
   ]), updateUserProfile);
-router.put("/update-profilpic/:id", 
-upload.fields([
-    { name: "profilpic", maxCount: 1 },
-  ]), updateProfilPic);
+
 
 router.put("/update-coverpic/:id", upload.fields([
     { name: "coverpic", maxCount: 1 },

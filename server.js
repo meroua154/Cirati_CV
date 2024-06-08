@@ -18,6 +18,7 @@ require("./config/passport")(passport);
 const jwtMiddleware = (req, res, next) => {
     const noAuthRoutes = [
         /^\/user\/login/,
+        // /^\/job\/derniersjobs/,
         /^\/user\/resetpassword2/,
         /^\/ciraticv\/pdfs\/cvs\/.*/,
         /^\/ciraticv\/Images\/coverpic\/.*/,
