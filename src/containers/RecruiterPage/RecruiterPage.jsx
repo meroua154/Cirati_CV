@@ -7,12 +7,12 @@ import { IoBusiness } from 'react-icons/io5';
 import { logo1, logo3, logo4 } from '../../assets/Logo';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { useSelector } from 'react-redux'; 
 export default function RecruiterPage() {
     useEffect(() => {
         AOS.init();
       }, []); 
-
+    const { isAuthenticated, user } = useSelector((state) => state.auth);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -22,8 +22,7 @@ export default function RecruiterPage() {
         };
       
         window.addEventListener('scroll', handleScroll);
-      
-        // Nettoyer l'écouteur d'événement lors du démontage du composant
+
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
@@ -61,16 +60,20 @@ export default function RecruiterPage() {
                          <strong>Publiez</strong> vos annonces et trouvez rapidement vos <strong>futurs talents</strong> sur le site d’emploi leader en Algérie !
                     </p>
                     <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 mt-12'>
-                        <a href="/passrec">
-                        <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
-                             Essayer gratuitement
-                        </button>
-                        </a>
-                        <a href="/reclog">
-                        <button className="btn bg-white text-primary border border-primary text-sm whitespace-nowrap py-2 px-4 sm:mr-12 ml-12 md:ml-2 rounded-2xl sm:static w-auto overflow-hidden">
-                            Se connecter
-                        </button>
-                        </a>
+                    {isAuthenticated && user.role === 'recruiter' ? null : (
+                            <>
+                                <a href="/register">
+                                    <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
+                                        Essayer gratuitement
+                                    </button>
+                                </a>
+                                <a href="/login">
+                                    <button className="btn bg-white text-primary border border-primary text-sm whitespace-nowrap py-2 px-4 sm:mr-12 ml-12 md:ml-2 rounded-2xl sm:static w-auto overflow-hidden">
+                                        Se connecter
+                                    </button>
+                                </a>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className='mt-20'>

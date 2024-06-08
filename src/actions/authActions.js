@@ -5,7 +5,8 @@ import { jwtDecode } from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    LOGOUT
 } from "./types";
 
 
@@ -78,5 +79,6 @@ export const logoutUser = () => dispatch => {
     localStorage.removeItem("jwtToken");
     setAuthToken(false);
     dispatch(setCurrentUser({}));
-    window.location.href = "/login";
+    dispatch({ type: LOGOUT });
+    // window.location.href = "/login";
 };

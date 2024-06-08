@@ -1,49 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import instance from '../../utils/setAuthToken';
-import CompanyMap from './CompanyMap';
 import Head from './components/Head';
-import Map from './components/Map';
-import yassir from "../../assets/Images/yassir.png";
-import yass from "../../assets/Images/yass.png";
 import Description from './components/Description';
 import Offre from './components/Offre';
 import { useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
-const Offrepagesingle = () => {
-  const [offres, setOffres] = useState([]);
-  const [company, setCompany] = useState('');
+import { useSelector,useDispatch } from "react-redux";
+import { fetchCompany, fetchJobs , addApplication,selectoffreSliceStatus } from './Slices/offreSlice'
+const Offrejob  = () => {
+  const dispatch = useDispatch();
   const { id} = useParams(); 
+  const { status, company, error,jobs } = useSelector((state) => state.offre);
+  const loadingStatus = useSelector(selectoffreSliceStatus);
+ 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   useEffect(() => {
-    const fetchCompany = async () => {
-      try {
-        const response = await instance.get(`/user/recruiter/${id}`);
-        const companyData = response.data; 
-        setCompany(companyData); 
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
-      }
-    };
-
-    fetchCompany();
-    const fetchOffres = async () => {
-      try {
-        const response = await instance.get(`/job/get_jobs/${id}`);
-        setOffres(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des offres d\'emploi:', error);
-      }
-    };
-
-    fetchOffres();
-  }, [id]);
-
+    dispatch(fetchCompany(id));
+    dispatch(fetchJobs({recruiterId:id}));
+  }, [dispatch,id]);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = offres.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(offres.length / itemsPerPage);
+  const currentItems = jobs.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(jobs.length / itemsPerPage);
 
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -60,11 +38,7 @@ const Offrepagesingle = () => {
       formData.append('applicantId',user._id);
       formData.append('recruiterId',id);
       try {
-        await instance.post('/application/add_application', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
+        await dispatch(addApplication(formData));
         alert('CV uploaded successfully!');
       } catch (error) {
         console.error('Error uploading CV:', error);
@@ -86,6 +60,7 @@ const Offrepagesingle = () => {
             facebookLink={company.Facebook}
             linkedinLink={company.LinkedIn}
             idcomp={id}
+            isLoading={loadingStatus === 'loading'} 
           />
         </div>
 
@@ -96,7 +71,7 @@ const Offrepagesingle = () => {
                 <h1 className='text-lg font-bold pb-8 border-b-2'>Les derniers offres d'emploi</h1>
                 {/* Displaying current page items */}
                 {currentItems.map((offre, index) => (
-                        <a className="bg-white p-8 w-full block rounded-lg" href={`/offre/${id}/${offre._id}`}>
+                        <a className="bg-white p-8 w-full block rounded-lg" href={`/singleoffre/${id}/${offre._id}`}>
                   <Offre
                     key={index}
                     title={offre.title}
@@ -155,4 +130,4 @@ const Offrepagesingle = () => {
   );
 };
 
-export default Offrepagesingle;
+export default Offrejob ;

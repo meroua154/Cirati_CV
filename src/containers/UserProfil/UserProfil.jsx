@@ -3,10 +3,14 @@ import instance from '../../utils/setAuthToken';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
-import '@fortawesome/fontawesome-free/css/all.css'; // Importation des icônes FontAwesome
+import '@fortawesome/fontawesome-free/css/all.css';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { fetchApplicantById } from '../Full-stage/slices/applicantsSlice';
 const UserProfil = () => {
+  const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { loading, error, selectedApplicant } = useSelector(state => state.applicant);
   const [userData, setUserData] = useState({
     preferences: {
       secteur: [],
@@ -54,17 +58,20 @@ const UserProfil = () => {
     return parts[parts.length - 1];
   };
   useEffect(() => {
-    setUserData(user);
-   }, [user]);
-   useEffect(() => {
-    // Récupérer le nom du fichier du CV à partir de l'URL
-    const cvFileName = extractFileName(user.cv);
-    const OldCv = new File([userData.cv], cvFileName, { type: 'application/pdf' });
-    setUserData(prevState => ({
-      ...prevState,
-      cv: OldCv
-    }));
-  }, [user.cv]);
+    dispatch(fetchApplicantById(user._id));
+}, [dispatch,user._id]);
+useEffect(() => {
+  if (selectedApplicant) {
+      const cvFileName = extractFileName(selectedApplicant.cv);
+      const oldCv = new File([selectedApplicant.cv], cvFileName, { type: 'application/pdf' });
+
+      setUserData({
+          ...selectedApplicant,
+          cv: oldCv
+      });
+  }
+}, [selectedApplicant]);
+
   const [isEditingUserInfo, setIsEditingUserInfo] = useState(false);
   const [isEditingRecruitmentPreferences, setIsEditingRecruitmentPreferences] = useState(false);
   const [isEditingExperiences, setIsEditingExperiences] = useState(false);
@@ -73,7 +80,7 @@ const UserProfil = () => {
     setIsEditingUserInfo(true);
   };
   const [ProfPic,SetProfilPic]=useState()
-  const handleSaveUserInfo = () => {
+  const handleSaveUserInfo = async () => {
     
     setIsEditingUserInfo(false);
     const userId = userData._id;
@@ -82,20 +89,17 @@ const UserProfil = () => {
     formData.append('name', userData.name)
     formData.append('phone_number', userData.phone_number)
     formData.append('email', userData.email)
-    
-    instance.put(`/user/update1/${userId}`, formData)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la mise à jour du CV');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message); 
-    })
-    .catch(error => {
-        console.error(error);
-    });
+
+    try {
+        const response = await instance.put(`/user/update1/${userId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error updating user:', error);
+    }
   };
   const handleCancelEditUserInfo = () => {
     setIsEditingUserInfo(false);
@@ -103,28 +107,27 @@ const UserProfil = () => {
   const handleEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(true);
   };
-  const handleSaveRecruitmentPreferences = () => {
+  const handleSaveRecruitmentPreferences = async () => {
     setIsEditingRecruitmentPreferences(false);
     const userId = userData._id;
     const preferencesData = {
         preferences: userData.preferences
     };
 
-    instance.put(`/user/update2/${userId}`, preferencesData
-  )
-    .then(response => {
-        if (!response.ok) {
+    try {
+        const response = await instance.put(`/user/update2/${userId}`, preferencesData);
+
+        if (response.status !== 200) {
             throw new Error('Erreur lors de la mise à jour des préférences de recrutement');
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message); 
-    })
-    .catch(error => {
+
+        const data = await response.data;
+        console.log(data.message);
+    } catch (error) {
         console.error(error);
-    });
+    }
 };
+
   const handleCancelEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(false);
   };
@@ -175,25 +178,31 @@ const UserProfil = () => {
     setNewExperience({ titre: '', company: '', annees: '' });
 };
 const handleDeleteExperience = (id) => {
-  console.log(id)
-  const userId=userData._id
-  instance.delete(`/user/delete-experience/${userId}/${id}`)
-  .then(response => {
-    if (!response.data.message) {
-      throw new Error('Erreur lors de la suppression de l\'expérience');
-    }
+    console.log(id);
+    const userId = userData._id;
 
-  setUserData(prevState => ({
-    ...prevState,
-    experiences: prevState.experiences.filter(exp => exp._id !== id)
-  }));
-  console.log(response.data.message);
-  return response;
-  })
-  .catch(error => {
-    console.error(error);
-  });
+    try {
+        instance.delete(`/user/delete-experience/${userId}/${id}`)
+            .then(response => {
+                if (!response.data.message) {
+                    throw new Error('Erreur lors de la suppression de l\'expérience');
+                }
+
+                setUserData(prevState => ({
+                    ...prevState,
+                    experiences: prevState.experiences.filter(exp => exp._id !== id)
+                }));
+                console.log(response.data.message);
+                return response;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    } catch (error) {
+        console.error(error);
+    }
 };
+
   const handleEditExperiences = () => {
     setIsEditingExperiences(true);
   };
@@ -214,26 +223,26 @@ const handleDeleteExperience = (id) => {
   }));
   };
 
-  // Fonction pour enregistrer le CV
-  const handleSaveCV = () => {
+  const handleSaveCV = async () => {
     setIsEditingCV(false);
     const formData = new FormData();
     formData.append('cv', userData.cv);
     const userId = userData._id;
-    instance.put(`/user/update-cv/${userId}`,formData)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la mise à jour du CV');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message); 
-    })
-    .catch(error => {
+
+    try {
+        const response = await instance.put(`/user/update-cv/${userId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        
+        const data = await response.data;
+        console.log(data.message);
+    } catch (error) {
         console.error(error);
-    });
-  };
+    }
+};
+
   const handleCancelEditCV = () => {
     setIsEditingCV(false);
 
@@ -246,8 +255,6 @@ const handleDeleteExperience = (id) => {
     }));
   };
   
-
-    // Déclarez un état local pour gérer les langues et leur édition
     const [languages, setLanguages] = useState([
       { name: 'Kabyle', value: false },
       { name: 'Arabe', value: false },
@@ -257,8 +264,7 @@ const handleDeleteExperience = (id) => {
       { name: 'Turc', value: false }
     ]);
     const [isEditingLanguages, setIsEditingLanguages] = useState(false);
-  
-    // Fonction pour ajouter une langue
+
     const handleLanguageChange = (lang) => {
       setIsEditingLanguages(true)
       setUserData(prevState => ({
@@ -270,31 +276,25 @@ const handleDeleteExperience = (id) => {
       }));
     };
   
-    // Fonction pour enregistrer les langues
-    const handleSaveLanguages = () => {
+
+    const handleSaveLanguages = async () => {
       setIsEditingLanguages(false);
-      const userId=userData._id
+      const userId = userData._id;
       console.log("Langues modifiées :", userData.langues);
       const languesData = {
-        langues: userData.langues
-    }; 
-
-     instance.put(`/user/update-languages/${userId}`,languesData )
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la mise à jour des langues');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message); 
-    })
-    .catch(error => {
-        console.error(error);
-    });
-    };
+          langues: userData.langues
+      };
   
- // Fonction pour annuler l'édition des langues
+      try {
+          const response = await instance.put(`/user/update-languages/${userId}`, languesData);
+
+          const data = await response.data;
+          console.log(data.message);
+      } catch (error) {
+          console.error(error);
+      }
+  };
+  
  const handleCancelEditLanguages = () => {
   setIsEditingLanguages(false);
   setUserData(prevState => ({

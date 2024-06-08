@@ -128,7 +128,7 @@ function MultiStepjobForm() {
                 recruiterPic: user.profilpic
             };
     
-            const response = await instance.post('http://localhost:4000/job/add_job', jobData);
+            const response = await instance.post('/job/add_job', jobData);
             console.log(response.data);
             alert('Annonce publiée avec succès!');
             setStep(1);

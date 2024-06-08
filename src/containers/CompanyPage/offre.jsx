@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import instance from '../../utils/setAuthToken';
-import CompanyMap from './CompanyMap';
 import Head from './components/Head';
-import Map from './components/Map';
-import yassir from "../../assets/Images/yassir.png";
-import yass from "../../assets/Images/yass.png";
 import Description from './components/Description';
 import { useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
-const Offrejob = () => {
+import { useSelector,useDispatch } from "react-redux";
+import { fetchCompany, fetchOffres , addApplication,selectoffreSliceStatus } from './Slices/offreSlice'
+const Offrepagesingle = () => {
     const { recId, id } = useParams(); 
-    const [offre, setOffre] = useState({});
-    const [company, setCompany] = useState('');
+    const { company, offre, status, error } = useSelector((state) => state.offre);
+    const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
+    const loadingStatus = useSelector(selectoffreSliceStatus);
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
           const formData = new FormData();
@@ -25,11 +22,7 @@ const Offrejob = () => {
           formData.append('jobId',id);
           formData.append('recruiterId',recId);
           try {
-            await instance.post('/application/add_application', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            });
+            await dispatch(addApplication(formData));
             alert('CV uploaded successfully!');
           } catch (error) {
             console.error('Error uploading CV:', error);
@@ -47,28 +40,9 @@ const Offrejob = () => {
     };
 
     useEffect(() => {
-        const fetchCompany = async () => {
-            try {
-                const response = await instance.get(`/user/recruiter/${recId}`);
-                const companyData = response.data; 
-                setCompany(companyData); 
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
-            }
-        };
-
-        const fetchOffres = async () => {
-            try {
-                const response = await instance.get(`/job/get_job/${recId}/${id}`);
-                setOffre(response.data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des offres d\'emploi:', error);
-            }
-        };
-
-        fetchCompany();
-        fetchOffres();
-    }, [id, recId]);
+        dispatch(fetchCompany(recId));
+        dispatch(fetchOffres({ recId, id }));
+      }, [dispatch, recId, id]);
 
     const secteurs = offre.secteur ? Object.keys(offre.secteur).join(', ') : '';
 
@@ -84,6 +58,7 @@ const Offrejob = () => {
                     facebookLink={company.Facebook}
                     linkedinLink={company.LinkedIn}
                     idcomp={recId}
+                    isLoading={loadingStatus === 'loading'} 
                 />
             </div>
             <div className="container mx-auto my-5 p-10 min-h-screen relative mx-20">
@@ -194,4 +169,4 @@ const Offrejob = () => {
     );
 };
 
-export default Offrejob;
+export default Offrepagesingle;

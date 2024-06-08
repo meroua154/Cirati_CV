@@ -1,51 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import CompanyMap from './CompanyMap'; // Importez le composant CompanyMap
 import Head from './components/Head';
 import Map from './components/Map';
-import yassir from "../../assets/Images/yassir.png"
-import yass from "../../assets/Images/yass.png"
 import Description from './components/Description';
 import Offre from './components/Offre';
-import instance from '../../utils/setAuthToken'
-
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams,useNavigate } from 'react-router-dom';
+import { fetchCompany,fetchJobs,selectCompanyStatus  } from './Slices/CompanySlice';
 const CompanyPage = () => {
   const navigate = useNavigate(); 
-
+  const dispatch = useDispatch();
   const {id} = useParams(); 
-  const [company, setCompany] = useState('');
-  const [deuxDernieresOffres, setDeuxDernieresOffres] = useState([]);
+  const company=useSelector((state) => state.company.companyData);
+  const deuxDernieresOffres =  useSelector((state) => state.jobs.jobsData);
+  const loadingStatus = useSelector(selectCompanyStatus);
   const ToutesLesOffres = (recId) => {
-
-    const applicationUrl = `/singleoffre/${recId}`;
+    const applicationUrl = `/offres/${recId}`;
     navigate(applicationUrl);
   };
   useEffect(() => {
    
-    const fetchCompany = async () => {
-      try {
-        const response = await instance.get(`/user/recruiter/${id}`);
-        const companyData = response.data; 
-        setCompany(companyData); 
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
-      }
-    };
-
-    fetchCompany();
-
-    const fetchDernieresOffres = async () => {
-      try {
-        const response = await instance.get(`/job/latest_jobs/${id}`);
-        const data = response.data;
-        setDeuxDernieresOffres(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des dernières offres d\'emploi:', error);
-      }
-    };
-
-    fetchDernieresOffres();
-  }, [id]);
+    dispatch(fetchCompany(id)); 
+    dispatch(fetchJobs(id)); 
+}, [dispatch, id]);
 
 
   
@@ -62,13 +38,13 @@ const CompanyPage = () => {
         facebookLink={company.Facebook}
         linkedinLink={company.LinkedIn}
         idcomp={id}
-        
+        isLoading={loadingStatus === 'loading'} 
 
       />
       </div>
        
       <div className="bg-gray-100 min-h-screen flex flex-col md:flex-row mt-24 mx-8">
-        {/* Boîte 1 */}
+
         <div className="bg-white p-8 md:basis-2/3 rounded-lg shadow mb-4 sm:mr-4" style={{ height: 'fit-content' }}>
           <div className="flex items-start">
             <div className="ml-2 border-black">
@@ -97,11 +73,10 @@ const CompanyPage = () => {
            <Description 
               description={company.bio} />
         </div>
-       {/* Boîte 2 */}
 <div className="p-8 pb-4 md:basis-1/3 rounded-lg shadow mb-4 sm:mr-4 relative" style={{ height: '425px' }}>
     <Map 
         companyName={company.localisation}
-        className="mb-8 absolute inset-0" // Ajoutez la classe absolute et inset-0 pour remplir toute la boîte
+        className="mb-8 absolute inset-0" 
     />
 </div>
 

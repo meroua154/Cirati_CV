@@ -20,7 +20,7 @@ const Jobs = ({ JobsData }) => {
   const currentJobs = JobsData.slice(indexOfFirstJob, indexOfLastJob);
 
   const handleApplyNow = (recId,id) => {
-    const applicationUrl = `/offre/${recId}/${id}`;
+    const applicationUrl = `/singleoffre/${recId}/${id}`;
     navigate(applicationUrl);
   };
 

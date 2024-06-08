@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import instance from '../../utils/setAuthToken';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchApplicants, setFilteredApplicants, resetFilters } from './slices/applicantsSlice';
 import Search from './components/Search';
 import Matchingjob from '../../components/matchjob';
 
 export default function Fullcv() {
-  const [applicantsData, setApplicantsData] = useState([]);
-  const [filteredApplicants, setFilteredApplicants] = useState([]);
+  const dispatch = useDispatch();
+  const applicantsData = useSelector((state) => state.applicants.applicantsData);
+  const filteredApplicants = useSelector((state) => state.applicants.filteredApplicants);
 
   useEffect(() => {
-    instance.get('http://localhost:4000/user/applicants')
-      .then(response => {
-        setApplicantsData(response.data);
-        setFilteredApplicants(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+    dispatch(fetchApplicants());
+  }, [dispatch]);
 
   const handleSearch = (searchData) => {
     const filtered = applicantsData.filter(applicant => {
@@ -27,16 +22,16 @@ export default function Fullcv() {
         (searchData.metier === '' || metier.includes(searchData.metier.toLowerCase()))
       );
     });
-    setFilteredApplicants(filtered);
+    dispatch(setFilteredApplicants(filtered));
   };
 
-  const resetFilters = () => {
-    setFilteredApplicants(applicantsData);
+  const handleResetFilters = () => {
+    dispatch(resetFilters());
   };
 
   return (
     <div>
-      <Search onSearch={handleSearch} resetFilters={resetFilters} applicantsData={applicantsData} />
+      <Search onSearch={handleSearch} resetFilters={handleResetFilters} applicantsData={applicantsData} />
       <div><Matchingjob applicants={filteredApplicants} /></div>
     </div>
   );
