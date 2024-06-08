@@ -261,6 +261,11 @@ async function updateProfilPic(req, res) {
             const imageprofil = generateImageURL(req, profilpic, 'profilpic');
             user.profilpic = imageprofil;
             await user.save();
+            const jobsToUpdate = await Job.find({ recruiter: user._id });
+            jobsToUpdate.forEach(async (job) => {
+                job.recruiterPic = user.profilpic;
+                await job.save();
+            });
             return res.status(200).json({ message: 'Image de profil mise à jour avec succès',profilpic:imageprofil });
         } else {
             return res.status(400).json({ message: 'Aucune image de profil trouvée' });
