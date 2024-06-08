@@ -45,9 +45,7 @@ export default function Fullcompanyinfo() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(); // Créez un objet FormData
-
-        // Ajoutez chaque propriété de company à l'objet FormData
+        const formData = new FormData(); 
         formData.append('preferences', JSON.stringify(company.preferences));
         formData.append('role', company.role);
         formData.append('verified', company.verified);
@@ -72,7 +70,7 @@ export default function Fullcompanyinfo() {
 
 
         try {
-            const response = await instance.put(`/user/update/${user.id}`, formData, {
+            const response = await instance.put(`/user/update/${user._id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Spécifiez le type de contenu comme multipart/form-data
                 },
@@ -109,7 +107,7 @@ export default function Fullcompanyinfo() {
             formData.append('coverpic', file);
     
             try {
-                const response = await instance.put(`/user/update-coverpic/${user.id}`, formData, {
+                const response = await instance.put(`/user/update-coverpic/${user._id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -129,7 +127,7 @@ export default function Fullcompanyinfo() {
             formData.append('profilpic', file );
     
             try {
-                const response = await instance.put(`/user/update-profilpic/${user.id}`, formData, {
+                const response = await instance.put(`/user/update-profilpic/${user._id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -142,7 +140,16 @@ export default function Fullcompanyinfo() {
     };
     
     useEffect(() => {
- setCompany(user);
+        const fetchCompany = async () => {
+            try {
+              const response = await instance.get(`/user/recruiter/${user._id}`);
+              const companyData = response.data; 
+              setCompany(companyData); 
+            } catch (error) {
+              console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
+            }
+          };
+          fetchCompany()
 }, [user]);
 return (
     

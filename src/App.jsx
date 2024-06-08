@@ -66,6 +66,7 @@ function App() {
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<FormPagered />} />
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
+            <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/rec"  element={<RecruiterPage />}/>
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
