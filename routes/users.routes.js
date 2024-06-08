@@ -326,7 +326,6 @@ async function updateUserProfile(req, res) {
         const profilpic = req.files["profilpic"] ? req.files["profilpic"][0].filename : undefined;
         const coverpic = req.files["coverpic"] ? req.files["coverpic"][0].filename : undefined;
         const cv = req.files["cv"] ? req.files["cv"][0].filename : undefined;
-
         // Si le fichier du profil est modifié ou ajouté
         if (profilpic !== undefined) {
             const imageprofil = generateImageURL(req, profilpic, 'profilpic');
@@ -496,23 +495,39 @@ async function updateCV(req, res) {
         return res.status(500).json({ message: 'Erreur lors de la mise à jour du CV' });
     }
 }
+async function getApplicantById(req, res) {
+    try {
+        const { id } = req.params;
+        const applicant = await User.findById(id);
+
+        if (!applicant) {
+            return res.status(404).json({ message: 'Demandeur non trouvé' });
+        }
+        if (applicant.role === 'applicant') {
+            return res.status(200).json(applicant);
+       
+        } else {
+            return res.status(404).json({ message: 'L\'utilisateur trouvé n\'est pas un demandeur' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erreur lors de la récupération du demandeur' });
+    }
+}
+router.get("/applicant/:id", getApplicantById);
 
 router.put("/update-cv/:id", upload.fields([{ name: "cv", maxCount: 1 }]), updateCV);
 // PUT Request
 async function updateBasicInfoAndProfilePic(req, res) {
     try {
-        const { id } = req.params; // Récupère l'ID de l'utilisateur à partir des paramètres de la requête
-        const user = await User.findById(id); // Trouve l'utilisateur dans la base de données
+        const { id } = req.params; 
+        const user = await User.findById(id); 
 
         if (!user) {
             return res.status(404).json({ message: 'Utilisateur introuvable' });
         }
-
-        // Mettre à jour l'e-mail
         const newEmail = req.body.email;
         const oldEmail = user.email;
-
-        // Si le nouvel e-mail est différent de l'ancien
         if (newEmail && newEmail !== oldEmail) {
             const existingUser = await User.findOne({ email: newEmail });
             if (existingUser) {
@@ -525,32 +540,19 @@ async function updateBasicInfoAndProfilePic(req, res) {
             const emailContent = `
                 <p>Cliquez sur ce lien pour vérifier votre nouvelle adresse e-mail:</p>
                 <a href="${verificationLink}">${verificationLink}</a>
-            `;
-
-            // Envoie l'e-mail de vérification
+            `
             await sendEmails(newEmail, emailSubject, emailContent);
-
-            // Met à jour l'utilisateur avec le nouvel e-mail non vérifié
             user.email = newEmail;
-            user.verified = false; // Marque le nouvel e-mail comme non vérifié
+            user.verified = false; 
         }
-
-        // Mettre à jour les autres champs du profil si nécessaire
         user.name = req.body.name;
         user.phone_number = req.body.phone_number;
-
-        // Traitement de la photo de profil
-        const profilpic = req.files["profilpic"] ? req.files["profilpic"][0].filename : undefined;
-        console.log(profilpic)
-        // Si le fichier du profil est modifié ou ajouté
+        const profilpic = req.files["profilpic"] ? req.files["profilpic"][0].filename : undefined
         if (profilpic !== undefined) {
             const imageprofil = generateImageURL(req, profilpic, 'profilpic');
             user.profilpic = imageprofil;
         }
-
-        // Enregistre les modifications dans la base de données
         await user.save();
-
         return res.status(200).json({ message: 'Informations de base et photo de profil mises à jour avec succès' });
     } catch (error) {
         console.error(error);

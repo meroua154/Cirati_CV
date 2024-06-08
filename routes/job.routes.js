@@ -6,34 +6,44 @@ const Job = require("../models/job.model");
 
 // GET request 
 // Getting all the jobs
-router.get("/get_jobs", function(req, res) {
-    Job.find(function(err, jobs) {
-		if (err) {
-			console.log(err);
-		} else {
-			res.json(jobs);
-		}
-	})
-});
-router.get("/derniersjobs", function(req, res) {
+// router.get("/get_jobs", function(req, res) {
+//     Job.find(function(err, jobs) {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			res.json(jobs);
+// 		}
+// 	})
+// });
+router.get("/Alljobs", function(req, res) {
     
     Job.find() 
         .sort({ dateOfPost: -1 }) 
-        .limit(10) 
+        // .limit(10) 
         .exec(function(err, jobs) {
             if (err) {
                 console.log(err);
                 res.status(500).send("Erreur lors de la récupération des emplois.");
             } else {
-                console.log(jobs)
+                res.status(200).json(jobs);
+            }
+        });
+});
+router.get("/MatchingJobs", function(req, res) {
+    
+    Job.find() 
+        .sort({ dateOfPost: -1 }) 
+        .exec(function(err, jobs) {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Erreur lors de la récupération des emplois.");
+            } else {
                 res.status(200).json(jobs);
             }
         });
 });
 
-
 // Getting one job
-
 router.get('/secteurs', async (req, res) => {
     try {
         const jobs = await Job.find()
