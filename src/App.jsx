@@ -72,7 +72,7 @@ function App() {
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
             
             {/* <Route path="/recform" element={<RecRoute element={<RecForm />} />} /> */}
-            <Route path="/Fulljob" element={<Fulljob />} />
+            <Route path="/Fulljob" element={<ApplicantRoute element={<Fulljob/>} />} />
             <Route path="/offre/:recId/:id"
              element={<ApplicantRoute element={<Offrejob />} />}  />
                   {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}
