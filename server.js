@@ -43,7 +43,7 @@ var UserRouter = require("./routes/users.routes");
 var JobRouter = require("./routes/job.routes");
 var ApplicationRouter = require("./routes/application.routes");
 var SponsorRouter=require("./routes/Sponsor.routes")
-
+var EventRouter = require("./routes/event.router");
 // Body-Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -69,6 +69,7 @@ app.use("/user", UserRouter);
 app.use("/job", JobRouter);
 app.use("/application", ApplicationRouter);
 app.use("/sponsor", SponsorRouter);
+app.use("/event", EventRouter);
 // Afficher les endpoints disponibles
 console.log(listEndpoints(app));
 
