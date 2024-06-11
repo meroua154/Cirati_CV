@@ -35,6 +35,7 @@ import { jwtDecode } from 'jwt-decode' ;
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import SponsorForm from "./containers/Sponsor/SponsorForm";
+import EventForm from "./containers/Events/EventForm";
 
 // Fonction principale de l'application
 function App() {
@@ -67,6 +68,7 @@ function App() {
             {/*<Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />*/}
             <Route path="/annonce"  element={<MultiStepjobForm />} /> 
             <Route path="/sponsor"  element={<SponsorForm />} /> 
+            <Route path="/event"  element={<EventForm />} /> 
             <Route path="/formred" element={<FormPagered />} />
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
             <Route path="/rec"  element={<RecruiterPage />}/>

@@ -57,7 +57,7 @@ function SponsorForm() {
         const handleMultiChange = (selectedOption) => {
             setFormData(prevState => ({
                 ...prevState,
-                sector: selectedOption.value
+                sector: selectedOption
             }));
         };
         
