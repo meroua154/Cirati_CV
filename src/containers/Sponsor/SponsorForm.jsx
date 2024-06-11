@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Multi from "./Multi";
-
+import instance from '../../utils/setAuthToken';
 import { useSelector } from "react-redux";
 import {
     Card,
@@ -30,6 +30,7 @@ function SponsorForm() {
         const [step, setStep] = useState(1);
         const [formData, setFormData] = useState({
             title: '',
+            userId:user._id,
             projectDescription: '',
             projectObjectives: '',
             targetAudience: '',
@@ -39,7 +40,7 @@ function SponsorForm() {
             primaryContactName: '',
             primaryContactEmail: '',
             primaryContactPhone: '',
-            sector: '',
+            sector: [],
             projectLocation: '',
             existingMediaPromotions: '',
             existingPartnerships: '',
@@ -54,13 +55,16 @@ function SponsorForm() {
             }));
         };
     
-        const handleMultiChange = (selectedOption) => {
+        const handleMultiChange = (selectedOptions) => {
+
+            const values = selectedOptions.map(option => option.value);
             setFormData(prevState => ({
                 ...prevState,
-                sector: selectedOption
+                sector: values
             }));
         };
         
+
         const prevStep = () => {
             setStep(step - 1);
         };
@@ -72,14 +76,14 @@ function SponsorForm() {
                 case 2:
                     return formData.sponsorBenefits && formData.partnershipDuration && formData.primaryContactName && formData.primaryContactEmail && formData.primaryContactPhone;
                 case 3:
-                    return formData.sector && formData.projectLocation && formData.existingMediaPromotions && formData.existingPartnerships;
+                    return formData.sector && 
+                    formData.projectLocation && formData.existingMediaPromotions && formData.existingPartnerships;
                 case 4:
                     return formData.agreedToTerms;
                 default:
                     return false;
             }
         };
-    
         const nextStep = () => {
             if (validateStep()) {
                 setStep(step + 1);
@@ -90,7 +94,19 @@ function SponsorForm() {
     
         const handleSubmit = async (e) => {
             e.preventDefault();
-            // Gestion de la soumission du formulaire
+            try{
+            if (!isAuthenticated || !user) {
+                alert('Veuillez vous connecter pour publier une annonce.');
+                return;
+            }
+            const response = await instance.post('/sponsor', formData);
+            console.log(response.data);
+            alert('Annonce publiée avec succès!');
+            setStep(1);
+        } catch (error) {
+            console.error('Erreur lors de la publication de l\'annonce:', error);
+            alert('Erreur lors de la publication de l\'annonce. Veuillez réessayer.');
+        }
         };
     
 
@@ -298,7 +314,7 @@ function SponsorForm() {
                                 </Typography>
                                 <Multi
                                     name="sector"
-                                    options={sectorOptions}
+                                    jobs={sectorOptions}
                                     onChange={handleMultiChange}
                                     required
                                 />

@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    LOGOUT
 } from "../actions/types";
 import isEmpty from "is-empty";
 
@@ -24,6 +25,10 @@ export default function(state = initialState, action) {
                 ...state,
                 loading: true
             };
+        case LOGOUT:
+                return {
+                    ...initialState
+                };
         default:
             return state;
     }

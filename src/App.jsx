@@ -19,27 +19,20 @@ import PassRecLog from './containers/RecruiterPage/PassRecLog';
 import RecForm from './containers/RecruiterPage/RecForm';
 import Fullcompanyinfo from "./containers/Annonceform/fullcompany";
 import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
-import Offrejob from "./containers/CompanyPage/offre"
-import Offrepagesingle from "./containers/CompanyPage/offrepagesingle";
+import Offrepagesingle from "./containers/CompanyPage/offre"
+import Offrejob from "./containers/CompanyPage/offrepage";
 import UserProfil from "./containers/UserProfil/UserProfil";
 import FrontendLayout from "./hocs/FrontendLayout";
-// Importer le store Redux
 import { Provider } from "react-redux";
 import store from "./store";
+import SponsorForm from "./containers/Sponsor/SponsorForm";
 import { setAuthToken } from "./utils/setAuthToken";
-// Importer les composants de route personnalisés
 import RecRoute from "./components/private-route/RecRoute";
 import ApplicantRoute from "./components/private-route/applicantroute";
-// Importer les fonctions utilitaires
 import { jwtDecode } from 'jwt-decode' ;
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-import SponsorForm from "./containers/Sponsor/SponsorForm";
-import EventForm from "./containers/Events/EventForm";
-
-// Fonction principale de l'application
 function App() {
-  // Vérifier si un token JWT est stocké dans le localStorage
   if (localStorage.jwtToken) {
 
     const token = localStorage.jwtToken;
@@ -59,28 +52,25 @@ function App() {
         <FrontendLayout>
         <div className="container">
           <Routes>
-            <Route path="/" element={<Landing />} />
+         <Route path="/" element={<ApplicantRoute element={<Landing />} />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
-            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
-       
-            {/*<Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />*/}
-            <Route path="/annonce"  element={<MultiStepjobForm />} /> 
-            <Route path="/sponsor"  element={<SponsorForm />} /> 
-            <Route path="/event"  element={<EventForm />} /> 
-            <Route path="/formred" element={<FormPagered />} />
+           <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
+            <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
+            <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
+            <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
-            <Route path="/rec"  element={<RecruiterPage />}/>
+            <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
+            <Route path="/rec" element={<RecruiterPage />} />
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
-            
             {/* <Route path="/recform" element={<RecRoute element={<RecForm />} />} /> */}
-            <Route path="/Fulljob" element={<Fulljob />} />
-            <Route path="/offre/:recId/:id"
-             element={<ApplicantRoute element={<Offrejob />} />}  />
+            <Route path="/Fulljob" element={<ApplicantRoute element={<Fulljob/>} />} />
+            <Route path="/singleoffre/:recId/:id"
+             element={<ApplicantRoute element={<Offrepagesingle />} />}  />
                   {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}
-                  <Route path="/singleoffre/:id" element={<ApplicantRoute element={<Offrepagesingle />} />} />
+                  <Route path="/offres/:id" element={<ApplicantRoute element={<Offrejob />} />} />
             {/* <Route path="/singleoffre" element={<Offrepagesingle />} /> */}
             <Route path="/user" 
             element={<ApplicantRoute element={<UserProfil />} />} />
