@@ -6,10 +6,7 @@ const exampleData = {
     email: "Meroua.Rezige@mail.co.uk",
     phoneNumber: "+44 3245 5521 5521",
     address: "London, UK",
-<<<<<<< HEAD
-=======
     photo: "https://via.placeholder.com/150", // Default photo URL
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   },
 
   sections: {

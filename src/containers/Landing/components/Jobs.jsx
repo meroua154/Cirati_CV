@@ -20,11 +20,7 @@ const Jobs = ({ JobsData }) => {
   const currentJobs = JobsData.slice(indexOfFirstJob, indexOfLastJob);
 
   const handleApplyNow = (recId,id) => {
-<<<<<<< HEAD
     const applicationUrl = `/singleoffre/${recId}/${id}`;
-=======
-    const applicationUrl = `/offre/${recId}/${id}`;
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     navigate(applicationUrl);
   };
 
@@ -40,11 +36,7 @@ const Jobs = ({ JobsData }) => {
           {currentJobs.map((job) => {
             return (
               <div key={job.id}
-<<<<<<< HEAD
                 className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-primary dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
-=======
-                className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-[#2a68ff] dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
               >
                 <div className="upperpart flex justify-between">
                   <div className="titlecountry flex-grow">

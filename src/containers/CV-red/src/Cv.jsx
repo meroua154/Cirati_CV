@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { useState ,useEffect } from "react";
-=======
 import { useState, useEffect } from "react";
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 import "./styles/App.css";
 import PersonalDetails from "./components/personal-info/PersonalDetails";
 import AddEducationSection from "./components/education/AddEducationSection";
@@ -22,32 +18,20 @@ function App() {
     AOS.init();
   }, [])
 
-<<<<<<< HEAD
-  const [personalInfo, setPersonalInfo] = useState(exampleData.personalInfo);
-=======
   const [personalInfo, setPersonalInfo] = useState({
     ...exampleData.personalInfo,
     photo: exampleData.personalInfo.photo,
   });
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const [sections, setSections] = useState(exampleData.sections);
   const [sectionOpen, setSectionOpen] = useState(null);
   const [currentPage, setCurrentPage] = useState("content");
   const [resumeLayout, setResumeLayout] = useState("top");
-<<<<<<< HEAD
-  // Store prevState to revert changes when user clicks "cancel"
-  const [prevState, setPrevState] = useState(null);
-=======
   const [prevState, setPrevState] = useState(null);
 
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   function handlePersonalInfoChange(e) {
     const { key } = e.target.dataset;
     setPersonalInfo({ ...personalInfo, [key]: e.target.value });
   }
-<<<<<<< HEAD
- 
-=======
   function handlePhotoChange(e) {
     const file = e.target.files[0];
     if (file) {
@@ -88,7 +72,6 @@ function App() {
     }
   }
   
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 
   function handleSectionChange(e) {
     const { key } = e.target.dataset;
@@ -108,10 +91,6 @@ function App() {
 
   function createForm(arrayName, object) {
     setPrevState(null);
-<<<<<<< HEAD
-    // Clone array to not push object to original
-=======
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     const section = structuredClone(sections[arrayName]);
     section.push(object);
     setSections({ ...sections, [arrayName]: section });
@@ -156,10 +135,6 @@ function App() {
   }
 
   function cancelForm(e) {
-<<<<<<< HEAD
-    // if no prevState found remove form
-=======
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     if (prevState == null) {
       removeForm(e);
       return;
@@ -174,17 +149,9 @@ function App() {
       ...sections,
       [arrayName]: section.map((form) => {
         if (form.id === id) {
-<<<<<<< HEAD
-          // Revert back to previous state
           form = prevState;
           form.isCollapsed = true;
         }
-
-=======
-          form = prevState;
-          form.isCollapsed = true;
-        }
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
         return form;
       }),
     });
@@ -202,10 +169,6 @@ function App() {
           setPrevState(Object.assign({}, form));
           form[key] = !form[key];
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
         return form;
       }),
     });
@@ -228,74 +191,6 @@ function App() {
 
   return (
     <div data-aos="zoom-in-down" data-aos-duration="2000" className="app flex flex-col md:flex-row">
-<<<<<<< HEAD
-  <div className="edit-side mt-24 md:w-1/3">
-    <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
-    <div className="form-container">
-      <TemplateLoader
-        onTemplateLoad={() => {
-          setPersonalInfo(exampleData.personalInfo);
-          setSections(exampleData.sections);
-        }}
-        onClear={() => {
-          setPersonalInfo({
-            fullName: "",
-            email: "",
-            phoneNumber: "",
-            address: "",
-          });
-          setSections({ educations: [], experiences: [] });
-          setPrevState(null);
-        }}
-      />
-      {currentPage === "content" && (
-        <>
-          <PersonalDetails
-            onChange={handlePersonalInfoChange}
-            fullName={personalInfo.fullName}
-            email={personalInfo.email}
-            phoneNumber={personalInfo.phoneNumber}
-            address={personalInfo.address}
-          />
-          <AddEducationSection
-            educations={sections.educations}
-            isOpen={sectionOpen === "Education"}
-            onChange={handleSectionChange}
-            createForm={createEducationForm}
-            setOpen={setOpen}
-            onCancel={cancelForm}
-            toggleCollapsed={toggleCollapsed}
-            onHide={toggleHidden}
-            onRemove={removeForm}
-          />
-          <AddExperienceSection
-            experiences={sections.experiences}
-            isOpen={sectionOpen === "Experience"}
-            onChange={handleSectionChange}
-            createForm={createExperienceForm}
-            setOpen={setOpen}
-            onCancel={cancelForm}
-            toggleCollapsed={toggleCollapsed}
-            onHide={toggleHidden}
-            onRemove={removeForm}
-          />
-        </>
-      )}
-
-      <Customize
-        isShown={currentPage === "customize"}
-        onColChange={setResumeLayout}
-      />
-    </div>
-    <button className="btn bg-primary hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 ml-32 md:ml-32 rounded-2xl md:static mt-4 md:mt-0" onClick={downloadPDF}>Download as PDF</button>
-  </div>
-  <div className="downl mt-4 md:mt-24  md:w-2/3">
-    <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />
-  </div>
-</div>
-
-    
-=======
       <div className="edit-side mt-24 md:w-1/3">
         <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
         <div className="form-container">
@@ -364,7 +259,6 @@ function App() {
         <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />
       </div>
     </div>
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   );
 }
 

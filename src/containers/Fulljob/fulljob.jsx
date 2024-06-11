@@ -7,41 +7,21 @@ import Top_company from "../../components/topcompany";
 import Matchigstage from '../../components/Matchingcv';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllJobs } from '../Landing/slices/jobsSlice';
-=======
-
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 export default function Fulljob() {
   useEffect(() => {
     AOS.init();
   }, []); 
 
-<<<<<<< HEAD
   const dispatch = useDispatch();
   const JOBS = useSelector((state) => state.jobs.jobsData);
-=======
-
-  const [JOBS, SETJOBS] = useState([]);
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const [searchTerm, setSearchTerm] = useState('');
   const [location, setLocation] = useState('');
  
   useEffect(() => {
-<<<<<<< HEAD
     dispatch(fetchAllJobs());
   }, [dispatch]);
-=======
-    instance.get('http://localhost:4000/job/get_jobs')
-      .then(response => {
-        SETJOBS(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 
   const filteredJobs = JOBS.filter(job => 
     job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&

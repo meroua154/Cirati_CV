@@ -47,8 +47,4 @@ function PersonalDetails({ onChange, email, fullName, phoneNumber, address }) {
     </form>
   );
 }
-<<<<<<< HEAD
 export default PersonalDetails;
-=======
-export default PersonalDetails;
->>>>>>> 93846b62112895e41eb7296ad95831804a037d22
