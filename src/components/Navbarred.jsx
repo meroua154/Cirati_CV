@@ -52,6 +52,12 @@ export default function Navbarred() {
               Offres d'emploi
             </a>
             <a
+              href="/SponsorForm"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+            >
+              Recherche Sponsor
+            </a>
+            <a
               href="/formred"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >

@@ -25,6 +25,7 @@ import UserProfil from "./containers/UserProfil/UserProfil";
 import FrontendLayout from "./hocs/FrontendLayout";
 import { Provider } from "react-redux";
 import store from "./store";
+import SponsorForm from "./containers/Sponsor/SponsorForm";
 import { setAuthToken } from "./utils/setAuthToken";
 import RecRoute from "./components/private-route/RecRoute";
 import ApplicantRoute from "./components/private-route/applicantroute";
@@ -58,6 +59,7 @@ function App() {
            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
+            <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/rec" element={<RecruiterPage />} />
