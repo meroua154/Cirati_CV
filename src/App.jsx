@@ -30,7 +30,7 @@ import { setAuthToken } from "./utils/setAuthToken";
 import RecRoute from "./components/private-route/RecRoute";
 import ApplicantRoute from "./components/private-route/applicantroute";
 import { jwtDecode } from 'jwt-decode' ;
-
+import EventForm from "./containers/Events/EventForm";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 function App() {
   if (localStorage.jwtToken) {
@@ -60,6 +60,7 @@ function App() {
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
             <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
+            <Route path="/EventForm" element={<RecRoute element={<EventForm/>} />} /> 
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/rec" element={<RecruiterPage />} />
