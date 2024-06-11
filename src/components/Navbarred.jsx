@@ -52,6 +52,7 @@ export default function Navbarred() {
               Offres d'emploi
             </a>
             <a
+<<<<<<< HEAD
               href="/SponsorForm"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
@@ -59,6 +60,9 @@ export default function Navbarred() {
             </a>
             <a
               href="/formred"
+=======
+              href="/fullcv"
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               Construire votre CV

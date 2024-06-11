@@ -3,3 +3,35 @@
   background-color: white;
   border-radius: 12px;
 }
+<<<<<<< HEAD
+=======
+
+
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cropper-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cropper-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Set a max-width for the cropper container */
+  margin-bottom: 10px; /* Space between the cropper and the button */
+}
+
+.confirm-crop-button {
+  margin-top: 10px; /* Space between the cropper and the button */
+}
+
+.cropped-image {
+  margin-top: 20px;
+  max-width: 100%;
+}
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22

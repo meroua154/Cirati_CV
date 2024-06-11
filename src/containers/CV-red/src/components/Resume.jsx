@@ -23,4 +23,8 @@ function Resume({ personalInfo, sections, layout }) {
   );
 }
 
+<<<<<<< HEAD
 export default Resume;
+=======
+export default Resume;
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22

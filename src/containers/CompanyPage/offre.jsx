@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import Head from './components/Head';
 import Description from './components/Description';
 import { useParams } from 'react-router-dom';
@@ -8,12 +9,30 @@ const Offrepagesingle = () => {
     const { recId, id } = useParams(); 
     const { company, offre, status, error } = useSelector((state) => state.offre);
     const dispatch = useDispatch();
+=======
+import instance from '../../utils/setAuthToken';
+import CompanyMap from './CompanyMap';
+import Head from './components/Head';
+import Map from './components/Map';
+import yassir from "../../assets/Images/yassir.png";
+import yass from "../../assets/Images/yass.png";
+import Description from './components/Description';
+import { useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
+const Offrejob = () => {
+    const { recId, id } = useParams(); 
+    const [offre, setOffre] = useState({});
+    const [company, setCompany] = useState('');
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
+<<<<<<< HEAD
     const loadingStatus = useSelector(selectoffreSliceStatus);
+=======
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
           const formData = new FormData();
@@ -22,7 +41,15 @@ const Offrepagesingle = () => {
           formData.append('jobId',id);
           formData.append('recruiterId',recId);
           try {
+<<<<<<< HEAD
             await dispatch(addApplication(formData));
+=======
+            await instance.post('/application/add_application', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
             alert('CV uploaded successfully!');
           } catch (error) {
             console.error('Error uploading CV:', error);
@@ -40,9 +67,34 @@ const Offrepagesingle = () => {
     };
 
     useEffect(() => {
+<<<<<<< HEAD
         dispatch(fetchCompany(recId));
         dispatch(fetchOffres({ recId, id }));
       }, [dispatch, recId, id]);
+=======
+        const fetchCompany = async () => {
+            try {
+                const response = await instance.get(`/user/recruiter/${recId}`);
+                const companyData = response.data; 
+                setCompany(companyData); 
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données de l\'entreprise:', error);
+            }
+        };
+
+        const fetchOffres = async () => {
+            try {
+                const response = await instance.get(`/job/get_job/${recId}/${id}`);
+                setOffre(response.data);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des offres d\'emploi:', error);
+            }
+        };
+
+        fetchCompany();
+        fetchOffres();
+    }, [id, recId]);
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 
     const secteurs = offre.secteur ? Object.keys(offre.secteur).join(', ') : '';
 
@@ -58,7 +110,10 @@ const Offrepagesingle = () => {
                     facebookLink={company.Facebook}
                     linkedinLink={company.LinkedIn}
                     idcomp={recId}
+<<<<<<< HEAD
                     isLoading={loadingStatus === 'loading'} 
+=======
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
                 />
             </div>
             <div className="container mx-auto my-5 p-10 min-h-screen relative mx-20">
@@ -169,4 +224,8 @@ const Offrepagesingle = () => {
     );
 };
 
+<<<<<<< HEAD
 export default Offrepagesingle;
+=======
+export default Offrejob;
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22

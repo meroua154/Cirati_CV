@@ -5,8 +5,12 @@ import { jwtDecode } from 'jwt-decode'
 import {
     GET_ERRORS,
     SET_CURRENT_USER,
+<<<<<<< HEAD
     USER_LOADING,
     LOGOUT
+=======
+    USER_LOADING
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 } from "./types";
 
 
@@ -79,6 +83,10 @@ export const logoutUser = () => dispatch => {
     localStorage.removeItem("jwtToken");
     setAuthToken(false);
     dispatch(setCurrentUser({}));
+<<<<<<< HEAD
     dispatch({ type: LOGOUT });
     // window.location.href = "/login";
+=======
+    window.location.href = "/login";
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
 };

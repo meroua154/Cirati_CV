@@ -3,6 +3,7 @@ import instance from '../../utils/setAuthToken';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+<<<<<<< HEAD
 import '@fortawesome/fontawesome-free/css/all.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
@@ -11,6 +12,12 @@ const UserProfil = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const { loading, error, selectedApplicant } = useSelector(state => state.applicant);
+=======
+import '@fortawesome/fontawesome-free/css/all.css'; // Importation des icônes FontAwesome
+import { v4 as uuidv4 } from 'uuid';
+const UserProfil = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const [userData, setUserData] = useState({
     preferences: {
       secteur: [],
@@ -58,6 +65,7 @@ const UserProfil = () => {
     return parts[parts.length - 1];
   };
   useEffect(() => {
+<<<<<<< HEAD
     dispatch(fetchApplicantById(user._id));
 }, [dispatch,user._id]);
 useEffect(() => {
@@ -72,6 +80,19 @@ useEffect(() => {
   }
 }, [selectedApplicant]);
 
+=======
+    setUserData(user);
+   }, [user]);
+   useEffect(() => {
+    // Récupérer le nom du fichier du CV à partir de l'URL
+    const cvFileName = extractFileName(user.cv);
+    const OldCv = new File([userData.cv], cvFileName, { type: 'application/pdf' });
+    setUserData(prevState => ({
+      ...prevState,
+      cv: OldCv
+    }));
+  }, [user.cv]);
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const [isEditingUserInfo, setIsEditingUserInfo] = useState(false);
   const [isEditingRecruitmentPreferences, setIsEditingRecruitmentPreferences] = useState(false);
   const [isEditingExperiences, setIsEditingExperiences] = useState(false);
@@ -80,7 +101,11 @@ useEffect(() => {
     setIsEditingUserInfo(true);
   };
   const [ProfPic,SetProfilPic]=useState()
+<<<<<<< HEAD
   const handleSaveUserInfo = async () => {
+=======
+  const handleSaveUserInfo = () => {
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     
     setIsEditingUserInfo(false);
     const userId = userData._id;
@@ -89,6 +114,7 @@ useEffect(() => {
     formData.append('name', userData.name)
     formData.append('phone_number', userData.phone_number)
     formData.append('email', userData.email)
+<<<<<<< HEAD
 
     try {
         const response = await instance.put(`/user/update1/${userId}`, formData, {
@@ -100,6 +126,22 @@ useEffect(() => {
     } catch (error) {
         console.error('Error updating user:', error);
     }
+=======
+    
+    instance.put(`/user/update1/${userId}`, formData)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour du CV');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   };
   const handleCancelEditUserInfo = () => {
     setIsEditingUserInfo(false);
@@ -107,13 +149,18 @@ useEffect(() => {
   const handleEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(true);
   };
+<<<<<<< HEAD
   const handleSaveRecruitmentPreferences = async () => {
+=======
+  const handleSaveRecruitmentPreferences = () => {
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     setIsEditingRecruitmentPreferences(false);
     const userId = userData._id;
     const preferencesData = {
         preferences: userData.preferences
     };
 
+<<<<<<< HEAD
     try {
         const response = await instance.put(`/user/update2/${userId}`, preferencesData);
 
@@ -128,6 +175,23 @@ useEffect(() => {
     }
 };
 
+=======
+    instance.put(`/user/update2/${userId}`, preferencesData
+  )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour des préférences de recrutement');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
+};
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const handleCancelEditRecruitmentPreferences = () => {
     setIsEditingRecruitmentPreferences(false);
   };
@@ -178,6 +242,7 @@ useEffect(() => {
     setNewExperience({ titre: '', company: '', annees: '' });
 };
 const handleDeleteExperience = (id) => {
+<<<<<<< HEAD
     console.log(id);
     const userId = userData._id;
 
@@ -203,6 +268,27 @@ const handleDeleteExperience = (id) => {
     }
 };
 
+=======
+  console.log(id)
+  const userId=userData._id
+  instance.delete(`/user/delete-experience/${userId}/${id}`)
+  .then(response => {
+    if (!response.data.message) {
+      throw new Error('Erreur lors de la suppression de l\'expérience');
+    }
+
+  setUserData(prevState => ({
+    ...prevState,
+    experiences: prevState.experiences.filter(exp => exp._id !== id)
+  }));
+  console.log(response.data.message);
+  return response;
+  })
+  .catch(error => {
+    console.error(error);
+  });
+};
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const handleEditExperiences = () => {
     setIsEditingExperiences(true);
   };
@@ -223,11 +309,17 @@ const handleDeleteExperience = (id) => {
   }));
   };
 
+<<<<<<< HEAD
   const handleSaveCV = async () => {
+=======
+  // Fonction pour enregistrer le CV
+  const handleSaveCV = () => {
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     setIsEditingCV(false);
     const formData = new FormData();
     formData.append('cv', userData.cv);
     const userId = userData._id;
+<<<<<<< HEAD
 
     try {
         const response = await instance.put(`/user/update-cv/${userId}`, formData, {
@@ -243,6 +335,22 @@ const handleDeleteExperience = (id) => {
     }
 };
 
+=======
+    instance.put(`/user/update-cv/${userId}`,formData)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour du CV');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
+  };
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
   const handleCancelEditCV = () => {
     setIsEditingCV(false);
 
@@ -255,6 +363,11 @@ const handleDeleteExperience = (id) => {
     }));
   };
   
+<<<<<<< HEAD
+=======
+
+    // Déclarez un état local pour gérer les langues et leur édition
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     const [languages, setLanguages] = useState([
       { name: 'Kabyle', value: false },
       { name: 'Arabe', value: false },
@@ -264,7 +377,12 @@ const handleDeleteExperience = (id) => {
       { name: 'Turc', value: false }
     ]);
     const [isEditingLanguages, setIsEditingLanguages] = useState(false);
+<<<<<<< HEAD
 
+=======
+  
+    // Fonction pour ajouter une langue
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
     const handleLanguageChange = (lang) => {
       setIsEditingLanguages(true)
       setUserData(prevState => ({
@@ -276,6 +394,7 @@ const handleDeleteExperience = (id) => {
       }));
     };
   
+<<<<<<< HEAD
 
     const handleSaveLanguages = async () => {
       setIsEditingLanguages(false);
@@ -295,6 +414,33 @@ const handleDeleteExperience = (id) => {
       }
   };
   
+=======
+    // Fonction pour enregistrer les langues
+    const handleSaveLanguages = () => {
+      setIsEditingLanguages(false);
+      const userId=userData._id
+      console.log("Langues modifiées :", userData.langues);
+      const languesData = {
+        langues: userData.langues
+    }; 
+
+     instance.put(`/user/update-languages/${userId}`,languesData )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour des langues');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); 
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    };
+  
+ // Fonction pour annuler l'édition des langues
+>>>>>>> 93846b62112895e41eb7296ad95831804a037d22
  const handleCancelEditLanguages = () => {
   setIsEditingLanguages(false);
   setUserData(prevState => ({
