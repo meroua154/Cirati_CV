@@ -33,6 +33,11 @@ import { jwtDecode } from 'jwt-decode' ;
 import EventForm from "./containers/Events/EventForm";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Sponsor from "./containers/Sponsor/Sponsor";
+import Event from "./containers/Events/Event";
+
+
+
+
 function App() {
   if (localStorage.jwtToken) {
 
@@ -58,6 +63,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
             <Route path="/sponsorpage" element={<Sponsor />} />
+            <Route path="/eventpage" element={<Event />} />
            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
