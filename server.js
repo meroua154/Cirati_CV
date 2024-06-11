@@ -18,12 +18,12 @@ require("./config/passport")(passport);
 const jwtMiddleware = (req, res, next) => {
     const noAuthRoutes = [
         /^\/user\/login/,
-        // /^\/job\/derniersjobs/,
-        /^\/user\/resetpassword2/,
+        // /^\/job\/derniersjobs/,/user/Resetpassword2/:resetToken
+        /^\/user\/Resetpassword2\/.*/,
         /^\/ciraticv\/pdfs\/cvs\/.*/,
         /^\/ciraticv\/Images\/coverpic\/.*/,
         /^\/ciraticv\/Images\/profilpic\/.*/,
-        /^\/user\/resetpassword/,
+        /^\/user\/Resetpassword/,
         /^\/user\/register/,
         /^\/user\/verifyemail/
     ];
@@ -42,7 +42,7 @@ app.use(jwtMiddleware)
 var UserRouter = require("./routes/users.routes");
 var JobRouter = require("./routes/job.routes");
 var ApplicationRouter = require("./routes/application.routes");
-
+var SponsorRouter=require("./routes/Sponsor.routes")
 
 // Body-Parser Middleware
 app.use(bodyParser.json());
@@ -68,7 +68,7 @@ connection.once('open', function() {
 app.use("/user", UserRouter);
 app.use("/job", JobRouter);
 app.use("/application", ApplicationRouter);
-
+app.use("/sponsor", SponsorRouter);
 // Afficher les endpoints disponibles
 console.log(listEndpoints(app));
 
