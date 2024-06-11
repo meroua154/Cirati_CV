@@ -28,7 +28,7 @@ export default function Navbarred() {
   };
 
   return (
-    <nav className="container backdrop-blur-xl bg-white/30  h-12  w-full justify-center items-center relative z-20 mt-0">
+    <nav className="container backdrop-blur-xl bg-white/30  h-20  w-full justify-center items-center relative z-20 mt-0">
       <div  data-aos="zoom-in-down" data-aos-duration="1500" className="mx-auto lg:px-6 mt-4" >
         <div className="lg:w-full w-11/12 mx-auto  flex justify-between items-center">
           <div className="flex flex-col gap-y-4">
@@ -52,7 +52,7 @@ export default function Navbarred() {
               Offres d'emploi
             </a>
             <a
-              href="/SponsorForm"
+              href="/sponsorpage"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               Recherche Sponsor

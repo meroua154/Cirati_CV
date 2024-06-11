@@ -32,6 +32,7 @@ import ApplicantRoute from "./components/private-route/applicantroute";
 import { jwtDecode } from 'jwt-decode' ;
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import Sponsor from "./containers/Sponsor/Sponsor";
 function App() {
   if (localStorage.jwtToken) {
 
@@ -52,10 +53,11 @@ function App() {
         <FrontendLayout>
         <div className="container">
           <Routes>
-         <Route path="/" element={<ApplicantRoute element={<Landing />} />} />
+         <Route path="/"  element={<Landing />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
+            <Route path="/sponsorpage" element={<Sponsor />} />
            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
