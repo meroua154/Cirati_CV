@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Multi from "./Multi"; // Assurez-vous que ce composant est correctement importé ou remplacez-le si nécessaire
-
+import Multi from "./Multi";
+import instance from '../../utils/setAuthToken';
 import { useSelector } from "react-redux";
 import {
     Card,
@@ -39,14 +39,15 @@ function EventForm() {
     const [donneesFormulaire, setDonneesFormulaire] = useState({
         titre: '',
         description: '',
+        user:user._id,
         date: '',
         heure: '',
         lieu: '',
-        typeEvenement: '',
+        typeEvenement: [],
         organisateur: '',
         emailContact: '',
         telephoneContact: '',
-        secteur: '',
+        secteur: [],
         promotionMedia: '',
         partenariatsExistants: '',
         accepteTermes: false,
@@ -59,7 +60,7 @@ function EventForm() {
             [name]: type === 'checkbox' ? checked : value
         }));
     };
-
+console.log(donneesFormulaire)
     const handleMultiChange = (selectedOption) => {
         setDonneesFormulaire(prevState => ({
             ...prevState,
@@ -103,7 +104,24 @@ function EventForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Gestion de la soumission du formulaire
+        try{
+            if (!isAuthenticated || !user) {
+                alert('Veuillez vous connecter pour publier une annonce.');
+                return;
+            }
+            const response = await instance.post('/event', donneesFormulaire);
+            console.log(response.data);
+            alert('Annonce publiée avec succès!');
+            setEtape(1);
+        } catch (error) {
+            console.error('Erreur lors de la publication de l\'annonce:', error);
+            if (error.response && error.response.data && error.response.data.errors) {
+                var  errorstotal=error.response.data.errors.join(', ');
+                alert(errorstotal)
+            } else {
+                alert('Erreur lors de la publication de l\'annonce. Veuillez réessayer.');
+            }
+        }
     };
 
     return (
