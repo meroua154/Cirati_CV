@@ -48,5 +48,13 @@ router.post('/', async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 });
-
+router.get('/All', async (req, res) => {
+    try {
+        const sponsors = await SponsorForm.find();
+        res.status(200).json(sponsors);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }
+});
 module.exports = router;
