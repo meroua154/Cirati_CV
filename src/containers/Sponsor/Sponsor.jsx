@@ -6,17 +6,17 @@ import { FaUsers } from 'react-icons/fa';
 import { IoBusiness } from 'react-icons/io5';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useSelector } from 'react-redux'; 
-
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSponsors } from './Slices/SponsorSlice';
+import Sponsors from './SponsorsElement';
 export default function Sponsor() {
     useEffect(() => {
         AOS.init();
       }, []); 
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const [isScrolled, setIsScrolled] = useState(false);
-
+    const dispatch = useDispatch();
+    const sponsorData = useSelector((state) => state.sponsor.sponsorsData);
     useEffect(() => {
         const handleScroll = () => {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -28,12 +28,11 @@ export default function Sponsor() {
           window.removeEventListener('scroll', handleScroll);
         };
       }, []);
-      
+      useEffect(() => {
+          dispatch(fetchSponsors());
+      }, [dispatch]);
 
    
-    
-
-    
     return (
         <div>
            <div
@@ -52,13 +51,11 @@ export default function Sponsor() {
                   <strong>Publiez</strong> vos demandes de sponsoring et trouvez rapidement vos <strong>futurs sponsors</strong> sur la plateforme leader en Algérie !
                </p>
                <div className='mt-12'>
-                   {isAuthenticated ? null : (
-                      <a href="/sponsor">
+                      <a href="/SponsorForm">
                           <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 text-center rounded-2xl">
                               Rechercher des sponsors
                           </button>
                       </a>
-                    )}
                </div>
            </div>
         </div>
@@ -67,6 +64,7 @@ export default function Sponsor() {
        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <h2 className="text-center text-4xl font-bold mb-12">Projets à la Recherche de Sponsors</h2>
        </div>
+       <Sponsors SponsorsData={sponsorData} />
     </div>
             
 </div>
