@@ -91,28 +91,18 @@ const Matchingjob = ({applicants}) => {
   };
 
   return (
-    <div className="bg-[#fafbfc]">
+    
+      <div className='bg-slate-100 pb-8 pt-12'>
+       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <h2 className="text-center text-4xl font-bold mb-12">Découvrez toutes les demandes d'emploi</h2>
+       </div>
+       
+  
       <div className="container mx-auto px-6 py-24 pt-0 grid gap-12">
         <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}>
           {renderApplicants()}
         </div>
-        {/* Pagination buttons */}
-        <div className="flex justify-center mt-4">
-          <button
-            className={`rounded-full py-2 px-4 mr-2 ${currentPage === 1 ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-400'}`}
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            Précédent
-          </button>
-          <button
-            className={`rounded-full py-2 px-4 ${currentPage === pageNumbers ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-primary text-white hover:bg-light'}`}
-            onClick={handleNextPage}
-            disabled={currentPage === pageNumbers}
-          >
-            Suivant
-          </button>
-        </div>
+        
       </div>
     </div>
   );

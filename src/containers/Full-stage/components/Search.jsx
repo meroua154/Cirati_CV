@@ -32,10 +32,7 @@ const Search = ({ onSearch, resetFilters, applicantsData }) => {
   };
 
   return (
-    <section className="Search px-20">
-      <div>
-        <h1 className="text-center text-3xl md:text-4xl font-bold mt-32 md:mt-20 leading-relaxed mx-0 md:p-[3rem]">Trouvez le <span className="text-green-600">Profile</span> de vos rêves en quelques clics</h1>
-      </div>
+    <section className="Search  px-20 -mt-32 relative z-10">
       <div className="grid gap-9 rounded-[10px] p-[1rem] md:p-[3rem] px-0">
         <form onSubmit={handleSearch}>
           <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-5 shadow-lg shadow-grey-700 dark:bg-slate-600">
@@ -79,6 +76,7 @@ const Search = ({ onSearch, resetFilters, applicantsData }) => {
           </div>
         </form>
       </div>
+    
     </section>
   );
 };

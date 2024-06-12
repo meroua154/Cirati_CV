@@ -13,8 +13,8 @@ const Footer = () => {
     AOS.init();
   }, []);
   return (
-    <footer className="w-full">
-      <div data-aos="zoom-in-down" data-aos-duration="2000" className="container mx-auto grid grid-cols-2 p-10 sm:grid-cols-3  lg:grid-cols-5 gap-6 bg-[#196a5c] rounded-lg">
+    <footer className="w-full absolute mt-96">
+      <div  className="container mx-auto grid grid-cols-2 p-10 sm:grid-cols-3  lg:grid-cols-5 gap-6 bg-[#196a5c] rounded-lg">
         <div>
           <a href="/">
             <h1 className="text-lg font-medium text-white pb-2">

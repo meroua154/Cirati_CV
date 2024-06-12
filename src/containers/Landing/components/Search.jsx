@@ -80,9 +80,9 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
         <p className="text-xl text-white text-center tracking-widest">Parmi plus de <a href="" className="text-primary font-bold">5417</a> postes ouverts</p>
       </div>
         <form onSubmit={handleSearch}>
-          <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-5 shadow-lg shadow-grey-700 dark:bg-slate-600 "> 
+          <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-1 mt-12 shadow-lg shadow-grey-700 dark:bg-slate-600 "> 
             <div className="flex flex-grow items-center ">
-              <AiOutlineSearch className="icon mr-1 dark:invert" />
+              <AiOutlineSearch className="icon ml-2 dark:invert" />
               <input
                 className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
                 placeholder="Search Job..."

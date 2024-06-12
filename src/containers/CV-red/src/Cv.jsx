@@ -255,7 +255,7 @@ function App() {
         </div>
         <button className="btn bg-primary hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 ml-32 md:ml-32 rounded-2xl md:static mt-4 md:mt-0" onClick={downloadPDF}>Download as PDF</button>
       </div>
-      <div className="downl mt-4 md:mt-24 md:w-2/3">
+      <div className="downl mt-4 md:mt-24 md:mb-24 md:w-2/3">
         <Resume personalInfo={personalInfo} sections={sections} layout={resumeLayout} />
       </div>
     </div>
