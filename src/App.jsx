@@ -2,21 +2,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Importer les composants des différentes pages
 import Landing from "../src/containers/Landing/Landing";
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import Password from './containers/LoginPage/Password';
 import CompanyPage from "../src/containers/CompanyPage/CompanyPage";
-import OffresEmploi from './containers/CompanyPage/OffresEmploi';
 import MultiStepjobForm from './containers/Annonceform/form';
 import FormPagered from './containers/CV-red/src/Cv';
-import EssGratuitement from './containers/RecruiterPage/EssGratuitement';
-import ValidationEmail from './containers/RecruiterPage/ValidationEmail';
 import Fulljob from './containers/Fulljob/fulljob';
 import Fullcv from "./containers/Full-stage/Fullcv";
 import PassRecLog from './containers/RecruiterPage/PassRecLog';
-import RecForm from './containers/RecruiterPage/RecForm';
 import Fullcompanyinfo from "./containers/Annonceform/fullcompany";
 import RecruiterPage from "./containers/RecruiterPage/RecruiterPage";
 import Offrepagesingle from "./containers/CompanyPage/offre"
@@ -34,9 +29,7 @@ import EventForm from "./containers/Events/EventForm";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Sponsor from "./containers/Sponsor/Sponsor";
 import Event from "./containers/Events/Event";
-
-
-
+import ApplicantOrRecRoute from "./components/private-route/ApplicantOrRecRoute ";
 
 function App() {
   if (localStorage.jwtToken) {

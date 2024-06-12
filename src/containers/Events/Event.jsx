@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import event from "../../assets/Images/event.jpg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useSelector } from 'react-redux'; 
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents } from './Slices/EventSlice';
+import EventCard from './EventCard';
 
 export default function Event() {
     useEffect(() => {
@@ -12,7 +12,8 @@ export default function Event() {
       }, []); 
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const [isScrolled, setIsScrolled] = useState(false);
-
+    const dispatch = useDispatch();
+    const EventsData = useSelector((state) => state.event.eventsData);
     useEffect(() => {
         const handleScroll = () => {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -25,7 +26,9 @@ export default function Event() {
         };
       }, []);
       
-
+      useEffect(() => {
+        dispatch(fetchEvents());
+    }, [dispatch]);
    
     
 
@@ -48,13 +51,13 @@ export default function Event() {
                   <strong>Publiez</strong> les détails de votre événement et trouvez rapidement vos <strong>participants</strong> sur la plateforme leader en Algérie !
                </p>
                <div className='mt-12'>
-                   {isAuthenticated ? null : (
-                      <a href="/event">
+                   {user &&user.role=="recruiter" ?(
+                      <a href="/EventForm">
                           <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 text-center rounded-2xl">
                               Créer une annonce d'événement
                           </button>
                       </a>
-                    )}
+                    ): null} 
                </div>
            </div>
         </div>
@@ -62,6 +65,7 @@ export default function Event() {
     <div className='bg-slate-100 pb-8 pt-12'>
        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <h2 className="text-center text-4xl font-bold mb-12">Découvrez les Événements à Ne Pas Manquer</h2>
+          <EventCard eventData={EventsData} />
        </div>
     </div>
             

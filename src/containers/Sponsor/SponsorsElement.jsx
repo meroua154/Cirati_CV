@@ -8,19 +8,12 @@ const Sponsors = ({ SponsorsData }) => {
   useEffect(() => {
     AOS.init();
   }, []);
-
-  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const sponsorsPerPage = 6;
 
   const indexOfLastSponsor = currentPage * sponsorsPerPage;
   const indexOfFirstSponsor = indexOfLastSponsor - sponsorsPerPage;
   const currentSponsors = SponsorsData.slice(indexOfFirstSponsor, indexOfLastSponsor);
-
-  const handleApplyNow = (sponsorId) => {
-    const applicationUrl = `/sponsor/${sponsorId}`;
-    navigate(applicationUrl);
-  };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -33,7 +26,7 @@ const Sponsors = ({ SponsorsData }) => {
         <div className="flex sm:items-center gap-8 flex-wrap md:ml-16 sm:px-2 sm:py-10">
           {currentSponsors.map((sponsor) => {
             return (
-              <div key={sponsor.id}
+              <div key={sponsor._id}
                 className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-primary dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
               >
                 <div className="upperpart flex justify-between">

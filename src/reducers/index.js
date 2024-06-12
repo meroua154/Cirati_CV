@@ -8,6 +8,7 @@ import { applicantsReducer, applicantReducer }from '../containers/Full-stage/sli
 import offreSlice from '../containers/CompanyPage/Slices/offreSlice';
 import FullcompanySlice from '../containers/Annonceform/slices/FullcompanySlice';
 import sponsorsSlice from '../containers/Sponsor/Slices/SponsorSlice';
+import EventSlice from '../containers/Events/Slices/EventSlice';
 export default combineReducers({
     auth: authReducer,
     errors: errorReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
     companyProfile:FullcompanySlice,
     offre:offreSlice,
     sponsor:sponsorsSlice,
+    event:EventSlice
 });
