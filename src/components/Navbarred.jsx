@@ -16,8 +16,7 @@ export default function Navbarred() {
   }, [])
 
   const [dropdown, setDropdown] = useState(false);
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const showDropdown = () => {
     setDropdown(!dropdown);
   };
@@ -51,12 +50,22 @@ export default function Navbarred() {
             >
               Offres d'emploi
             </a>
-            <a
-              href="/sponsorpage"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
+            {user && user.role === 'recruiter' ? (
+                     <a
+                     href="/EventForm"
+                     className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+                   >
+                     Annonce Event
+                   </a>
+          
+            ) : (
+              <a
+              href="/Sponsors"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
               Recherche Sponsor
             </a>
+            )}
             <a
               href="/formred"
               className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"

@@ -68,6 +68,7 @@ function App() {
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/formred" element={<ApplicantRoute element={<FormPagered/>} />} /> 
             <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
+            <Route path="/Sponsors" element={<Sponsor/>}  /> 
             <Route path="/EventForm" element={<RecRoute element={<EventForm/>} />} /> 
             <Route path="/fullcv" element={<RecRoute element={<Fullcv />} />} />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
