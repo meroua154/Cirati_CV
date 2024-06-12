@@ -37,7 +37,7 @@ export default function Navbarred() {
               </a>
             </div>
           </div>
-          <ul className="flex-auto flex justify-center items-center ml-32 xl:gap-12 gap-x-12 max-lg:hidden">
+          <ul className="flex-auto flex justify-center items-center ml-15 xl:gap-12 gap-x-12 max-lg:hidden">
             <a
               href="/rec"
               className="leading-normal tracking-wider no-underline text-primary font-medium text-base hover:text-primary"
@@ -50,30 +50,28 @@ export default function Navbarred() {
             >
               Offres d'emploi
             </a>
-            {user && user.role === 'recruiter' ? (
                      <a
-                     href="/EventForm"
+                     href="/eventpage"
                      className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
                    >
                      Annonce Event
                    </a>
           
-            ) : (
               <a
-              href="/Sponsors"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
-            >
-              Recherche Sponsor
-            </a>
-            )}
+                  href="/sponsorpage"
+                  className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+                >
+                  Recherche Sponsor
+                </a>
+  
             <a
               href="/formred"
               className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
             >
-              Construire votre CV
+              Construire votre CV 
             </a>
           </ul>
-          <div className="flex max-lg:hidden gap-x-4">
+          <div className="flex max-lg:hidden  gap-x-4">
             {isAuthenticated ? (
               <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
                 Log out
