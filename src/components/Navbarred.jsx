@@ -37,16 +37,16 @@ export default function Navbarred() {
               </a>
             </div>
           </div>
-          <ul className="flex-auto flex justify-center items-center ml-15 xl:gap-12 gap-x-12 max-lg:hidden">
+          <ul className="flex-auto flex justify-center items-center ml-2 xl:gap-12 gap-x-12 max-lg:hidden">
             <a
               href="/rec"
-              className="leading-normal tracking-wider no-underline text-primary font-medium text-base hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
             >
               Espace recruteur
             </a>
             <a
               href="/fulljob"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
             >
               Offres d'emploi
             </a>
@@ -66,7 +66,7 @@ export default function Navbarred() {
   
             <a
               href="/formred"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
             >
               Construire votre CV 
             </a>
@@ -74,18 +74,18 @@ export default function Navbarred() {
           <div className="flex max-lg:hidden  gap-x-4">
             {isAuthenticated ? (
               <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
-                Log out
+                Déconnexion
               </button>
             ) : (
               <>
                 <Link to="/register">
-                    <button className="rounded-2xl bg-primary text-base text-white border-none font-medium px-6 py-2 hoverBtn">
-                       Sign Up
+                    <button className="rounded-2xl bg-primary text-sm text-white border-none font-medium px-6 py-2 hoverBtn">
+                       S'inscrire
                     </button>
                 </Link>
                 <Link to="/login">
-                    <button className="rounded-lg bg-none text-base text-primary border-none font-medium px-8 py-3 hoverBtn">
-                      Sign In
+                    <button className="rounded-lg bg-none text-sm text-primary border-none font-medium px-8 py-3 hoverBtn">
+                       Se connecter
                     </button>
                 </Link>
               </>
@@ -115,45 +115,45 @@ export default function Navbarred() {
             <div className="w-full h-[380px] flex flex-col items-baseline pt-8 gap-4">
               <ul className="text-center p-0 flex flex-col justify-center w-full gap-y-8">
                 <a
-                  href="#"
+                  href="/rec"
                   className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
-                  Find jobs
+                  Espace recruteur
                 </a>
                 <a
-                  href="#"
+                  href="/fulljob"
                   className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
-                  People
+                  Offres d'emploi
                 </a>
                 <a
-                  href="#"
+                  href="/sponsorpage"
                   className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
-                  Hiring site
+                  Recherche Sponsor
                 </a>
                 <a
-                  href="#"
+                  href="/formred"
                   className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
-                  Resume
+                  Construire votre CV
                 </a>
               </ul>
               <div className="flex flex-col justify-center items-center w-full gap-y-8 mt-4">
                 {isAuthenticated ? (
                   <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
-                    Log out
+                    Déconnexion
                   </button>
                 ) : (
                   <>
                   <Link to="/register">
                     <button className="rounded-2xl bg-primary text-base text-white border-none font-medium px-8 py-3 hoverBtn">
-                      Sign Up
+                    S'inscrire
                     </button>
                   </Link>
                   <Link to="/login">
                     <button className="rounded-full bg-none text-base text-primary border-none font-medium px-8 py-2 hoverBtn">
-                      Sign In
+                      Se connecter
                     </button>
                   </Link>
                   </>
