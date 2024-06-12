@@ -25,6 +25,7 @@ const jwtMiddleware = (req, res, next) => {
         /^\/ciraticv\/Images\/profilpic\/.*/,
         /^\/user\/Resetpassword/,
         /^\/sponsor\/All/,
+        /^\/event\/All/,
         /^\/user\/register/,
         /^\/user\/verifyemail/
     ];

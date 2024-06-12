@@ -51,6 +51,14 @@ router.post('/', async (req, res) => {
 
         res.status(500).send('Server Error');
     }
-});
 
+});
+router.get('/All', async (req, res) => {
+    try {
+        const Events = await Event.find();
+        res.status(200).json(Events);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }});
 module.exports = router;
