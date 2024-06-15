@@ -40,33 +40,33 @@ export default function Navbarred() {
           <ul className="flex-auto flex justify-center items-center ml-2 xl:gap-12 gap-x-12 max-lg:hidden">
             <a
               href="/rec"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
             >
               Espace recruteur
             </a>
             <a
               href="/fulljob"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
             >
               Offres d'emploi
             </a>
                      <a
                      href="/eventpage"
-                     className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+                     className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
                    >
                      Annonce Event
                    </a>
           
               <a
                   href="/sponsorpage"
-                  className="leading-normal tracking-wider no-underline text-black font-medium text-base hover:text-primary"
+                  className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
                 >
                   Recherche Sponsor
                 </a>
   
             <a
               href="/formred"
-              className="leading-normal tracking-wider no-underline text-black font-medium text-sm hover:text-primary"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
             >
               Construire votre CV 
             </a>

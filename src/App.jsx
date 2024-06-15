@@ -30,6 +30,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Sponsor from "./containers/Sponsor/Sponsor";
 import Event from "./containers/Events/Event";
 import ApplicantOrRecRoute from "./components/private-route/ApplicantOrRecRoute ";
+import FormEmploi from "./containers/Full-stage/components/FormEmploi";
 
 function App() {
   if (localStorage.jwtToken) {
@@ -63,7 +64,8 @@ function App() {
             <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
             <Route path="/Sponsors" element={<Sponsor/>}  /> 
             <Route path="/EventForm" element={<RecRoute element={<EventForm/>} />} /> 
-            <Route path="/fullcv"element={<Fullcv />}  />
+            <Route path="/fullcv" element={<Fullcv />}  />
+            <Route path="/formemploi" element={<FormEmploi />}  />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/rec" element={<RecruiterPage />} />
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
