@@ -56,22 +56,20 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
-            <Route path="/sponsorpage" element={<Sponsor />} />
-            <Route path="/eventpage" element={<Event />} />
-           <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
+            <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
+            <Route path="/sponsorpage" element={<ApplicantOrRecRoute element={<Sponsor/>} />} />
+           <Route path="/eventpage" element={<ApplicantOrRecRoute  element={<Event/>} />} />
+           <Route path="/formred" element={<ApplicantOrRecRoute  element={<FormPagered/>} />} />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
-            <Route path="/formred"  element={<FormPagered/>}  /> 
-            <Route path="/SponsorForm" element={<ApplicantRoute element={<SponsorForm/>} />} /> 
-            <Route path="/Sponsors" element={<Sponsor/>}  /> 
+            <Route path="/SponsorForm" element={<ApplicantOrRecRoute element={<SponsorForm/>} />} /> 
             <Route path="/EventForm" element={<RecRoute element={<EventForm/>} />} /> 
-            <Route path="/fullcv" element={<Fullcv />}  />
-            <Route path="/formemploi" element={<FormEmploi />}  />
+            <Route path="/fullcv" element={<RecRoute element={<Fullcv/>} />} />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/rec" element={<RecruiterPage />} />
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
             {/* <Route path="/recform" element={<RecRoute element={<RecForm />} />} /> */}
-            <Route path="/Fulljob"  element={<Fulljob/>}  />
+            <Route path="/Fulljob" element={<ApplicantRoute element={<Fulljob/>} />} />
             <Route path="/singleoffre/:recId/:id"
              element={<ApplicantRoute element={<Offrepagesingle />} />}  />
                   {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}
