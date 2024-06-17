@@ -46,6 +46,7 @@ var JobRouter = require("./routes/job.routes");
 var ApplicationRouter = require("./routes/application.routes");
 var SponsorRouter=require("./routes/Sponsor.routes")
 var EventRouter = require("./routes/event.router");
+var EmploiRouter = require("./routes/Emploi.routes");
 // Body-Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,6 +73,7 @@ app.use("/job", JobRouter);
 app.use("/application", ApplicationRouter);
 app.use("/sponsor", SponsorRouter);
 app.use("/event", EventRouter);
+app.use("/Emploi", EmploiRouter);
 // Afficher les endpoints disponibles
 console.log(listEndpoints(app));
 
