@@ -50,6 +50,12 @@ export default function Navbarred() {
             >
               Offres d'emploi
             </a>
+            <a
+              href="/fullcv"
+              className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
+            >
+              Demandes D'emploi
+            </a>
                      <a
                      href="/eventpage"
                      className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"

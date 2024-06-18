@@ -8,11 +8,12 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import cvv from "../../../assets/Images/cvv.jpg";
-
+import instance from '../../../utils/setAuthToken';
 function FormEmploi() {
     const { isAuthenticated, user } = useSelector((state) => state.auth);
    
     const [formData, setFormData] = useState({
+        user: user._id,
         fullName: '',
         jobTitle: '',
         degreeTitle: '',
@@ -54,12 +55,20 @@ function FormEmploi() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add your form submission logic here
-        console.log(formData);
-        // Example of how to submit data to backend or dispatch an action
-        // dispatch(submitFormData(formData));
+        try{
+            if (!isAuthenticated || !user) {
+                alert('Veuillez vous connecter pour publier une annonce.');
+                return;
+            }
+            const response = await instance.post('/Emploi', formData);
+            alert('Annonce publiée avec succès!');
+            setStep(1);
+        } catch (error) {
+            console.error('Erreur lors de la publication de l\'annonce:', error);
+            alert('Erreur lors de la publication de l\'annonce. Veuillez réessayer.');
+        }
     };
 
     const [step, setStep] = useState(1);
@@ -150,6 +159,30 @@ function FormEmploi() {
                                         value={formData.yearsOfExperience}
                                         onChange={handleChange}
                                     />
+                                       <Typography variant="h6" color="black" className="-mb-3">
+                                        Localisation
+                                    </Typography>
+                                    <Input
+                                       size="lg"
+                                       placeholder="Ex: Alger"
+                                       className="flex text-sm text-gray-500 border border-gray-900 rounded shadow-sm border-solid border-1 transition-all duration-300 outline-none focus:outline-none rounded-lg"
+                                       name="location"
+                                       value={formData.location}
+                                       onChange={handleChange}
+                                       required
+                                    />
+                                       <Typography variant="h6" color="black" className="-mb-3">
+                                       Résumé Professionnel*
+                                    </Typography>
+                                    <Input
+                                       size="lg"
+                                       placeholder="Je suis un développeur web passionné avec plus de cinq ans d'expérience dans la conception et le développement d'applications web robustes. Ma spécialité réside dans la création de solutions innovantes et conviviales qui répondent aux besoins spécifiques des utilisateurs. Ayant obtenu un diplôme en informatique, j'ai acquis une solide expertise en technologies front-end et back-end telles que JavaScript, React.js, Node.js et MongoDB. Mon approche axée sur les résultats et ma capacité à travailler efficacement en équipe ont contribué au succès de plusieurs projets complexes. Je suis actuellement à la recherche de nouvelles opportunités stimulantes pour continuer à développer mes compétences et apporter une valeur ajoutée significative à votre équipe"
+                                       className="flex text-sm text-gray-500 border border-gray-900 rounded shadow-sm border-solid border-1 transition-all duration-300 outline-none focus:outline-none rounded-lg"
+                                       name="professionalSummary"
+                                       value={formData.professionalSummary}
+                                       onChange={handleChange}
+                                       type="textarea"
+                                    />
                                 </div>
 
                                 <Button className="mt-6 text-white bg-primary hover:bg-light w-full" onClick={nextStep}>Suivant</Button>
@@ -186,8 +219,6 @@ function FormEmploi() {
                                 <Button className="mt-2 text-white bg-light hover:bg-gray-700 w-full" onClick={prevStep}>Précédent</Button>
                             </>
                         )}
-
-                        {/* Etape 3 */}
                         {step === 3 && (
                             <>
                                 <Typography variant="h4" color="black">
