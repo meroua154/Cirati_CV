@@ -5,6 +5,7 @@ import Description from './components/Description';
 import Offre from './components/Offre';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams,useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchCompany,fetchJobs,selectCompanyStatus  } from './Slices/CompanySlice';
 const CompanyPage = () => {
   const navigate = useNavigate(); 
@@ -49,6 +50,7 @@ const CompanyPage = () => {
             <div className="ml-2 border-black">
              <h1 className='text-lg font-bold pb-8 border-b-2'>Les derniers offres d'emploi</h1>
              {deuxDernieresOffres.map((offre, index) => (
+                    <Link to={`/singleoffre/${offre.recruiter}/${offre._id}`} >
               <Offre
                 key={index}
                 title={offre.title}
@@ -58,6 +60,7 @@ const CompanyPage = () => {
                 experience={offre.AnneeExperience}
                 service={Object.keys(offre.secteur).join(', ')} 
             />
+            </Link>
             ))}
               <button className="mt-4 text-primary text-sm  px-4 py-2 font-lg"
                  onClick={() => ToutesLesOffres(id)} 

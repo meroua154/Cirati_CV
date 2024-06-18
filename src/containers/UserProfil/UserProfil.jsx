@@ -307,8 +307,19 @@ const handleDeleteExperience = (id) => {
       {/* Sidebar */}
       <div className="w-full md:w-1/4 md:h-screen  mt-24">
         <ul className="mt-8">
+        <a href="/user">
           <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-user mr-2"></i> Mon Profil</li>
-          {/* <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-sign-out-alt mr-2"></i> Se Déconnecter</li> */}
+          </a>
+          <a href="/user">
+          <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fas fa-bookmark mr-2"></i> Mes sauvgardes</li>
+          </a>
+   
+          <a href="/mesapplications">
+  <li className="flex items-center p-4 hover:bg-gray-300">
+    <i className="fas fa-file mr-2"></i> Mes Applications
+  </li>
+</a>
+
         </ul>
       </div>
       

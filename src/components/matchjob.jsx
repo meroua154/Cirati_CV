@@ -1,53 +1,89 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 
 const getColor = (status) => {
-  // Define colors based on status
-  switch (status) {
-    case 'Fulltime':
-      return "#4b4efc";
-    case 'Parttime':
-      return "#fec220";
-    case 'Remote':
-      return "#333333"; // Couleur pour Remote
-    case 'Contract':
-      return "#666666"; // Couleur pour Contract
-    default:
-      return "#333333"; // Par défaut
+ 
+  const lowerCaseStatus = status.toLowerCase();
+
+  if (lowerCaseStatus.startsWith('contrat')) {
+    return "#666666"; 
+  } else if (lowerCaseStatus.startsWith('temps')) {
+    return "#fec220"; 
+  } else {
+    return "#333333"; 
   }
 };
 
+
 const ApplicantCard = ({ applicant }) => {
-  const { profilpic, name, preferences, cv, } = applicant;
+  const { profilpic, name, cv, preferences,} = applicant.user;
+  const { usefulLinks, jobTitle, desiredPosition, yearsOfExperience, professionalSummary, location}=applicant;
+  const [showDetails, setShowDetails] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
 
   return (
- 
-      <div className="shadow lg:w-[95%] mt-12"> 
-        <div className="bg-white rounded-t-md px-6 py-8 flex flex-col items-center">
-          <span className="flex items-center justify-between w-full">
-            <button
-              className="rounded-full bg-transparent text-lg text-black px-8 py-2 outline-none border-none hoverBtn"
-              style={{ border: `3px solid ${getColor(preferences.statut)}` }}
-            >
-              {preferences.statut}
-            </button>
-          </span>
+    <div className="shadow lg:w-[95%] mt-12">
+      <div className="bg-white rounded-t-md px-6 py-8 flex flex-col items-center">
+        <span className="flex items-center justify-between w-full">
+          <button
+            className="rounded-full bg-transparent text-lg text-black px-8 py-2 outline-none border-none hoverBtn"
+            style={{ border: `3px solid ${getColor(applicant.statut)}` }}
+          >
+            {applicant.statut}
+          </button>
+        </span>
           <img src={profilpic} alt="" className="w-28 h-28 rounded-full my-8" />
-        </div>
-        <div className="rounded-b-md px-6 py-8" >
-          <p className="text-lg font-bold">{preferences.secteur.join(', ')}</p>
-          <p className="py-2 text-lg">{preferences.metier ? preferences.metier : 'Métier non spécifié'}</p>
-
-          <p className="py-2 text-lg">{name}</p>
-          <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
-            <p>Salaire</p>
-            <p style={{ color: getColor(preferences.statut) }}>{preferences.salaire} DA</p>
-            
-          </div>
-                  <a href={cv} target="_blank" rel="noopener noreferrer" className="job-card mx-8"/> 
-        </div>
       </div>
- 
+      <div className="rounded-b-md px-6 py-8">
+        <p className="text-lg font-bold">{jobTitle ? jobTitle : 'Métier non spécifié'}</p>
+        {applicant.user && (
+          <Link
+          to="/profil"
+          state={{ user: applicant.user }}
+            className="block"
+          >
+          <p
+            className="py-2 text-lg"
+            style={{ textDecoration: isHovered ? 'underline' : 'none' }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {name}
+          </p>
+          </Link>
+        )}
+        <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
+          <p>Poste souhaité :</p>
+          <p>{desiredPosition}</p>
+        </div>
+
+        <button
+  className="mt-4 bg-primary hover:bg-light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={toggleDetails}
+        >
+          {showDetails ? 'Masquer les détails' : 'Plus de détails'}
+        </button>
+        {showDetails && (
+          <div className="mt-4">
+            <p className="py-2">Années d'expérience : {yearsOfExperience}</p>
+            <p className="py-2">Résumé professionnel : {professionalSummary}</p>
+            <p className="py-2">Localisation : {location}</p>
+            <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
+              <p>Liens utiles :</p>
+              <div>
+                <a href={usefulLinks.LinkedIn} className="mr-2 text-blue-500 hover:text-blue-700">LinkedIn</a>
+                <a href={usefulLinks.GitHub} className="mr-2 text-blue-500 hover:text-blue-700">GitHub</a>
+                <a href={usefulLinks.Portfolio} className="mr-2 text-blue-500 hover:text-blue-700">Portfolio</a>
+                <a href={usefulLinks.CV} className="mr-2 text-blue-500 hover:text-blue-700">CV</a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

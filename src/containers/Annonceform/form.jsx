@@ -16,6 +16,7 @@ function MultiStepjobForm() {
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const contractTypeOptions = [
         { value: "Temps plein", label: "Temps plein" },
+        { value: "Stage", label: "Stage" },
         { value: "Temps partiel", label: "Temps partiel" },
         { value: "Contrat à durée déterminée (CDD)", label: "Contrat à durée déterminée (CDD)" },
         { value: "Contrat à durée indéterminée (CDI)", label: "Contrat à durée indéterminée (CDI)" },

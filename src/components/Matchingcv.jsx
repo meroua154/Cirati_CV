@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { Link } from 'react-router-dom';
 const getColor = (type) => {
   switch (type) {
     case 'Full Time':
@@ -70,14 +70,15 @@ export default function Matchigstage({jobs}) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   return (
     <div data-aos="zoom-in-down" data-aos-duration="2000" className="bg-[#fafbfc]">
       <div className="container mx-auto px-6 py-24 grid gap-12">
         <h2 className="text-3xl font-semibold">Matching Jobs</h2>
         <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}> 
         {jobs&&jobs.map(job => (
+            <Link to={`/singleoffre/${job.recruiter}/${job._id}`} >
             <Jobs key={job._id} job={job} />
+            </Link>
           ))}
 
         </div>

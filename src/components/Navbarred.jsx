@@ -16,11 +16,14 @@ export default function Navbarred() {
   }, [])
 
   const [dropdown, setDropdown] = useState(false);
+  const [dropdown1, setDropdown1] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const showDropdown = () => {
     setDropdown(!dropdown);
   };
-
+  const toggleDropdown = () => {
+    setDropdown1(!dropdown1);
+  };
   const handleLogout = (event) => {
     event.preventDefault();
     store.dispatch(logoutUser());
@@ -79,9 +82,36 @@ export default function Navbarred() {
           </ul>
           <div className="flex max-lg:hidden  gap-x-4">
             {isAuthenticated ? (
-              <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
-                Déconnexion
-              </button>
+           <>
+           <div onClick={toggleDropdown} className="relative">
+             <img
+               src={user.profilpic}
+               alt="Avatar"
+               className="rounded-full cursor-pointer w-10 h-10"
+             />
+             {dropdown1 && (
+               <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+               {user.role === 'applicant' ? (
+                        <Link to="/user" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Mon profil
+                        </Link>
+                      ) : (
+                        <>
+                        <Link to="/fullcompany" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Mon profil
+                        </Link>
+                          <Link to="/mes-offres" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Mes offres
+                        </Link>
+                        </>
+                      )}
+                 <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                   Déconnexion
+                 </button>
+               </div>
+             )}
+           </div>
+         </>
             ) : (
               <>
                 <Link to="/register">
@@ -144,6 +174,15 @@ export default function Navbarred() {
                 >
                   Construire votre CV
                 </a>
+                {isAuthenticated ? ( 
+                 <a
+                 href={user.role === 'applicant' ? '/user' : '/fullcompany'}
+                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+               >
+                 Mon profil
+               </a>
+               
+                ):null}
               </ul>
               <div className="flex flex-col justify-center items-center w-full gap-y-8 mt-4">
                 {isAuthenticated ? (

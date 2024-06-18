@@ -16,12 +16,7 @@ export const fetchJobs = createAsyncThunk('offre/fetchJobs', async ({recruiterId
   return response.data;
 });
 
-export const addApplication = createAsyncThunk('offre/addApplication', async ({ file, applicantId, jobId, recruiterId }) => {
-  const formData = new FormData();
-  formData.append('cv', file);
-  formData.append('applicantId', applicantId);
-  formData.append('jobId', jobId);
-  formData.append('recruiterId', recruiterId);
+export const addApplication = createAsyncThunk('offre/addApplication', async (formData) => {
   try {
     const response = await instance.post('/application/add_application', formData, {
       headers: {
@@ -33,6 +28,7 @@ export const addApplication = createAsyncThunk('offre/addApplication', async ({ 
     throw error;
   }
 });
+
 
 const offreSlice = createSlice({
   name: 'offre',
