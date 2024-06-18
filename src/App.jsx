@@ -59,7 +59,7 @@ function App() {
             <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />
             <Route path="/sponsorpage" element={<ApplicantOrRecRoute element={<Sponsor/>} />} />
            <Route path="/eventpage" element={<ApplicantOrRecRoute  element={<Event/>} />} />
-           <Route path="/formred" element={<ApplicantOrRecRoute  element={<FormPagered/>} />} />
+           <Route path="/formred" element={<FormPagered/>}  />
             <Route path="/annonce" element={<RecRoute element={<MultiStepjobForm />} />} />
             <Route path="/SponsorForm" element={<ApplicantOrRecRoute element={<SponsorForm/>} />} /> 
             <Route path="/EventForm" element={<RecRoute element={<EventForm/>} />} /> 

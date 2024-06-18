@@ -1,0 +1,23 @@
+/* src/styles/LanguageSection.css */
+.language-section {
+    margin-top: 20px;
+  }
+  
+  .language-options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .language-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .language-button.selected {
+    background-color: green;
+    color: white;
+  }
+  

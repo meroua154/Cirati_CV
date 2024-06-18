@@ -1,8 +1,9 @@
 import "../../styles/PersonalInfoSection.css";
 
-function PersonalInfoSection({ email, fullName, phoneNumber, address }) {
+function PersonalInfoSection({ email, fullName, phoneNumber, address, photo }) {
   return (
     <div className="personal-info">
+      <img src={photo} alt="Profile" className="cv-photo" />
       <h1 className="resume-name">{fullName}</h1>
       <div className="contact-info">
         {email && (

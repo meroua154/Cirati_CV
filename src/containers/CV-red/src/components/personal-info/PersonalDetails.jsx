@@ -1,7 +1,14 @@
 import InputGroup from "../InputGroup";
 import "../../styles/PersonalDetails.css";
 
-function PersonalDetails({ onChange, email, fullName, phoneNumber, address }) {
+function PersonalDetails({
+  onChange,
+  email,
+  fullName,
+  phoneNumber,
+  address,
+  photo,
+}) {
   return (
     <form className="personal-details">
       <h2>Personal Details</h2>
@@ -44,7 +51,18 @@ function PersonalDetails({ onChange, email, fullName, phoneNumber, address }) {
         data-key="address"
         recommended
       />
+      <InputGroup
+        type="file"
+        id="photo"
+        labelText="CV Photo"
+        placeholder="Upload your photo"
+        onChange={onChange}
+        data-key="photo"
+        accept="image/*"
+        photo
+      />
     </form>
   );
 }
+
 export default PersonalDetails;

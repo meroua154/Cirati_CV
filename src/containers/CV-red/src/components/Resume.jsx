@@ -1,22 +1,35 @@
+import React from "react";
 import "../styles/Resume.css";
 import PersonalInfoSection from "./personal-info/PersonalInfoSection";
 import EducationInfoSection from "./education/EducationInfoSection";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import ExperienceInfoSection from "./experience/ExperienceInfoSection";
+import translations from "../translations";
 
-function Resume({ personalInfo, sections, layout }) {
+function Resume({ personalInfo, sections, layout, selectedLanguage }) {
+  const personalInfoTranslations = translations[selectedLanguage].personalInfo;
+  const sectionsTranslations = translations[selectedLanguage].sections;
+
   return (
-    <div className="resume-container overflow-hidden h-fit">
+    <div className="resume-container">
       <div className={`resume ${layout}`}>
         <PersonalInfoSection
-          fullName={personalInfo.fullName}
-          email={personalInfo.email}
-          phoneNumber={personalInfo.phoneNumber}
-          address={personalInfo.address}
+          fullName={personalInfoTranslations.fullName || personalInfo.fullName}
+          email={personalInfoTranslations.email || personalInfo.email}
+          phoneNumber={
+            personalInfoTranslations.phoneNumber || personalInfo.phoneNumber
+          }
+          address={personalInfoTranslations.address || personalInfo.address}
+          photo={personalInfo.photo}
         />
         <div>
-          <EducationInfoSection educations={sections.educations} />
-          <ExperienceInfoSection experiences={sections.experiences} />
+          <EducationInfoSection
+            educations={sectionsTranslations.educations || sections.educations}
+          />
+          <ExperienceInfoSection
+            experiences={
+              sectionsTranslations.experiences || sections.experiences
+            }
+          />
         </div>
       </div>
     </div>
