@@ -31,6 +31,9 @@ const emploiSchema = new Schema({
     yearsOfExperience: {
         type: String
     },
+    statut: {
+        type: String
+    },
     usefulLinks: {
         LinkedIn: {
             type: String

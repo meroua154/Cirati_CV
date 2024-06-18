@@ -33,7 +33,26 @@ upload.fields([{ name: 'cv', maxCount: 1 }]),
             res.status(400).send(err);
         });
 });
-
+router.get("/check_application/:jobId/:applicantId", async (req, res) => {
+    try {
+      const jobId = req.params.jobId;
+      const applicantId = req.params.applicantId;
+  
+      const existingApplication = await Application.findOne({
+        jobId: jobId,
+        applicantId: applicantId,
+      });
+  
+      if (existingApplication) {
+        res.json({ applied: true });
+      } else {
+        res.json({ applied: false });
+      }
+    } catch (error) {
+      console.error("Error checking application:", error);
+      res.status(500).json({ error: "Server error" });
+    }
+  });
 // PUT Request
 // Edit Application Details
 router.put('/edit_application/:id', (req, res) => {

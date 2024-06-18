@@ -6,6 +6,7 @@ router.post('/', async (req, res) => {
     try {
         const {
             user,
+            statut,
             fullName,
             jobTitle,
             degreeTitle,
@@ -20,6 +21,7 @@ router.post('/', async (req, res) => {
         const newEmploi = new Emploi({
             user,
             fullName,
+            statut,
             jobTitle,
             degreeTitle,
             desiredPosition,
@@ -39,14 +41,19 @@ router.post('/', async (req, res) => {
 });
 router.get('/All', async (req, res) => {
   try {
-      const offres = await Emploi.find()
+    const offres = await Emploi.find()
+      .populate({
+        path: 'user',
+        select: '-_id -password -verified'
+      });
 
-      res.status(200).json(offres);
+    res.status(200).json(offres);
   } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Erreur serveur');
+    console.error(err.message);
+    res.status(500).send('Erreur serveur');
   }
 });
 
-module.exports = router;
-module.exports = router;
+  
+  module.exports = router;
+

@@ -229,16 +229,16 @@ router.get("/recruiter", function(req, res) {
 //     )
 //     .catch(err => console.log(err));
 // });
-router.get("/applicants", function(req, res) {
-    User.find({ role: 'applicant' }, function(err, applicants) {
-        if (err) {
-            console.log(err);
-            res.status(500).json({ error: 'Erreur lors de la récupération des recruteurs' });
-        } else {
-            res.json(applicants);
-        }
-    });
-});
+// router.get("/applicants", function(req, res) {
+//     User.find({ role: 'applicant' }, function(err, applicants) {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).json({ error: 'Erreur lors de la récupération des recruteurs' });
+//         } else {
+//             res.json(applicants);
+//         }
+//     });
+// });
 
 
 
