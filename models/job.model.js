@@ -73,6 +73,10 @@ const jobSchema = new Schema({
         atype: Date,
         //required: true
     },
+    hidden: {
+        atype: Boolean,
+       default:false
+    },
 });
 
 jobSchema.index({ recruiter: 1 });

@@ -128,7 +128,18 @@ router.post("/add_job", (req, res) => {
             res.status(400).send(err);
         });
 });
-
+router.get("/get_jobs/:recruiterId", function(req, res) {
+    Job.find({ recruiter: req.params.recruiterId }) 
+        .sort({ dateOfPost: -1 }) 
+        .exec(function(err, jobs) {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Erreur lors de la récupération des emplois.");
+            } else {
+                res.json(jobs);
+            }
+        });
+});
 // PUT Request
 // Edit Job Details
 router.put('/edit_job/:id', (req, res) => {

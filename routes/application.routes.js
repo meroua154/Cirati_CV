@@ -76,6 +76,19 @@ router.delete('/del_application/:id', (req,res) => {
     )
     .catch(err => res.status(404).json({success: false}));
 });
-
+router.get("/get_user_applications/:userId", async (req, res) => {
+    try {
+      const userId = req.params.userId;
+  
+      // Find applications by applicantId
+      const applications = await Application.find({ applicantId: userId })
+      .populate('applicantId', '-password -verified -_id') 
+      .populate('recruiterId', '-password -verified -_id') 
+      res.status(200).json(applications);
+    } catch (error) {
+      console.error("Error fetching applications for user:", error);
+      res.status(500).json({ error: "Server error" });
+    }
+  });
 module.exports = router;
 

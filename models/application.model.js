@@ -17,10 +17,10 @@ const applicationSchema = new Schema({
         ref: 'User',
         required: true
     },
-    // stage: {
-    //     type: Number,
-    //     default: 4
-    // },
+    statut: {
+        type: String,
+        default: 'En attente'
+    },
     status: {
         type: String
     },
