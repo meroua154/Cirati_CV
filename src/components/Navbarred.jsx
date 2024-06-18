@@ -100,7 +100,7 @@ export default function Navbarred() {
                         <Link to="/fullcompany" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                           Mon profil
                         </Link>
-                          <Link to="/mes-offres" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          <Link to="/MesEmplois" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                           Mes offres
                         </Link>
                         </>
