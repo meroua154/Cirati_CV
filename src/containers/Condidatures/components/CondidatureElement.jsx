@@ -44,14 +44,12 @@ const CondidatureElement = ({ application }) => {
           <button
             className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
             onClick={handleAccept}
-            disabled={isActionTaken}
           >
             Accepter la candidature
           </button>
           <button
             className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800"
             onClick={handleReject}
-            disabled={isActionTaken}
           >
             Refuser la candidature
           </button>
