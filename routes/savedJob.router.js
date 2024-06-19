@@ -37,11 +37,21 @@ router.get('/:userId', async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    const savedJobs = await SavedJob.find({ user: userId }).populate('job');
-    res.json(savedJobs);
+
+    const savedJobs = await SavedJob.find({ user: userId }).populate({
+      path: 'job',
+      match: { hidden: false }, 
+      select: '-hidden'
+    });
+
+    const visibleSavedJobs = savedJobs.filter(savedJob => savedJob.job!== null);
+         console.log(savedJobs)
+    res.json(visibleSavedJobs);
   } catch (error) {
     console.error('Erreur lors de la récupération des sauvegardes d\'emplois : ', error);
     res.status(500).json({ error: 'Erreur serveur lors de la récupération des sauvegardes d\'emplois.' });
   }
 });
+
+
 module.exports = router;
