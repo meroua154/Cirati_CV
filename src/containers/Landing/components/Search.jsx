@@ -45,7 +45,11 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
       [name]: fieldSuggestions
     }));
   };
-
+  useEffect(() => {
+    if (!searchData.title && !searchData.recruiterName && !searchData.address) {
+      resetFilters();
+    }
+  }, [searchData, resetFilters]);
   const handleSearch = (e) => {
     e.preventDefault();
     const filters = {
@@ -189,7 +193,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
             Clear All
           </button>
         </div>
-        <div className="suggestions">
+        {/* <div className="suggestions">
           <ul>
             {suggestions.title.map((job) => (
               <li key={job.id}>{job.title}</li>
@@ -205,7 +209,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               <li key={job.id}>{job.address}</li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </section>
   );

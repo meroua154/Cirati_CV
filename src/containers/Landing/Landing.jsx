@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJobs, setFilteredJobs, resetFilters } from './slices/jobsSlice';
+import { fetchAllJobs, setFilteredJobs, resetFilters } from './slices/jobsSlice';
 import Search from "../Landing/components/Search";
 import Value from "../Landing/components/Value";
 import Jobs from "../Landing/components/Jobs";
@@ -24,7 +24,7 @@ const Landing = () => {
     if (token) {
       setAuthToken(token);
     }
-    dispatch(fetchJobs());
+    dispatch(fetchAllJobs());
   }, [dispatch]);
 
   const handleSearch = (searchData) => {

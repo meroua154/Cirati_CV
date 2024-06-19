@@ -21,7 +21,7 @@ const Jobs = ({ JobsData }) => {
       <div data-aos="zoom-in-down" data-aos-duration="2000" className="container mx-auto px-16 pb-24">
         <h2 className="text-center text-3xl font-bold pt-12 pb-8 md:pt-20 md:pb-8 dark:text-white lettre-espace">Dernieres offres</h2>
         <div className="flex sm:items-center gap-8 flex-wrap md:ml-16 sm:px-2 sm:py-10">
-          {JobsData.map((job) => {
+        {JobsData.slice(0, 6).map((job) => { 
             return (
               <div key={job.id}
                 className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-primary dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
