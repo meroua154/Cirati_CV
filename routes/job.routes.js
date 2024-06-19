@@ -15,20 +15,6 @@ const Job = require("../models/job.model");
 // 		}
 // 	})
 // });
-router.get("/Alljobs", function(req, res) {
-    
-    Job.find({ hidden: false }) 
-        .sort({ dateOfPost: -1 }) 
-        .limit(6) 
-        .exec(function(err, jobs) {
-            if (err) {
-                console.log(err);
-                res.status(500).send("Erreur lors de la récupération des emplois.");
-            } else {
-                res.status(200).json(jobs);
-            }
-        });
-});
 router.get("/MatchingJobs", function(req, res) {
     
     Job.find({ hidden: false }) 

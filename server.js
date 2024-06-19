@@ -20,7 +20,7 @@ const jwtMiddleware = (req, res, next) => {
         /^\/user\/login/,
         // /^\/job\/derniersjobs/,/user/Resetpassword2/:resetToken
         /^\/user\/Resetpassword2\/.*/,
-        /^\/job\/Alljobs/,
+        /^\/job\/MatchingJobs/,
         /^\/job\/secteurs/,
         /^\/ciraticv\/pdfs\/cvs\/.*/,
         /^\/ciraticv\/Images\/coverpic\/.*/,
