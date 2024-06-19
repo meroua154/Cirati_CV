@@ -59,7 +59,8 @@ const ApplicantCard = ({ applicant }) => {
           <p>Poste souhaité :</p>
           <p>{desiredPosition}</p>
         </div>
-
+        <p className="py-2">Localisation : {location}</p>
+        
         <button
   className="mt-4 bg-primary hover:bg-light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={toggleDetails}
@@ -68,9 +69,6 @@ const ApplicantCard = ({ applicant }) => {
         </button>
         {showDetails && (
           <div className="mt-4">
-            <p className="py-2">Années d'expérience : {yearsOfExperience}</p>
-            <p className="py-2">Résumé professionnel : {professionalSummary}</p>
-            <p className="py-2">Localisation : {location}</p>
             <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
               <p>Liens utiles :</p>
               <div>
