@@ -1,10 +1,11 @@
-import Carousel from "react-multi-carousel";
-import { HiStar } from "react-icons/hi";
-import "react-multi-carousel/lib/styles.css";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { Link } from 'react-router-dom';
+import { removeSavedJob, addSavedJob, fetchSavedJobs } from '../containers/mesSauvegardes/slices/savedJobsSlice';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link } from 'react-router-dom';
+import { fetchAllJobs } from '../containers/Landing/slices/jobsSlice';
 const getColor = (type) => {
   switch (type) {
     case 'Full Time':
@@ -21,11 +22,35 @@ const getColor = (type) => {
 };
 
 const Jobs = ({ job }) => {
+  const dispatch = useDispatch();
+  const { _id, title, address, Contratype, salary, recruiterName, recruiterPic } = job;
+  const secteurArray = Object.keys(job.secteur);
+  const savedJobs = useSelector((state) => state.savedJobs.savedJobs);
+  const userId = useSelector((state) => state.auth.user._id);
+  const isSaved = savedJobs.some(savedJob => savedJob.job._id === _id);
+
+  const [isHearted, setIsHearted] = useState(isSaved);
+
   useEffect(() => {
     AOS.init();
-  }, [])
-  const { _id, title, address, Contratype, salary, recruiterName, recruiterPic } = job;
-  const secteurArray  = Object.keys(job.secteur);
+    dispatch(fetchSavedJobs(userId));
+    dispatch(fetchAllJobs());
+  }, [dispatch, userId]);
+
+
+
+  const toggleHeart = (e) => {
+    e.stopPropagation();
+  
+    if (isHearted) {
+      dispatch(removeSavedJob(_id))
+        .then(() => dispatch(fetchAllJobs())); 
+    } else {
+      dispatch(addSavedJob({ userId: userId, jobId: _id }))
+        .then(() => dispatch(fetchAllJobs())); 
+    }
+    setIsHearted(!isHearted);
+  };
 
   return (
     <div data-aos="zoom-in-down" data-aos-duration="2000" className="job-card mx-8">
@@ -38,30 +63,37 @@ const Jobs = ({ job }) => {
             >
               {Contratype}
             </button>
+            {isHearted ? (
+              <HiHeart className="text-2xl text-red-500 cursor-pointer" onClick={toggleHeart} />
+            ) : (
+              <HiOutlineHeart className="text-2xl cursor-pointer" onClick={toggleHeart} />
+            )}
           </span>
-          <img src={recruiterPic} alt="" className="w-28 h-28 rounded-full my-8" />
+          <Link to={`/singleoffre/${job.recruiter}/${job._id}`} className="block">
+            <img src={recruiterPic} alt="" className="w-28 h-28 rounded-full my-8" />
+          </Link>
         </div>
-        <div className="rounded-b-md px-6 py-8">
-        <p className="text-lg font-bold">{title}</p>
-          <p className="py-2 text-lg">{secteurArray.join(', ')}</p>
-        
-          <p className="py-2 text-lg">{address}</p>
-          <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
-            <p>Salary</p>
-            <p style={{ color: getColor(Contratype) }}>{salary} DA</p>
+        <Link to={`/singleoffre/${job.recruiter}/${job._id}`} className="block">
+          <div className="rounded-b-md px-6 py-8">
+            <p className="text-lg font-bold">{title}</p>
+            <p className="py-2 text-lg">{secteurArray.join(', ')}</p>
+            <p className="py-2 text-lg">{address}</p>
+            <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">
+              <p>Société</p>
+              <p style={{ color: getColor(Contratype) }}>{recruiterName}</p>
+            </div>
           </div>
-          <p className="py-2 text-lg">{recruiterName}</p>
-        </div>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default function Matchigstage({jobs}) {
-  useEffect(() => {
-    AOS.init();
-  }, [])
+const MatchingJobs = ({ jobs }) => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
+  const dispatch = useDispatch();
+  const savedJobs = useSelector((state) => state.savedJobs.savedJobs);
+  const userId = useSelector((state) => state.auth.user._id);
 
   useEffect(() => {
     function handleResize() {
@@ -70,19 +102,23 @@ export default function Matchigstage({jobs}) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchSavedJobs(userId));
+  }, [dispatch, userId]);
+
   return (
     <div data-aos="zoom-in-down" data-aos-duration="2000" className="bg-[#fafbfc]">
       <div className="container mx-auto px-6 py-24 grid gap-12">
         <h2 className="text-3xl font-semibold">Matching Jobs</h2>
-        <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}> 
-        {jobs&&jobs.map(job => (
-            <Link to={`/singleoffre/${job.recruiter}/${job._id}`} >
+        <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}>
+          {jobs && jobs.map(job => (
             <Jobs key={job._id} job={job} />
-            </Link>
           ))}
-
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default MatchingJobs;

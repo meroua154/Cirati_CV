@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmploisByRecruiter } from'../slices/JobsSlice'; 
 import JobElement from './JobElement'; 
+
 const JobsList = ({ recruiterId }) => {
   const dispatch = useDispatch();
   const jobs =  useSelector((state) => state.emploi.emplois);
   const jobStatus = useSelector((state) => state.emploi.status);
   const error = useSelector((state) => state.emploi.error);
-
+ 
   useEffect(() => {
     if (jobStatus === 'idle') {
       dispatch(fetchEmploisByRecruiter(recruiterId));

@@ -310,8 +310,8 @@ const handleDeleteExperience = (id) => {
         <a href="/user">
           <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fa-user mr-2"></i> Mon Profil</li>
           </a>
-          <a href="/user">
-          <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fas fa-bookmark mr-2"></i> Mes sauvgardes</li>
+          <a href="/messauvegardes">
+          <li className="flex items-center p-4 hover:bg-gray-300"><i className="fas fas fa-bookmark mr-2"></i> Mes sauvegardes</li>
           </a>
    
           <a href="/mesapplications">

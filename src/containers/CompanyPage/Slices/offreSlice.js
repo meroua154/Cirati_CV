@@ -12,7 +12,7 @@ export const fetchOffres = createAsyncThunk('offre/fetchOffres', async ({ recId,
 });
 
 export const fetchJobs = createAsyncThunk('offre/fetchJobs', async ({recruiterId}) => {
-  const response = await instance.get(`/job/get_jobs/${recruiterId}`);
+  const response = await instance.get(`/job/get_jobs2/${recruiterId}`);
   return response.data;
 });
 
@@ -28,7 +28,18 @@ export const addApplication = createAsyncThunk('offre/addApplication', async (fo
     throw error;
   }
 });
-
+export const EnvoiApplication= createAsyncThunk('offre/addApplication', async (formData) => {
+  try {
+    const response = await instance.post('/application/EnvoiApplication', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
 
 const offreSlice = createSlice({
   name: 'offre',

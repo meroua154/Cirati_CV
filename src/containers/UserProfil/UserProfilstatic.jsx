@@ -81,7 +81,7 @@ const UserProfilStatic = () => {
 
         {/* Box pour le CV */}
         <div className="bg-white rounded shadow-md p-6 mb-8 md:mx-16">
-          <h2 className="text-xl mb-4 font-bold">Mon CV</h2>
+          <h2 className="text-xl mb-4 font-bold">Le CV</h2>
           <div>
             {userData.cv ? (
               <div>

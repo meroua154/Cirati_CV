@@ -1,7 +1,7 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const ApplicationElement = ({ application }) => {
-  // Function to format the date
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB'); 
@@ -15,7 +15,7 @@ const ApplicationElement = ({ application }) => {
           <p className="text-lg font-lg">{application.recruiterId.name}</p>
           <div className="flex items-center text-gray-600">
             <i className="fas fa-map-marker-alt mr-2"></i>
-            <p>{application.recruiterId.localisation}</p>
+            <p>lieu de l'emploi: {application.jobId.address}</p>
           </div>
         </div>
       </div>
@@ -27,6 +27,16 @@ const ApplicationElement = ({ application }) => {
         <h3 className="font-semibold">Statut de l'application</h3>
         <p><i className="fas fa-info-circle mr-2"></i>{application.statut}</p>
       </div>
+      {application.jobId && (
+        <div className="mb-8">
+          <h3 className="font-semibold">Poste appliqué</h3>
+          <p>{application.jobId.title}</p>
+          <p>Type de contrat : {application.jobId.Contratype}</p>
+          <Link to={`/singleoffre/${application.jobId.recruiter}/${application.jobId._id}`} className="bg-green-700 hover:bg-green-800 text-white  py-2 px-4 rounded mt-4 inline-block">
+            Voir l'offre
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

@@ -59,19 +59,22 @@ export default function Navbarred() {
             >
               Demandes D'emploi
             </a>
-                     <a
-                     href="/eventpage"
-                     className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
-                   >
-                     Annonce Event
-                   </a>
-          
-              <a
+            {isAuthenticated && (
+              <>
+                <a
+                  href="/eventpage"
+                  className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
+                >
+                  Annonce Event
+                </a>
+                <a
                   href="/sponsorpage"
                   className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
                 >
                   Recherche Sponsor
                 </a>
+              </>
+            )}
   
             <a
               href="/formred"

@@ -34,6 +34,8 @@ import FormEmploi from "./containers/Full-stage/components/FormEmploi";
 import UserProfilStatic from "./containers/UserProfil/UserProfilstatic";
 import Mesapplications from "./containers/Mesapplications/Mesapplications";
 import MesEmplois from "./containers/Recjoblist/MesEmplois";
+import MesCandidatures from "./containers/Condidatures/MesCandidatures";
+import SavedJobsPage from "./containers/mesSauvegardes/savedJobsList";
 function App() {
   if (localStorage.jwtToken) {
 
@@ -69,6 +71,7 @@ function App() {
             <Route path="/Profil" element={<RecRoute element={<UserProfilStatic/>} />} />
             <Route path="/fullcompany" element={<RecRoute element={<Fullcompanyinfo />} />} />
             <Route path="/MesEmplois" element={<RecRoute element={<MesEmplois />} />} />
+            <Route path="/MesCandidatures" element={<RecRoute element={<MesCandidatures />} />} />
             <Route path="/rec" element={<RecruiterPage />} />
             {/* <Route path="/ess" element={<RecRoute element={<EssGratuitement />} />} /> */}
             <Route path="/passrec/:resetToken"  element={<PassRecLog />} />
@@ -76,6 +79,7 @@ function App() {
             <Route path="/Fulljob" element={<ApplicantOrRecRoute element={<Fulljob/>} />} />
             <Route path="/FormEmploi" element={<ApplicantRoute element={<FormEmploi/>} />} />
             <Route path="/mesapplications" element={<ApplicantRoute element={<Mesapplications/>} />} />
+            <Route path="/messauvegardes" element={<ApplicantRoute element={<SavedJobsPage/>} />} />
             <Route path="/singleoffre/:recId/:id"
              element={<ApplicantRoute element={<Offrepagesingle />} />}  />
                   {/* <Route path="/emploi/:id" element={<ApplicantRoute element={<OffresEmploi />} />} /> */}

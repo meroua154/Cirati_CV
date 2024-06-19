@@ -4,7 +4,7 @@ import Description from './components/Description';
 import Offre from './components/Offre';
 import { useParams } from 'react-router-dom';
 import { useSelector,useDispatch } from "react-redux";
-import { fetchCompany, fetchJobs , addApplication,selectoffreSliceStatus } from './Slices/offreSlice'
+import { fetchCompany, fetchJobs ,EnvoiApplication,selectoffreSliceStatus } from './Slices/offreSlice'
 const Offrejob  = () => {
   const dispatch = useDispatch();
   const { id} = useParams(); 
@@ -35,10 +35,9 @@ const Offrejob  = () => {
     const file = e.target.files[0];
       const formData = new FormData();
       formData.append('cv', file);
-      formData.append('applicantId',user._id);
       formData.append('recruiterId',id);
       try {
-        await dispatch(addApplication(formData));
+        await dispatch(EnvoiApplication(formData));
         alert('CV uploaded successfully!');
       } catch (error) {
         console.error('Error uploading CV:', error);

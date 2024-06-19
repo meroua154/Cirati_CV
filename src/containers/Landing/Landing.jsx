@@ -23,8 +23,8 @@ const Landing = () => {
     const token = localStorage.getItem('jwtToken');
     if (token) {
       setAuthToken(token);
-      dispatch(fetchJobs());
     }
+    dispatch(fetchJobs());
   }, [dispatch]);
 
   const handleSearch = (searchData) => {
