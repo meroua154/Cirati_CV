@@ -53,7 +53,7 @@ const jobSchema = new Schema({
     },
     Contratype: {
         type: String,
-        enum: ["Temps plein", "Temps partiel","Contrat à durée déterminée (CDD)", "Contrat à durée indéterminée (CDI)","Contrat d'apprentissage","Contrat de professionnalisation","Contrat de stage","Contrat d'intérim","Contrat de freelance","Contrat de mission"],
+        enum: ["Stage","Temps plein", "Temps partiel","Contrat à durée déterminée (CDD)", "Contrat à durée indéterminée (CDI)","Contrat d'apprentissage","Contrat de professionnalisation","Contrat de stage","Contrat d'intérim","Contrat de freelance","Contrat de mission"],
         default: "Temps plein"
         //required: true
     },
@@ -74,8 +74,8 @@ const jobSchema = new Schema({
         //required: true
     },
     hidden: {
-        atype: Boolean,
-       default:false
+        type: Boolean,
+        default: false
     },
 });
 

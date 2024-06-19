@@ -20,6 +20,8 @@ const jwtMiddleware = (req, res, next) => {
         /^\/user\/login/,
         // /^\/job\/derniersjobs/,/user/Resetpassword2/:resetToken
         /^\/user\/Resetpassword2\/.*/,
+        /^\/job\/Alljobs/,
+        /^\/job\/secteurs/,
         /^\/ciraticv\/pdfs\/cvs\/.*/,
         /^\/ciraticv\/Images\/coverpic\/.*/,
         /^\/ciraticv\/Images\/profilpic\/.*/,
@@ -47,6 +49,7 @@ var ApplicationRouter = require("./routes/application.routes");
 var SponsorRouter=require("./routes/Sponsor.routes")
 var EventRouter = require("./routes/event.router");
 var EmploiRouter = require("./routes/Emploi.routes");
+var savedJobRouter = require("./routes/savedJob.router");
 // Body-Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,6 +77,7 @@ app.use("/application", ApplicationRouter);
 app.use("/sponsor", SponsorRouter);
 app.use("/event", EventRouter);
 app.use("/Emploi", EmploiRouter);
+app.use("/savedjobs", savedJobRouter);
 // Afficher les endpoints disponibles
 console.log(listEndpoints(app));
 

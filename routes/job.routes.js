@@ -17,9 +17,9 @@ const Job = require("../models/job.model");
 // });
 router.get("/Alljobs", function(req, res) {
     
-    Job.find() 
+    Job.find({ hidden: false }) 
         .sort({ dateOfPost: -1 }) 
-        // .limit(10) 
+        .limit(6) 
         .exec(function(err, jobs) {
             if (err) {
                 console.log(err);
@@ -31,7 +31,7 @@ router.get("/Alljobs", function(req, res) {
 });
 router.get("/MatchingJobs", function(req, res) {
     
-    Job.find() 
+    Job.find({ hidden: false }) 
         .sort({ dateOfPost: -1 }) 
         .exec(function(err, jobs) {
             if (err) {
@@ -46,7 +46,7 @@ router.get("/MatchingJobs", function(req, res) {
 // Getting one job
 router.get('/secteurs', async (req, res) => {
     try {
-        const jobs = await Job.find()
+        const jobs = await Job.find({ hidden: false })
 
         const secteursCount = {};
         jobs.forEach(job => {
@@ -77,7 +77,7 @@ router.get('/secteurs', async (req, res) => {
     .catch(err => console.log(err));
 });
 router.get("/latest_jobs/:recruiterId", function(req, res) {
-    Job.find({ recruiter: req.params.recruiterId }) 
+    Job.find({ recruiter: req.params.recruiterId,hidden: false }) 
         .sort({ dateOfPost: -1 }) 
         .limit(2) 
         .exec(function(err, jobs) {
@@ -103,18 +103,7 @@ router.get("/get_job/:recruiterId/:jobId", function(req, res) {
             res.status(500).send("Erreur lors de la récupération de l'offre d'emploi.");
         });
 });
-router.get("/get_jobs/:recruiterId", function(req, res) {
-    Job.find({ recruiter: req.params.recruiterId }) 
-        .sort({ dateOfPost: -1 }) 
-        .exec(function(err, jobs) {
-            if (err) {
-                console.log(err);
-                res.status(500).send("Erreur lors de la récupération des emplois.");
-            } else {
-                res.json(jobs);
-            }
-        });
-});
+
 // POST request 
 // Add a job to db
 router.post("/add_job", (req, res) => {
@@ -129,7 +118,19 @@ router.post("/add_job", (req, res) => {
         });
 });
 router.get("/get_jobs/:recruiterId", function(req, res) {
-    Job.find({ recruiter: req.params.recruiterId }) 
+    Job.find({ recruiter: req.params.recruiterId}) 
+        .sort({ dateOfPost: -1 }) 
+        .exec(function(err, jobs) {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Erreur lors de la récupération des emplois.");
+            } else {
+                res.json(jobs);
+            }
+        });
+});
+router.get("/get_jobs2/:recruiterId", function(req, res) {
+    Job.find({ recruiter: req.params.recruiterId,hidden: false}) 
         .sort({ dateOfPost: -1 }) 
         .exec(function(err, jobs) {
             if (err) {
@@ -154,13 +155,16 @@ router.put('/edit_job/:id', (req, res) => {
     });
 });
 
-// DELETE request
-// Delete a job from the db
-router.delete('/del_job/:id', (req,res) => {
-    Job.findById(req.params.id).then(job => 
-        job.remove().then(() => res.json({success: true}))
-    )
-    .catch(err => res.status(404).json({success: false}));
+
+router.put('/archiver/:id', (req, res) => {
+    Job.findByIdAndUpdate(req.params.id, { hidden: true })
+        .then(() => res.json({ success: true }))
+        .catch(err => res.status(404).json({ success: false, error: err }));
 });
 
+router.put('/reactiver/:id', (req, res) => {
+    Job.findByIdAndUpdate(req.params.id, { hidden: false })
+        .then(() => res.json({ success: true }))
+        .catch(err => res.status(404).json({ success: false, error: err }));
+});
 module.exports = router;
