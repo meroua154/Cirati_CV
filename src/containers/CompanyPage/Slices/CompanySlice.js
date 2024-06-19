@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../../utils/setAuthToken';
 
@@ -22,6 +21,7 @@ const companySlice = createSlice({
   name: 'company',
   initialState: {
     companyData: {},
+    latest_jobs: [], 
     status: 'idle',
     error: null,
   },
@@ -40,11 +40,12 @@ const companySlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchJobs.fulfilled, (state, action) => {
-        state.companyData.latest_jobs = action.payload;
+        state.latest_jobs = action.payload; 
       });
   },
 });
 
 export const selectCompanyStatus = (state) => state.company.status;
+export const selectLatestJobs = (state) => state.company.latest_jobs; 
 
 export default companySlice.reducer;

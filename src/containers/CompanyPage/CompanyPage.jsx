@@ -6,13 +6,13 @@ import Offre from './components/Offre';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams,useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { fetchCompany,fetchJobs,selectCompanyStatus  } from './Slices/CompanySlice';
+import  { fetchCompany, fetchJobs, selectCompanyStatus, selectLatestJobs }  from './Slices/CompanySlice';
 const CompanyPage = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const {id} = useParams(); 
   const company=useSelector((state) => state.company.companyData);
-  const deuxDernieresOffres =  useSelector((state) => state.jobs.jobsData);
+  const deuxDernieresOffres =  useSelector(selectLatestJobs);
   const loadingStatus = useSelector(selectCompanyStatus);
   const ToutesLesOffres = (recId) => {
     const applicationUrl = `/offres/${recId}`;
