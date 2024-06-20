@@ -24,7 +24,11 @@ function AddEducationSection({
       <ExpandSection
         isOpen={isOpen}
         setOpen={setOpen}
+<<<<<<< HEAD
         sectionName={t.education}
+=======
+        sectionName="Education"
+>>>>>>> c5932676ff63e0b70b7d127f5920047a35c9d833
       />
 
       <div className={`section-content ${isOpen ? "open" : ""}`}>

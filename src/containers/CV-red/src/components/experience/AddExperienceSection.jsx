@@ -24,6 +24,7 @@ function AddExperienceSection({
       <ExpandSection
         isOpen={isOpen}
         setOpen={setOpen}
+        
         sectionName={t.experience}
         iconName="fa-solid fa-briefcase"
       />
