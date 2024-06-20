@@ -1,8 +1,10 @@
+// AddExperienceSection.jsx
+import React from "react";
 import ExpandSection from "../ExpandSection";
 import CreateForm from "../CreateForm";
-import "../../styles/Section.css";
 import DisplayForms from "../DisplayForms";
 import ExperienceForm from "./ExperienceForm";
+import translations from "../../translations";
 
 function AddExperienceSection({
   isOpen,
@@ -14,13 +16,16 @@ function AddExperienceSection({
   toggleCollapsed,
   onHide,
   onRemove,
+  language,
 }) {
+  const t = translations[language];
+
   return (
     <div className="add-experience-section section">
       <ExpandSection
         isOpen={isOpen}
         setOpen={setOpen}
-        sectionName="Experience"
+        sectionName={t.experience}
         iconName="fa-solid fa-briefcase"
       />
 
@@ -35,9 +40,14 @@ function AddExperienceSection({
           FormComponent={ExperienceForm}
           titleKey="companyName"
           arrayName="experiences"
+          language={language}
         />
 
-        <CreateForm onClick={createForm} buttonText="Experience" />
+        <CreateForm
+          onClick={createForm}
+          buttonText={t.experience} 
+          language={language}
+        />
       </div>
     </div>
   );

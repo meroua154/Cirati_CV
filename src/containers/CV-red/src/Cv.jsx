@@ -1,25 +1,24 @@
 import { useState } from "react";
+import html2pdf from "html2pdf.js";
 import "./styles/App.css";
 import PersonalDetails from "./components/personal-info/PersonalDetails";
 import AddEducationSection from "./components/education/AddEducationSection";
 import AddExperienceSection from "./components/experience/AddExperienceSection";
-import LanguageSection from "./components/LanguageSection";
 import Resume from "./components/Resume";
 import uniqid from "uniqid";
 import TemplateLoader from "./components/TemplateLoader";
 import exampleData from "./example-data";
 import Sidebar from "./components/Sidebar";
 import Customize from "./components/Customize";
-import translations from "./translations"; // Import translations
 
 function App() {
+  const [language, setLanguage] = useState("en");
   const [personalInfo, setPersonalInfo] = useState(exampleData.personalInfo);
   const [sections, setSections] = useState(exampleData.sections);
   const [sectionOpen, setSectionOpen] = useState(null);
   const [currentPage, setCurrentPage] = useState("content");
   const [resumeLayout, setResumeLayout] = useState("top");
   const [prevState, setPrevState] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState("english");
 
   function handlePersonalInfoChange(e) {
     const { key } = e.target.dataset;
@@ -55,7 +54,7 @@ function App() {
 
   function createForm(arrayName, object) {
     setPrevState(null);
-    const section = structuredClone(sections[arrayName]);
+    const section = [...sections[arrayName]];
     section.push(object);
     setSections({ ...sections, [arrayName]: section });
   }
@@ -92,7 +91,6 @@ function App() {
     const { arrayName } = form.dataset;
     const section = sections[arrayName];
     const { id } = form;
-
     setSections({
       ...sections,
       [arrayName]: section.filter((item) => item.id !== id),
@@ -104,12 +102,10 @@ function App() {
       removeForm(e);
       return;
     }
-
     const sectionForm = e.target.closest(".section-form");
     const { id } = sectionForm;
     const { arrayName } = sectionForm.dataset;
     const section = sections[arrayName];
-
     setSections({
       ...sections,
       [arrayName]: section.map((form) => {
@@ -131,7 +127,7 @@ function App() {
       ...sections,
       [arrayName]: section.map((form) => {
         if (form.id === id) {
-          setPrevState(Object.assign({}, form));
+          setPrevState({ ...form });
           form[key] = !form[key];
         }
         return form;
@@ -142,15 +138,24 @@ function App() {
   const toggleCollapsed = (e) => toggleValue(e, "isCollapsed");
   const toggleHidden = (e) => toggleValue(e, "isHidden");
 
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language);
-    setPersonalInfo(translations[language].personalInfo);
-    setSections(translations[language].sections);
+  const downloadPDF = () => {
+    const element = document.querySelector(".downl");
+
+    html2pdf(element, {
+      filename: 'resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    });
   };
 
+  const handleChangeLanguage = (e) => {
+    setLanguage(e.target.value);
+  }
+
   return (
-    <div className="app">
-      <div className="edit-side">
+    <div className="app flex flex-col md:flex-row">
+      <div className="edit-side mt-24 w-1/3">
         <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
         <div className="form-container">
           <TemplateLoader
@@ -172,7 +177,13 @@ function App() {
           />
           {currentPage === "content" && (
             <>
+            <select onChange={handleChangeLanguage} value={language}>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+      </select>
               <PersonalDetails
+              language={language}
                 onChange={handlePersonalInfoChange}
                 fullName={personalInfo.fullName}
                 email={personalInfo.email}
@@ -192,6 +203,7 @@ function App() {
                 onRemove={removeForm}
               />
               <AddExperienceSection
+                language={language}
                 experiences={sections.experiences}
                 isOpen={sectionOpen === "Experience"}
                 onChange={handleSectionChange}
@@ -202,10 +214,6 @@ function App() {
                 onHide={toggleHidden}
                 onRemove={removeForm}
               />
-              <LanguageSection
-                selectedLanguage={selectedLanguage}
-                onLanguageChange={handleLanguageChange}
-              />
             </>
           )}
           <Customize
@@ -213,13 +221,15 @@ function App() {
             onColChange={setResumeLayout}
           />
         </div>
+        <button className="btn bg-primary hover:bg-light text-white text-sm whitespace-nowrap py-2 px-4 ml-32 md:ml-32 rounded-2xl md:static mt-4 md:mt-0" onClick={downloadPDF}>Télécharger CV</button>
       </div>
-      <Resume
-        personalInfo={personalInfo}
-        sections={sections}
-        layout={resumeLayout}
-        selectedLanguage={selectedLanguage}
-      />
+      <div className="downl mt-4 md:mt-24 w-2/3">
+        <Resume
+          personalInfo={personalInfo}
+          sections={sections}
+          layout={resumeLayout}
+        />
+      </div>
     </div>
   );
 }

@@ -1,8 +1,9 @@
+import React from "react";
 import DisplayForms from "../DisplayForms";
 import ExpandSection from "../ExpandSection";
 import CreateForm from "../CreateForm";
-import "../../styles/Section.css";
 import EducationForm from "./EducationForm";
+
 
 function AddEducationSection({
   educations,
@@ -14,14 +15,16 @@ function AddEducationSection({
   toggleCollapsed,
   onHide,
   onRemove,
+  
 }) {
+  
+
   return (
     <div className="add-education-section section">
       <ExpandSection
         isOpen={isOpen}
         setOpen={setOpen}
-        sectionName="Education"
-        iconName="fa-solid fa-graduation-cap"
+        sectionName="education" 
       />
 
       <div className={`section-content ${isOpen ? "open" : ""}`}>
@@ -37,7 +40,7 @@ function AddEducationSection({
           arrayName="educations"
         />
 
-        <CreateForm onClick={createForm} buttonText="Education" />
+        <CreateForm onClick={createForm} buttonText="addEducation" /> {/* Utilisez la traduction pour le texte du bouton */}
       </div>
     </div>
   );

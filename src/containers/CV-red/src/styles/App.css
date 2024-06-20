@@ -5,6 +5,7 @@
   padding: 32px 24px;
   gap: 24px;
   max-width: 1500px;
+  height: fit-content;
 }
 
 .form-container {
@@ -12,6 +13,8 @@
   flex-direction: column;
   flex-grow: 999;
   gap: 28px;
+  margin-right: 8px;
+  width: 1000px;
 }
 
 form {
@@ -24,6 +27,8 @@ form {
   height: fit-content;
   flex-wrap: wrap;
   gap: 24px;
-  max-width: 750px;
+  max-width: 650px;
   flex-grow: 1;
+  margin-bottom: 150px;
+  width: 500px;
 }

@@ -37,7 +37,7 @@ export default function Navbarred() {
               </a>
             </div>
           </div>
-          <ul className="flex-auto flex justify-center items-center ml-2 xl:gap-12 gap-x-12 max-lg:hidden">
+          <ul className="flex-auto flex justify-center items-center ml-2 xl:gap-12 gap-x-6 max-lg:hidden">
             <a
               href="/rec"
               className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
@@ -74,10 +74,10 @@ export default function Navbarred() {
               href="/formred"
               className="leading-normal tracking-wider no-underline text-black font-medium text-xs hover:text-primary"
             >
-              Construire votre CV 
+              Créez votre CV
             </a>
           </ul>
-          <div className="flex max-lg:hidden  gap-x-4">
+          <div className="flex max-lg:hidden  gap-x-2">
             {isAuthenticated ? (
               <button onClick={(event) => handleLogout(event)} className="rounded-2xl bg-primary text-lg text-white border-none font-bold px-8 py-3 hoverBtn">
                 Déconnexion
@@ -142,7 +142,7 @@ export default function Navbarred() {
                   href="/formred"
                   className="leading-normal no-underline text-black font-medium text-base hover:text-primary"
                 >
-                  Construire votre CV
+                  Créez votre CV
                 </a>
               </ul>
               <div className="flex flex-col justify-center items-center w-full gap-y-8 mt-4">

@@ -1,8 +1,8 @@
 .personal-info {
-  background-color: var(--resume-accent);
-  color: var(--header-resume-color);
-  width: 100%;
-  padding: 36px 24px;
+  display: flex;
+  flex-direction: column; /* Afficher les sections en colonne */
+  align-items: center; /* Centrer horizontalement les sections */
+  text-align: center; 
 }
 
 .resume-name {
@@ -18,9 +18,10 @@
 }
 
 .resume.top .contact-info {
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 12px;
 }
 
 .contact-info > div {
@@ -28,4 +29,21 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.cv-photo {
+  width: 150px; /* Ajustez la taille de la photo selon vos besoins */
+  height: 150px;
+  border-radius: 50%; /* Pour une photo de profil ronde */
+}
+
+.left-section {
+  margin-bottom: 20px; /* La section de gauche ne doit pas être flexible */
+}
+
+.right-section {
+  width: 100%; /* Utiliser toute la largeur disponible */
+  box-sizing: border-box; /* Inclure les bordures et les rembourrages dans la largeur */
+  padding: 20px; 
+  margin-top: 20px; /* Espacement entre les sections */
 }

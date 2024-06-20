@@ -1,5 +1,8 @@
+// ExperienceForm.jsx
+import React from "react";
 import InputGroup from "../InputGroup";
 import Buttons from "../Buttons";
+import translations from "../../translations";
 
 function ExperienceForm(props) {
   const {
@@ -12,7 +15,8 @@ function ExperienceForm(props) {
     id,
   } = props.form;
 
-  const { onChange, cancel, save, remove } = props;
+  const { onChange, cancel, save, remove, language } = props;
+  const t = translations[language];
 
   return (
     <form
@@ -24,62 +28,63 @@ function ExperienceForm(props) {
       <InputGroup
         type="text"
         id="company-name"
-        labelText="Company Name"
-        placeholder="Enter Company Name"
-        value={companyName}
-        onChange={onChange}
+        labelText={t.companyName}
+        placeholder={t.enterCompanyName}
+        value={companyName || ""}
+        onChange={(e) => onChange(e, id)}
         data-key="companyName"
       />
+
       <InputGroup
         type="text"
         id="position-title"
-        labelText="Position Title"
-        placeholder="Enter Position Title"
+        labelText={t.positionTitle}
+        placeholder={t.enterPositionTitle}
         value={positionTitle}
-        onChange={onChange}
+        onChange={(e) => onChange(e, id)}
         data-key="positionTitle"
       />
       <div className="dates-group">
         <InputGroup
           type="text"
-          id="date"
-          labelText="Start Date"
-          placeholder="Enter Start Date"
+          id="start-date"
+          labelText={t.startDate}
+          placeholder={t.enterStartDate}
           value={startDate}
-          onChange={onChange}
+          onChange={(e) => onChange(e, id)}
           data-key="startDate"
         />
         <InputGroup
           type="text"
-          id="date"
-          labelText="End Date"
-          placeholder="Enter End Date"
+          id="end-date"
+          labelText={t.endDate}
+          placeholder={t.enterEndDate}
           value={endDate}
-          onChange={onChange}
+          onChange={(e) => onChange(e, id)}
           data-key="endDate"
         />
       </div>
       <InputGroup
         type="text"
         id="location"
-        labelText="Location"
-        placeholder="Enter Location"
+        labelText={t.location}
+        placeholder={t.enterLocation}
         value={location}
-        onChange={onChange}
+        onChange={(e) => onChange(e, id)}
         data-key="location"
         optional
       />
       <InputGroup
         type="textarea"
         id="description"
-        labelText="Description"
-        placeholder="Enter Description"
+        labelText={t.description}
+        placeholder={t.enterDescription}
         value={description}
-        onChange={onChange}
+        onChange={(e) => onChange(e, id)}
         data-key="description"
         optional
       />
-      <Buttons save={save} cancel={cancel} remove={remove} />
+      <Buttons save={() => save(id)} cancel={() => cancel(id)} remove={() => remove(id)} />
     </form>
   );
 }

@@ -1,34 +1,24 @@
-.personal-details {
-  padding: 18px;
-  background-color: white;
-  border-radius: 12px;
+.photo {
+  padding: 4px 8px; /* Réduire le padding */
+  font-size: 12px;  /* Réduire la taille de la police */
+  width: auto; /* Ajuster la largeur automatiquement */
+  height: auto; /* Ajuster la hauteur automatiquement */
 }
 
-
-.photo-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.photo input[type="file"] {
+  display: none; /* Masquer le champ de fichier réel */
 }
 
-.cropper-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.photo label {
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte */
+  padding: 4px 8px; /* Réduire le padding */
+  font-size: 12px; /* Réduire la taille de la police */
+  border-radius: 4px; /* Arrondir les bords */
+  cursor: pointer; /* Ajouter un curseur pointer */
 }
 
-.cropper-container {
-  position: relative;
-  width: 100%;
-  max-width: 400px; /* Set a max-width for the cropper container */
-  margin-bottom: 10px; /* Space between the cropper and the button */
+.photo label:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
 }
 
-.confirm-crop-button {
-  margin-top: 10px; /* Space between the cropper and the button */
-}
-
-.cropped-image {
-  margin-top: 20px;
-  max-width: 100%;
-}
