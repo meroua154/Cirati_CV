@@ -1,6 +1,7 @@
 import React from "react";
 
 function DisplaySection({ array, InfoComponent, title }) {
+
   return (
     <React.Fragment>
       {

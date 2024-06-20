@@ -29,7 +29,6 @@ function DisplayForms({
             onChange={onChange}
             form={form}
             key={form.id}
-            onHide={onHide}
             cancel={onCancel}
             save={toggleCollapsed}
             remove={onRemove}
