@@ -2,11 +2,23 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import options from "../../Annonceform/optionsjob";
 
-const statuts = ['all', 'Remote', 'Contract', 'Fulltime', 'Parttime', 'Stager'];
+const statuts =[
+  "Non spécifié",
+  "Temps plein",
+  "Temps partiel",
+  "Contrat à durée déterminée (CDD)",
+  "Contrat à durée indéterminée (CDI)",
+  "Contrat d'apprentissage",
+  "Contrat de professionnalisation",
+  "Contrat de stage",
+  "Contrat d'intérim",
+  "Contrat de freelance",
+  "Contrat de mission"
+];
 
 const Search = ({ onSearch, resetFilters, applicantsData }) => {
   const [searchData, setSearchData] = useState({
-    statut: 'all',
+    statut: 'Non spécifié',
     metier: ''
   });
 
@@ -25,7 +37,7 @@ const Search = ({ onSearch, resetFilters, applicantsData }) => {
 
   const handleClearQuery = () => {
     setSearchData({
-      statut: 'all',
+      statut: 'Non spécifié',
       metier: ''
     });
     resetFilters();

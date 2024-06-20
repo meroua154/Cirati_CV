@@ -9,13 +9,21 @@ import offreSlice from '../containers/CompanyPage/Slices/offreSlice';
 import FullcompanySlice from '../containers/Annonceform/slices/FullcompanySlice';
 import sponsorsSlice from '../containers/Sponsor/Slices/SponsorSlice';
 import EventSlice from '../containers/Events/Slices/EventSlice';
+import Applicationslices from '../containers/Mesapplications/slices/Applicationslices';
+import emploiSlice from '../containers/Recjoblist/slices/JobsSlice'
+import candidatureSlice from '../containers/Condidatures/slices/candidatureSlice';
+import savedJobsSlice from '../containers/mesSauvegardes/slices/savedJobsSlice';
 export default combineReducers({
     auth: authReducer,
     errors: errorReducer,
+    emploi:emploiSlice,
+    savedJobs: savedJobsSlice,
     jobs: jobsSlice,
+    candidatures:candidatureSlice,
     company: CompanySlice,
     applicants: applicantsReducer,
     applicant: applicantReducer,
+    applications:Applicationslices,
     companyProfile:FullcompanySlice,
     offre:offreSlice,
     sponsor:sponsorsSlice,

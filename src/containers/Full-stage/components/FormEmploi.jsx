@@ -9,9 +9,30 @@ import {
 } from "@material-tailwind/react";
 import cvv from "../../../assets/Images/cvv.jpg";
 import instance from '../../../utils/setAuthToken';
+import Multione from '../../Annonceform/multione';
 function FormEmploi() {
     const { isAuthenticated, user } = useSelector((state) => state.auth);
-   
+    const contractTypeOptions = [
+        { value: "Non spécifié", label: "Non spécifié" },
+        { value: "Stage", label: "Stage" },
+        { value: "Temps plein", label: "Temps plein" },
+        { value: "Temps partiel", label: "Temps partiel" },
+        { value: "Contrat à durée déterminée (CDD)", label: "Contrat à durée déterminée (CDD)" },
+        { value: "Contrat à durée indéterminée (CDI)", label: "Contrat à durée indéterminée (CDI)" },
+        { value: "Contrat d'apprentissage", label: "Contrat d'apprentissage" },
+        { value: "Contrat de professionnalisation", label: "Contrat de professionnalisation" },
+        { value: "Contrat de stage", label: "Contrat de stage" },
+        { value: "Contrat d'intérim", label: "Contrat d'intérim" },
+        { value: "Contrat de freelance", label: "Contrat de freelance" },
+        { value: "Contrat de mission", label: "Contrat de mission" }
+    ]; 
+    const experienceOptions = [
+        { value: "Moins de 1 an", label: "Moins de 1 an" },
+        { value: "1 - 3 ans", label: "1 - 3 ans" },
+        { value: "4 - 7 ans", label: "4 - 7 ans" },
+        { value: "Plus de 7 ans", label: "Plus de 7 ans" }
+    ];
+    
     const [formData, setFormData] = useState({
         user: user._id,
         fullName: '',
@@ -20,6 +41,7 @@ function FormEmploi() {
         desiredPosition: '',
         professionalSummary: '',
         location: '',
+        statut:'',
         yearsOfExperience: '',
         usefulLinks: {
             LinkedIn: 'https://www.linkedin.com/',
@@ -150,14 +172,12 @@ function FormEmploi() {
                                     <Typography variant="h6" color="black" className="-mb-3">
                                          Années d'expérience*
                                     </Typography>
-                                    <Input
-                                        type="number"
-                                        size="lg"
-                                        placeholder="Ex: 2 ans"
-                                        className="flex text-sm text-gray-500 border border-gray-900 rounded shadow-sm border-solid border-1 transition-all duration-300 outline-none focus:outline-none rounded-lg"
-                                        name="yearsOfExperience"
-                                        value={formData.yearsOfExperience}
-                                        onChange={handleChange}
+                                    <Multione
+                                        options={experienceOptions}
+                                        onChange={(selectedOption) => setFormData(prevState => ({
+                                            ...prevState,
+                                            yearsOfExperience: selectedOption.value
+                                        }))}
                                     />
                                        <Typography variant="h6" color="black" className="-mb-3">
                                         Localisation
@@ -170,6 +190,16 @@ function FormEmploi() {
                                        value={formData.location}
                                        onChange={handleChange}
                                        required
+                                    />
+                                        <Typography variant="h6" color="black" className="-mb-3">
+                                        Type de contrat *
+                                    </Typography>
+                                    <Multione
+                                        options={contractTypeOptions}
+                                        onChange={(selectedOption) => setFormData(prevState => ({
+                                            ...prevState,
+                                            statut: selectedOption.value
+                                        }))}
                                     />
                                        <Typography variant="h6" color="black" className="-mb-3">
                                        Résumé Professionnel*
@@ -192,6 +222,7 @@ function FormEmploi() {
                         {/* Etape 2 */}
                         {step === 2 && (
                             <>
+                            
                                 <Typography variant="h4" color="black">
                                     Créez une demande d'emploi
                                 </Typography>
@@ -221,6 +252,7 @@ function FormEmploi() {
                         )}
                         {step === 3 && (
                             <>
+                            
                                 <Typography variant="h4" color="black">
                                     Créez une demande d'emploi
                                 </Typography>

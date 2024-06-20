@@ -59,7 +59,15 @@ export default function RecruiterPage() {
                          <strong>Publiez</strong> vos annonces et trouvez rapidement vos <strong>futurs talents</strong> sur le site d’emploi leader en Algérie !
                     </p>
                     <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 mt-12'>
-                    {isAuthenticated && user.role === 'recruiter' ? null : (
+                    {isAuthenticated && user.role === 'recruiter' ? 
+                    (
+                            <a href="/annonce">
+                                <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">
+                                    Créer une annonce
+                                </button>
+                            </a>
+                    )
+                    : (
                             <>
                                 <a href="/register">
                                     <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 ml-12 md:ml-16 text-center rounded-2xl sm:static mr-4 w-auto overflow-hidden">

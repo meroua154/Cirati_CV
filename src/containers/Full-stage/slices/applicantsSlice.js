@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../../utils/setAuthToken';
 
 export const fetchApplicants = createAsyncThunk('applicants/fetchApplicants', async () => {
-  const response = await instance.get('/user/applicants');
+  const response = await instance.get('/Emploi/All');
   return response.data;
 });
 

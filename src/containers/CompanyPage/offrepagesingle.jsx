@@ -59,6 +59,7 @@ const Offrepagesingle = () => {
       formData.append('cv', file);
       formData.append('applicantId',user._id);
       formData.append('recruiterId',id);
+      
       try {
         await instance.post('/application/add_application', formData, {
           headers: {

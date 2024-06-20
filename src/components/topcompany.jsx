@@ -1,6 +1,6 @@
 import{ useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import { HiStar } from "react-icons/hi";
+import { HiHeart } from "react-icons/hi";
 import "react-multi-carousel/lib/styles.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -41,7 +41,7 @@ export default function Top_company() {
           >
             {type}
           </button>
-          <HiStar className="text-3xl" />
+          <HiHeart className="text-3xl" />
         </span>
         <img src={img} alt="" className="w-28 h-28 rounded-full my-8" />
       </div>
@@ -53,7 +53,7 @@ export default function Top_company() {
         <p className="py-2 text-lg">803 46th St Brooklyn, NY</p>
         <div className="pb-4 flex items-center gap-2"> {/* Added flex display and removed vertical padding */}
           {[...Array(5)].map((_, index) => {
-            return <HiStar key={index} className="text-[#FFCC02] text-2xl" />;
+            return <HiHeart key={index} className="text-[#FFCC02] text-2xl" />;
           })}
         </div>
         <div className="p-2 border border-solid border-[#e2e4e7] rounded-md flex justify-between text-sm">

@@ -11,15 +11,15 @@ export default function Fullcv() {
   const dispatch = useDispatch();
   const applicantsData = useSelector((state) => state.applicants.applicantsData);
   const filteredApplicants = useSelector((state) => state.applicants.filteredApplicants);
-
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(fetchApplicants());
   }, [dispatch]);
 
   const handleSearch = (searchData) => {
     const filtered = applicantsData.filter(applicant => {
-      const statut = applicant.preferences.statut ? applicant.preferences.statut.toLowerCase() : '';
-      const metier = applicant.preferences.metier ? applicant.preferences.metier.toLowerCase() : '';
+      const statut = applicant.statut ? applicant.statut.toLowerCase() : '';
+      const metier = applicant.jobTitle ? applicant.jobTitle.toLowerCase() : '';
       return (
         (searchData.statut === 'all' || statut.includes(searchData.statut.toLowerCase())) &&
         (searchData.metier === '' || metier.includes(searchData.metier.toLowerCase()))
@@ -46,6 +46,8 @@ export default function Fullcv() {
               style={{ backgroundImage: `url(${cv})` }}
 >
            <div className="absolute inset-0 bg-black opacity-50 filter blur-sm"></div>
+           {isAuthenticated && user.role === 'applicant' ? 
+                    (
            <div className="relative z-10 flex items-center justify-center h-full">
            <div className="text-center text-white p-8">
                <h1 className='text-3xl sm:text-5xl font-extrabold'>
@@ -55,7 +57,7 @@ export default function Fullcv() {
                   <strong>Publiez</strong> votre demande d'emploi et trouvez rapidement <strong>l'opportunité</strong> idéale sur notre plateforme.
                </p>
                <div className='mt-12'>
-                      <a href="/SponsorForm">
+                      <a href="/FormEmploi">
                           <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 text-center rounded-2xl">
                              Créez une demande d'emploi
                           </button>
@@ -63,6 +65,28 @@ export default function Fullcv() {
                </div>
            </div>
         </div>
+                    )
+                    :
+                    (
+                      <div className="relative z-10 flex items-center justify-center h-full">
+                          <div className="text-center text-white p-8">
+                              <h1 className='text-3xl sm:text-5xl font-extrabold'>
+                                  Découvrez votre prochain talent ici!
+                              </h1>
+                              <p className='text-xl mt-8 pl-8'>
+                                  Consultez notre plateforme pour trouver le candidat idéal qui correspond à vos besoins spécifiques.
+                              </p>
+                              <div className='mt-12'>
+                                  <a href="/annonce">
+                                      <button className="btn bg-light text-white border border-blue-600 text-sm whitespace-nowrap py-2 px-8 text-center rounded-2xl">
+                                          Publiez une offre d'emploi
+                                      </button>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  )
+        }
     </div>
       <Search onSearch={handleSearch} resetFilters={handleResetFilters} applicantsData={applicantsData} />
       <div><Matchingjob applicants={filteredApplicants} /></div>

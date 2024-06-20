@@ -12,18 +12,25 @@ export const fetchOffres = createAsyncThunk('offre/fetchOffres', async ({ recId,
 });
 
 export const fetchJobs = createAsyncThunk('offre/fetchJobs', async ({recruiterId}) => {
-  const response = await instance.get(`/job/get_jobs/${recruiterId}`);
+  const response = await instance.get(`/job/get_jobs2/${recruiterId}`);
   return response.data;
 });
 
-export const addApplication = createAsyncThunk('offre/addApplication', async ({ file, applicantId, jobId, recruiterId }) => {
-  const formData = new FormData();
-  formData.append('cv', file);
-  formData.append('applicantId', applicantId);
-  formData.append('jobId', jobId);
-  formData.append('recruiterId', recruiterId);
+export const addApplication = createAsyncThunk('offre/addApplication', async (formData) => {
   try {
     const response = await instance.post('/application/add_application', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
+export const EnvoiApplication= createAsyncThunk('offre/addApplication', async (formData) => {
+  try {
+    const response = await instance.post('/application/EnvoiApplication', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
