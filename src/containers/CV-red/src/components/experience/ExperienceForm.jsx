@@ -17,7 +17,7 @@ function ExperienceForm(props) {
 
   const { onChange, cancel, save, remove, language } = props;
   const t = translations[language];
-
+  console.log( props.language )
   return (
     <form
       className="experience-form section-form"
@@ -30,7 +30,7 @@ function ExperienceForm(props) {
         id="company-name"
         labelText={t.companyName}
         placeholder={t.enterCompanyName}
-        value={companyName || ""}
+        value={t.companyName || ""}
         onChange={(e) => onChange(e, id)}
         data-key="companyName"
       />

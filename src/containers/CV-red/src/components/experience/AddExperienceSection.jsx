@@ -19,7 +19,6 @@ function AddExperienceSection({
   language,
 }) {
   const t = translations[language];
-
   return (
     <div className="add-experience-section section">
       <ExpandSection

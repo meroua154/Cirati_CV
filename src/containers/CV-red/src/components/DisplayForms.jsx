@@ -10,6 +10,7 @@ function DisplayForms({
   FormComponent,
   titleKey,
   arrayName,
+  language,
 }) {
   return (
     <div className="forms-container">
@@ -31,6 +32,7 @@ function DisplayForms({
             cancel={onCancel}
             save={toggleCollapsed}
             remove={onRemove}
+            language={language}
           />
         )
       )}
