@@ -17,7 +17,6 @@ function ExperienceForm(props) {
 
   const { onChange, cancel, save, remove, language } = props;
   const t = translations[language];
-  console.log( props.language )
   return (
     <form
       className="experience-form section-form"
