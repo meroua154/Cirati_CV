@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import InputGroup from "../InputGroup";
 import "../../styles/PersonalDetails.css";
-import translations from "../../translations"; // Assurez-vous que le chemin est correct
+import translations from "../../translations";
+import CropImage from "../crop/CropImage"
 
 function PersonalDetails({
   onChange,
@@ -10,9 +11,32 @@ function PersonalDetails({
   phoneNumber,
   address,
   photo,
-  language // Ajoutez cette ligne
+  language
 }) {
-  const t = translations[language]; // Sélectionnez les traductions appropriées
+  const t = translations[language];
+  const [imageSrc, setImageSrc] = useState(null);
+  const [showCrop, setShowCrop] = useState(false);
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+        setShowCrop(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCropCancel = () => {
+    setShowCrop(false);
+    setImageSrc(null);
+  };
+
+  const handleCropSave = (croppedImage) => {
+    setShowCrop(false);
+    onChange({ target: { dataset: { key: "photo" }, value: croppedImage } });
+  };
 
   return (
     <form className="">
@@ -23,11 +47,18 @@ function PersonalDetails({
           id="photo"
           labelText={t.cvPhoto}
           placeholder=""
-          onChange={onChange}
+          onChange={handlePhotoChange}
           data-key="photo"
           accept="image/*"
           className="photo"
         />
+        {showCrop && (
+          <CropImage
+            imageSrc={imageSrc}
+            onCancel={handleCropCancel}
+            onSave={handleCropSave}
+          />
+        )}
         <InputGroup
           type="text"
           id="full-name"
