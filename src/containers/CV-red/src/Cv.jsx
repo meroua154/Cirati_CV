@@ -157,7 +157,7 @@ function App() {
     <div className="app flex flex-col md:flex-row">
       <div className="edit-side mt-24 w-1/3">
         <Sidebar onGoToPage={setCurrentPage} page={currentPage} />
-        <div className="form-container">
+        <div className="form-container md:w-36">
           <TemplateLoader
             onTemplateLoad={() => {
               setPersonalInfo(exampleData.personalInfo);
@@ -177,13 +177,13 @@ function App() {
           />
           {currentPage === "content" && (
             <>
-            <select onChange={handleChangeLanguage} value={language}>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="ar">العربية</option>
-      </select>
+               <select onChange={handleChangeLanguage} value={language} className="p-2 w-36">
+                     <option value="en">English</option>
+                     <option value="fr">Français</option>
+                     <option value="ar">العربية</option>
+                </select>
               <PersonalDetails
-              language={language}
+               language={language}
                 onChange={handlePersonalInfoChange}
                 fullName={personalInfo.fullName}
                 email={personalInfo.email}
@@ -192,6 +192,7 @@ function App() {
                 photo={personalInfo.photo}
               />
               <AddEducationSection
+                 language={language}
                 educations={sections.educations}
                 isOpen={sectionOpen === "Education"}
                 onChange={handleSectionChange}
@@ -228,7 +229,11 @@ function App() {
           personalInfo={personalInfo}
           sections={sections}
           layout={resumeLayout}
+          language={language}
         />
+      </div>
+      <div>
+      
       </div>
     </div>
   );

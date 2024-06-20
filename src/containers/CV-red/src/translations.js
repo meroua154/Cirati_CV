@@ -25,7 +25,12 @@ const translations = {
     education: "Education",
     enterSkill: "Enter Skill",
     enterEducation: "Enter Education",
-  
+    schoolName: "School Name",
+    degree: "Degree",
+    enterSchool: "Enter School / University",
+    enterDegree: "Enter Degree / Field Of Study",
+    addEducation: "Add Education",
+    experienceTitle: "Professional Experience",
   },
   fr: {
     personalDetails: "Détails personnels",
@@ -53,6 +58,12 @@ const translations = {
     education: "Éducation",
     enterSkill: "Entrez la compétence",
     enterEducation: "Entrez l'éducation",
+    schoolName: "Nom de l'école",
+    degree: "Diplôme",
+    enterSchool: "Entrez l'école / université",
+    enterDegree: "Entrez le diplôme / domaine d'études",
+    addEducation: "Ajouter une éducation",
+    experienceTitle: "Expérience Professionnelle",
   },
   ar: {
     personalDetails: "تفاصيل شخصية",
@@ -80,7 +91,13 @@ const translations = {
     education: "التعليم",
     enterSkill: "أدخل المهارة",
     enterEducation: "أدخل التعليم",
-  }
+    schoolName: "اسم المدرسة",
+    degree: "الدرجة العلمية",
+    enterSchool: "أدخل المدرسة / الجامعة",
+    enterDegree: "أدخل الدرجة / مجال الدراسة",
+    addEducation: "أضف التعليم",
+    experienceTitle: "الخبرة المهنية",
+  },
 };
 
 export default translations;

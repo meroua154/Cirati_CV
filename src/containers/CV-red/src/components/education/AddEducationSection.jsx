@@ -3,7 +3,7 @@ import DisplayForms from "../DisplayForms";
 import ExpandSection from "../ExpandSection";
 import CreateForm from "../CreateForm";
 import EducationForm from "./EducationForm";
-
+import translations from "../../translations"; 
 
 function AddEducationSection({
   educations,
@@ -15,16 +15,16 @@ function AddEducationSection({
   toggleCollapsed,
   onHide,
   onRemove,
-  
+  language,
 }) {
-  
+  const t = translations[language];
 
   return (
     <div className="add-education-section section">
       <ExpandSection
         isOpen={isOpen}
         setOpen={setOpen}
-        sectionName="education" 
+        sectionName={t.education}
       />
 
       <div className={`section-content ${isOpen ? "open" : ""}`}>
@@ -38,9 +38,10 @@ function AddEducationSection({
           toggleCollapsed={toggleCollapsed}
           titleKey="schoolName"
           arrayName="educations"
+          language={language}
         />
 
-        <CreateForm onClick={createForm} buttonText="addEducation" /> {/* Utilisez la traduction pour le texte du bouton */}
+        <CreateForm onClick={createForm} buttonText={t.addEducation} />
       </div>
     </div>
   );
