@@ -83,7 +83,7 @@ function ExperienceForm(props) {
         data-key="description"
         optional
       />
-      <Buttons save={() => save(id)} cancel={() => cancel(id)} remove={() => remove(id)} />
+      <Buttons save={save} cancel={cancel} remove={remove} />
     </form>
   );
 }

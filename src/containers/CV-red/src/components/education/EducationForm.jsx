@@ -1,9 +1,12 @@
+import React from "react";
 import InputGroup from "../InputGroup";
 import Buttons from "../Buttons";
+import translations from "../../translations"; 
 
 function EducationForm(props) {
   const { degree, schoolName, location, startDate, endDate, id } = props.form;
-  const { onChange, cancel, save, remove } = props;
+  const { onChange, cancel, save, remove, language } = props;
+  const t = translations[language];
 
   return (
     <form
@@ -15,8 +18,8 @@ function EducationForm(props) {
       <InputGroup
         type="text"
         id="school-name"
-        labelText="School"
-        placeholder="Enter school / university"
+        labelText={t.schoolName}
+        placeholder={t.enterSchool}
         value={schoolName}
         onChange={onChange}
         data-key="schoolName"
@@ -24,8 +27,8 @@ function EducationForm(props) {
       <InputGroup
         type="text"
         id="degree"
-        labelText="Degree"
-        placeholder="Enter Degree / Field Of Study"
+        labelText={t.degree}
+        placeholder={t.enterDegree}
         value={degree}
         onChange={onChange}
         data-key="degree"
@@ -34,8 +37,8 @@ function EducationForm(props) {
         <InputGroup
           type="text"
           id="date"
-          labelText="Start Date"
-          placeholder="Enter Start Date"
+          labelText={t.startDate}
+          placeholder={t.enterStartDate}
           value={startDate}
           onChange={onChange}
           data-key="startDate"
@@ -43,8 +46,8 @@ function EducationForm(props) {
         <InputGroup
           type="text"
           id="date"
-          labelText="End Date"
-          placeholder="Enter End Date"
+          labelText={t.endDate}
+          placeholder={t.enterEndDate}
           value={endDate}
           onChange={onChange}
           data-key="endDate"
@@ -53,8 +56,8 @@ function EducationForm(props) {
       <InputGroup
         type="text"
         id="location"
-        labelText="Location"
-        placeholder="Enter Location"
+        labelText={t.location}
+        placeholder={t.enterLocation}
         value={location}
         onChange={onChange}
         data-key="location"
