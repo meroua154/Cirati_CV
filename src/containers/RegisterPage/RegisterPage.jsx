@@ -101,6 +101,7 @@ const RegisterPage = () => {
       }
     });
   };
+  
   const handlePreferenceChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -133,6 +134,10 @@ const handleSubmit = async (event) => {
         value.forEach((exp, index) => {
           userData.append(`experiences[${index}][titre]`, exp.titre);
           userData.append(`experiences[${index}][annees]`, exp.annees);
+        });
+      } else  if (key === 'langues') {
+        Object.entries(value).forEach(([langue, selected]) => {
+          userData.append(`langues[${langue}]`, selected);
         });
       } else {
         userData.append(key, value);
