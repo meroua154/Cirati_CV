@@ -11,8 +11,8 @@ function ExperienceInfoSection({ experiences, language }) {
       <DisplaySection
         array={experiences}
         InfoComponent={ExperienceInfo}
-        title={t.experienceTitle} // Utilisation de la traduction pour le titre d'expérience
-        language={language} // Vous pouvez également passer la langue ici si nécessaire
+        title="experienceTitle" // Passer la clé de traduction ici
+        language={language}
       />
     </div>
   );

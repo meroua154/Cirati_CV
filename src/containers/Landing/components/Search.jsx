@@ -81,7 +81,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
      <div className="grid gap-9 rounded-[10px] p-[1rem] md:p-[3rem] px-0" style={{ backdropFilter: 'blur(3px)'}}>
       <div className="">
         <h1 className="text-center text-white text-4xl md:text-3xl letter-spacing font-black leading-relaxed mx-0 mt-12 md:p-[1rem]">Trouvez le <span className="text-light">job</span> de vos rêves en quelques clics</h1>
-        <p className="text-xl text-white text-center tracking-widest">Parmi plus de <a href="" className="text-primary font-bold">5417</a> postes ouverts</p>
+        <p className="text-base text-white text-center tracking-widest">Révélez votre potentiel avec Ciraticv : créez votre CV, trouvez votre voie !</p>
       </div>
         <form onSubmit={handleSearch}>
           <div className="flex flex-wrap w-full justify-between items-center rounded-lg gap-[20px] bg-white p-1 mt-12 shadow-lg shadow-grey-700 dark:bg-slate-600 "> 
@@ -89,7 +89,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               <AiOutlineSearch className="icon ml-2 dark:invert" />
               <input
                 className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
-                placeholder="Search Job..."
+                placeholder="Emploi..."
                 type="text"
                 name="title"
                 value={searchData.title}
@@ -101,7 +101,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               <AiOutlineHome className="icon mr-1 dark:invert" />
               <input
                 className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
-                placeholder="Search Company..."
+                placeholder="Entreprise..."
                 type="text"
                 name="recruiterName"
                 value={searchData.recruiterName}
@@ -113,7 +113,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               <GoLocation className="icon mr-1 dark:invert" />
               <input
                 className="bg-transparent w-full text-primary focus:outline-none font-medium dark:text-white border-none"
-                placeholder="Search Location..."
+                placeholder="Wilaya..."
                 type="text"
                 name="address"
                 value={searchData.address}
@@ -122,7 +122,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               {searchData.address && <AiFillCloseCircle className="text-lg text-[#a5a6a6] hover:text-black hover:dark:invert cursor-pointer" onClick={() => setSearchData(prevSearchData => ({ ...prevSearchData, address: '' }))} />}
             </div>
             <button type="submit" className="bg-light flex-grow shrink text-white max-w-full p-3 px-10 rounded-[10px] w-30 hover:bg-primary">
-              Search
+              Chercher
             </button>
           </div>
         </form>
@@ -132,7 +132,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               htmlFor="relevance"
               className="font-semibold text-[#6f6f6f] dark:text-white"
             >
-              Sort By:
+              Trier par:
             </label>
             <select
               className="outline-none bg-white rounded-md px-4 py-1 dark:bg-slate-600 dark:text-white border-none"
@@ -173,7 +173,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
               htmlFor="level"
               className="font-semibold text-[#6f6f6f] dark:text-white"
             >
-              Level:
+              Niveau:
             </label>
             <select
               className="outline-none bg-white rounded-md px-4 py-1 dark:bg-slate-600 dark:text-white border-none"
@@ -190,7 +190,7 @@ const Search = ({ onSearch, resetFilters, jobsData }) => {
             </select>
           </div>
           <button className="hover:text-[#2a68ff] text-primary text-md px-2 py-2 dark:text-white" onClick={handleClearQuery}>
-            Clear All
+            Supprimer
           </button>
         </div>
         {/* <div className="suggestions">

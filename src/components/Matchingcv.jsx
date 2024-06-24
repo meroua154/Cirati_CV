@@ -109,8 +109,8 @@ const MatchingJobs = ({ jobs }) => {
 
   return (
     <div data-aos="zoom-in-down" data-aos-duration="2000" className="bg-[#fafbfc]">
-      <div className="container mx-auto px-6 py-24 grid gap-12">
-        <h2 className="text-3xl font-semibold">Matching Jobs</h2>
+      <div className="container mx-auto px-6 py-20 grid gap-12">
+        <h2 className="text-center text-3xl font-bold pt-12 pb-8 md:pb-8 dark:text-white lettre-espace">Les offres d'emploi</h2>
         <div className={`grid ${isDesktop ? 'grid-cols-3' : 'grid-cols-1'}`}>
           {jobs && jobs.map(job => (
             <Jobs key={job._id} job={job} />

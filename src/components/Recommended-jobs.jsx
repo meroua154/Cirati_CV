@@ -78,7 +78,7 @@ export default function RecommendedJobs() {
             </span>
           </div>
           <button className="rounded-lg bg-white border border-solid border-[#e2e4e7] text-lg text-black font-bold px-8 py-3 outline-none shadow hoverBtn">
-            Apply Now
+          Postuler maintenant
           </button>
         </div>
       </div>
