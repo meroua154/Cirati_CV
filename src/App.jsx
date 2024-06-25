@@ -19,6 +19,7 @@ import Offrejob from "./containers/CompanyPage/offrepage";
 import UserProfil from "./containers/UserProfil/UserProfil";
 import FrontendLayout from "./hocs/FrontendLayout";
 import { Provider } from "react-redux";
+import ValidationEmail from "./containers/RecruiterPage/ValidationEmail";
 import store from "./store";
 import SponsorForm from "./containers/Sponsor/SponsorForm";
 import { setAuthToken } from "./utils/setAuthToken";
@@ -58,6 +59,7 @@ function App() {
           <Routes>
          <Route path="/"  element={<Landing />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/validation" element={<ValidationEmail />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/password" element={<Password />} />
             <Route path="/company/:id" element={<ApplicantRoute element={<CompanyPage/>} />} />

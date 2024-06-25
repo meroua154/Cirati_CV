@@ -33,20 +33,20 @@ const RegisterPage = () => {
     cv: null,
     experiences: [{ titre: '', annees: '' }],
     langues: {
-      Kabyle: Boolean,
-      Arabe: Boolean,
-      Français: Boolean,
-      Anglais: Boolean,
-      Espagnol: Boolean,
-      Turc: Boolean
-  },
+      Kabyle: false,
+      Arabe: false,
+      Français: false,
+      Anglais: false,
+      Espagnol: false,
+      Turc: false
+    },
     profilpic: null,
     coverpic: null
   });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const errors = useSelector(state => state.errors);
+  var errors = useSelector(state => state.errors);
   const auth = useSelector(state => state.auth);
 
   useEffect(() => {
@@ -94,13 +94,14 @@ const RegisterPage = () => {
   const handleLangueChange = (event) => {
     const { name, checked } = event.target;
     setFormData({
-      ...formData,
-      langues: {
-        ...formData.langues,
-        [name]: checked
-      }
+        ...formData,
+        langues: {
+          ...formData.langues,
+          [name]: checked
+        }
     });
-  };
+};
+
   
   const handlePreferenceChange = (event) => {
     const { name, value } = event.target;
@@ -135,15 +136,21 @@ const handleSubmit = async (event) => {
           userData.append(`experiences[${index}][titre]`, exp.titre);
           userData.append(`experiences[${index}][annees]`, exp.annees);
         });
-      } else  if (key === 'langues') {
-        Object.entries(value).forEach(([langue, selected]) => {
-          userData.append(`langues[${langue}]`, selected);
-        });
-      } else {
-        userData.append(key, value);
-      }
+    
+    }
+    else if (key === 'langues') {
+      const selectedLanguages = Object.entries(formData.langues)
+      .filter(([langue, isChecked]) => isChecked)
+      .map(([langue]) => langue);
+    selectedLanguages.forEach(langue => {
+      userData.append(`langues[${langue}]`, true); 
     });
-
+    }
+    else {
+        userData.append(key, value);
+    }
+    });
+    console.log("UserData langues avant envoi :", formData.langues);
     const res = await dispatch(registerUser(userData));
 
     if (res.role) {
@@ -152,6 +159,7 @@ const handleSubmit = async (event) => {
         message: "User registered successfully! You can log in now."
       });
       setTimeout(() => {
+        errors=null;
         navigate("/Login");
       }, 1000);
     }
@@ -432,7 +440,6 @@ block text-sm font-medium text-gray-700">Localisation</label>
           name="website"
           id="website"
           autoComplete="website"
-          required
           value={formData.website}
           onChange={handleInputChange}
           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -445,7 +452,6 @@ block text-sm font-medium text-gray-700">Localisation</label>
           name="LinkedIn"
           id="LinkedIn"
           autoComplete="LinkedIn"
-          required
           value={formData.LinkedIn}
           onChange={handleInputChange}
           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -458,7 +464,6 @@ block text-sm font-medium text-gray-700">Localisation</label>
           name="Facebook"
           id="Facebook"
           autoComplete="Facebook"
-          required
           value={formData.Facebook}
           onChange={handleInputChange}
           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -470,7 +475,7 @@ block text-sm font-medium text-gray-700">Localisation</label>
           name="bio"
           id="bio"
           autoComplete="bio"
-          required
+
           value={formData.bio}
           onChange={handleInputChange}
           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

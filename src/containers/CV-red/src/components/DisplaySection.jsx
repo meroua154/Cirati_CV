@@ -3,7 +3,6 @@ import translations from "../translations";
 
 function DisplaySection({ array, InfoComponent, title, language }) {
   const t = translations[language];
-
   return (
     <React.Fragment>
       {

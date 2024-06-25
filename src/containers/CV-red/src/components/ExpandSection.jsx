@@ -1,6 +1,7 @@
 import "../styles/ExpandSection.css";
 
 function ExpandSection({ isOpen, setOpen, sectionName, iconName }) {
+
   return (
     <button
       className="expand-section"

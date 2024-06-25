@@ -5,7 +5,7 @@ import translations from "../../translations";
 
 function EducationInfoSection({ educations, language }) {
   const t = translations[language];
-
+  console.log(t.education)
   return (
     <div className="education-info-section resume-section">
       <DisplaySection

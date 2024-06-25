@@ -5,8 +5,8 @@ import EducationInfoSection from "./education/EducationInfoSection";
 import ExperienceInfoSection from "./experience/ExperienceInfoSection";
 import{ useState } from "react";
 
-function Resume({ personalInfo, sections, layout }) {
-  const [language, setLanguage] = useState("en");
+function Resume({ personalInfo, sections, layout,language }) {
+
   return (
     <div className="resume-container">
       <div className={`resume ${layout}`}>
