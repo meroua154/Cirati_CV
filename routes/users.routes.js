@@ -127,6 +127,7 @@ async function resetpassword(req, res) {
   async function registerr(req, res) {
   
     try {
+        console.log(req.body.langues)
         const { errors, isValid } = validateRegisterInput(req.body);
         if (!isValid) {
             return res.status(400).json(errors);

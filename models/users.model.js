@@ -99,13 +99,31 @@ const userSchema = new Schema({
         },
     }],
     langues: {
-        Kabyle: Boolean,
-        Arabe: Boolean,
-        Français: Boolean,
-        Anglais: Boolean,
-        Espagnol: Boolean,
-        Turc: Boolean
-    },
+        Kabyle: {
+          type: Boolean,
+          default: false
+        },
+        Arabe: {
+          type: Boolean,
+          default: false
+        },
+        Français: {
+          type: Boolean,
+          default: false
+        },
+        Anglais: {
+          type: Boolean,
+          default: false
+        },
+        Espagnol: {
+          type: Boolean,
+          default: false
+        },
+        Turc: {
+          type: Boolean,
+          default: false
+        }
+      },
 });
 
 userSchema.index({ name: 1 });
