@@ -209,7 +209,7 @@ export default function RecruiterPage() {
             <div data-aos="zoom-in-down" data-aos-duration="2000" className='grid gap-2 md:grid-cols-2 m-auto bg-slate-100'>
               <div className='mx-16 my-20'>
                   <h1 className='text-xl font-bold mb-8'>A propos de CiratiCV</h1>
-                  <p className='text-left text-sm'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate numquam, ducimus eos quasi labore vero nam veniam autem nesciunt impedit sit dolore repellendus deleniti temporibus, voluptates neque repellat, officiis explicabo.</p>
+                  <p className='text-left text-sm'>Ciraticv vise à être un partenaire précieux pour ceux qui cherchent à avancer dans leur carrière en offrant des outils puissants pour la création de CV, la recherche d'emploi et la connectivité avec les employeurs potentiels.</p>
               </div>
             </div>
             

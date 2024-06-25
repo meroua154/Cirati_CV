@@ -24,7 +24,7 @@ const Jobs = ({ JobsData }) => {
         {JobsData.slice(0, 6).map((job) => { 
             return (
               <div key={job.id}
-                className="flex flex-col justify-between h-[350px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-primary dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
+                className="flex flex-col justify-between h-[450px] w-[250px] p-3 md:p-[20px] md:mx-4 mx-auto bg-white rounded-md shadow-lg shadow-gray-400 dark:hover:bg-blueColor hover:bg-primary dark:bg-slate-700 dark:shadow-none sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/4"
               >
                 <div className="upperpart flex justify-between">
                   <div className="titlecountry flex-grow">
@@ -72,7 +72,7 @@ const Jobs = ({ JobsData }) => {
                   className="border-[2px] font-medium rounded-[10px] block p-2 w-full dark:text-slate-100 dark:bg-blueColors dark:border-transparent dark:group-hover:border dark:group-hover:border-white dark:hover:text-blueColor dark:hover:bg-white hover:bg-white"
                   onClick={() => handleApplyNow(job.recruiter, job._id)}
                 >
-                  Apply Now
+                  Postuler maintenant
                 </button>
               </div>
             );

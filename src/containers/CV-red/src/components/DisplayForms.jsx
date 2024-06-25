@@ -23,6 +23,7 @@ function DisplayForms({
             title={form[titleKey]}
             arrayName={arrayName}
             hideForm={onHide}
+            language={language}
           />
         ) : (
           <FormComponent

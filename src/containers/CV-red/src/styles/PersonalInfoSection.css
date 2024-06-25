@@ -32,9 +32,10 @@
 }
 
 .cv-photo {
-  width: 150px; /* Ajustez la taille de la photo selon vos besoins */
+  width: 150px; 
   height: 150px;
-  border-radius: 50%; /* Pour une photo de profil ronde */
+  border-radius: 50%; 
+  margin-top: 28px;
 }
 
 .left-section {
@@ -45,5 +46,5 @@
   width: 100%; /* Utiliser toute la largeur disponible */
   box-sizing: border-box; /* Inclure les bordures et les rembourrages dans la largeur */
   padding: 20px; 
-  margin-top: 20px; /* Espacement entre les sections */
+  margin-top: 15px; /* Espacement entre les sections */
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import html2pdf from "html2pdf.js";
 import "./styles/App.css";
 import PersonalDetails from "./components/personal-info/PersonalDetails";
@@ -42,6 +42,7 @@ function App() {
   }
 
   function createForm(arrayName, object) {
+    setPrevState(null);
     const section = [...sections[arrayName]];
     section.push(object);
     setSections({ ...sections, [arrayName]: section });
@@ -98,8 +99,8 @@ function App() {
       ...sections,
       [arrayName]: section.map((form) => {
         if (form.id === id) {
-          // Restaurer l'état précédent
-          return { ...prevState, isCollapsed: true };
+          form = prevState;
+          form.isCollapsed = true;
         }
         return form;
       }),
@@ -115,10 +116,8 @@ function App() {
       ...sections,
       [arrayName]: section.map((form) => {
         if (form.id === id) {
-          // Sauvegarder l'état précédent
           setPrevState({ ...form });
-          // Bascule la valeur de key
-          return { ...form, [key]: !form[key] };
+          form[key] = !form[key];
         }
         return form;
       }),
@@ -141,7 +140,7 @@ function App() {
 
   const handleChangeLanguage = (e) => {
     setLanguage(e.target.value);
-  };
+  }
 
   return (
     <div className="app flex flex-col md:flex-row">
@@ -161,19 +160,20 @@ function App() {
                 address: "",
                 photo: "",
               });
+              
               setSections({ educations: [], experiences: [] });
               setPrevState(null);
             }}
           />
           {currentPage === "content" && (
             <>
-              <select onChange={handleChangeLanguage} value={language} className="p-2 w-36">
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="ar">العربية</option>
-              </select>
+               <select onChange={handleChangeLanguage} value={language} className="p-2 w-36">
+                     <option value="en">English</option>
+                     <option value="fr">Français</option>
+                     <option value="ar">العربية</option>
+                </select>
               <PersonalDetails
-                language={language}
+               language={language}
                 onChange={handlePersonalInfoChange}
                 fullName={personalInfo.fullName}
                 email={personalInfo.email}
@@ -182,7 +182,7 @@ function App() {
                 photo={personalInfo.photo}
               />
               <AddEducationSection
-                language={language}
+                 language={language}
                 educations={sections.educations}
                 isOpen={sectionOpen === "Education"}
                 onChange={handleSectionChange}
@@ -221,6 +221,9 @@ function App() {
           layout={resumeLayout}
           language={language}
         />
+      </div>
+      <div>
+      
       </div>
     </div>
   );

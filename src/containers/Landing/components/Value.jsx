@@ -13,8 +13,8 @@ const Value = () => {
   return (
     
     <section className="Value">
-      <p className="text-center py-10 text-xl font-bold md:py-20 dark:text-white lettre-espace">
-      Les valeurs qui nous tiennent à cœur et nous responsabilisent
+      <p className="text-center text-3xl font-bold pt-12 pb-8 md:pt-20 md:pb-8 dark:text-white lettre-espace">
+        Nos valeurs, notre responsabilité
       </p>
       <div data-aos="zoom-in-down" data-aos-duration="2000" className="grid sm:grid-cols-3 gap-10 sm:gap-4 items-center justify-center pb-10 sm:pb-16 px-20">
         {ValuesData.slice(0, 3).map((ValuesData) => {
@@ -56,7 +56,13 @@ const Value = () => {
           );
         })}
      </div>
-      <div data-aos="zoom-in-down" data-aos-duration="2000" className="valuecard flex flex-wrap gap-10 justify-between items-center rounded-xl  md:mt-4 md:mb-16 sm:p-16 sm:col-span-3 bg-cover w-full background-image mb-8">
+      <div data-aos="zoom-in-down" data-aos-duration="2000" className="valuecard flex flex-wrap gap-10 justify-between items-center rounded-xl  md:mt-4 md:mb-16 sm:p-16 sm:col-span-3 bg-cover w-full background-image mb-8"
+      style={{ 
+        backgroundImage: `url(${ValueBG})`, 
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }}>
           <div className="left ml-2">
             <p className="text-clr2 font-extrabold text-2xl mb-3 mt-8 md:mt-0">
               Prêt à changer de carrière ?{" "}

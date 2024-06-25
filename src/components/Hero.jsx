@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HiSearch } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
-import femme from "../assets/Images/femme.jpg";
+import emp from "../assets/Images/emp.jpg";
 
 export default function Hero({ setSearchTerm, setLocation }) {
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
@@ -31,23 +31,23 @@ export default function Hero({ setSearchTerm, setLocation }) {
   ];
   console.log(wilayas.length)
   return (
-    <div className="pt-12">
-      <div className="flex flex-col items-center justify-center min-h-[60vh] py-16 px-6 bg-cover" style={{ backgroundImage: `url(${femme})` }}>
-        <h1 className="xl:text-4xl lg:text-3xl sm:text-3xl text-2xl xl:leading-normal lg:leading-normal font-bold text-center ml-64">
-          Find your{" "}
-          <span className="bg-primary text-white whitespace-pre">
-            dream jobs
+    <div className="">
+      <div className="flex flex-col items-center justify-center  py-16 px-6 bg-cover" style={{ backgroundImage: `url(${emp})` }}>
+      <div className="absolute inset-0 bg-black opacity-50 filter blur-sm"></div>
+        <h1 className="xl:text-4xl lg:text-3xl sm:text-3xl text-2xl xl:leading-normal lg:leading-normal font-bold text-center">
+          Trouver votre{" "}
+          <span className="bg-white  whitespace-pre">
+            emploi de rêve
           </span>{" "}
-          in <br /> New Castle
+          à <br /> New Castle
         </h1>
-        <p className="text-lg lg:w-1/2 text-center leading-10 my-8 ml-8">
-          When you're searching for a job, there are a few things you can do to
-          get the most out of your search
+        <p className="text-lg  text-white lg:w-1/2 text-center leading-10 my-8 ml-8">
+        Quand vous recherchez un emploi, il y a quelques actions à entreprendre pour optimiser votre recherche
         </p>
         <div className="flex items-center border-2 border-solid border-primary rounded-full h-16 lg:w-2/5 w-full py-2 relative mt-4">
           <input
             type="text"
-            placeholder="Job title or keyword"
+            placeholder="Intitulé du poste ou mot-clé"
             className="bg-transparent h-full w-full border-none outline-none absolute px-20 xl:text-2xl text-base"
             onChange={handleSearch}
           />
@@ -57,7 +57,7 @@ export default function Hero({ setSearchTerm, setLocation }) {
           <button className="flex items-center bg-[#f3f3f4] absolute right-2 rounded-full lg:px-4 px-2 h-[90%] xl:text-xl text-sm font-normal gap-x-2 border-none"
           onClick={handleLocationClick}
           >
-            <IoLocationOutline className="text-black lg:text-2xl" /> Any
+            <IoLocationOutline className="text-black lg:text-2xl" /> 
             location
           </button>
           {locationDropdownOpen && (
@@ -75,7 +75,7 @@ export default function Hero({ setSearchTerm, setLocation }) {
                   onClick={() => handleLocationSelect('')}
                   className="block w-full text-left px-4 py-2 hover:bg-gray-200"
                 >
-                  Any Location
+                  Location
                 </button>
               </div>
             )}

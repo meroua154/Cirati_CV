@@ -47,20 +47,20 @@ export const ValuesData = [
     {
         id: 1,
         logo: Image1,
-        title: "Simplicity",
-        desc: "Things blent more beautiful simple are at the heart of everything we do.",   
+        title: "Innovation",
+        desc: "Continuellement à la recherche de nouvelles solutions pour améliorer la recherche d'emploi et la gestion des talents.",   
     },
     {
         id: 2,
         logo: Image2,
-        title: "Social Good",
-        desc: "We Believe in making things better for everyone even if just by a little bit!",   
+        title: "Transparence",
+        desc: " Fournir une plateforme où les utilisateurs peuvent facilement comprendre et contrôler leurs données personnelles et leur visibilité.",   
     },
     {
         id: 3,
         logo: Image3,
-        title: "Trust",
-        desc: "We work on the basis of creating trust which can be nurtured through authenticity and transprancy",   
+        title: "Efficacité",
+        desc: "Maximiser l'efficacité des processus de recherche d'emploi et de recrutement grâce à des outils simples et puissants.",   
     }
 ];
 

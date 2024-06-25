@@ -11,7 +11,8 @@ function EducationInfoSection({ educations, language }) {
       <DisplaySection
         array={educations}
         InfoComponent={EducationInfo}
-        title={t.education} // Utilisation de la traduction pour le titre de l'éducation
+        title="education" // Passer la clé de traduction ici
+        language={language}
       />
     </div>
   );
